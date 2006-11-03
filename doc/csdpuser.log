@@ -1,0 +1,527 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.9.22)  2 NOV 2006 20:46
+**csdpuser.tex
+(./csdpuser.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+) (./csdpuser.aux)
+\openout1 = `csdpuser.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count88
+\scratchcounter=\count89
+\scratchtoks=\toks15
+\scratchdimen=\dimen105
+\scratchskip=\skip43
+\scratchmuskip=\muskip10
+\scratchbox=\box26
+\scratchread=\read1
+\scratchwrite=\write3
+\zeropoint=\dimen106
+\minusone=\count90
+\thousandpoint=\dimen107
+\emptytoks=\toks16
+\nextbox=\box27
+\nextdepth=\dimen108
+\everyline=\toks17
+\!!counta=\count91
+\!!countb=\count92
+\recursecounter=\count93
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count94
+\nofMParguments=\count95
+\everyMPtoPDFconversion=\toks18
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 28.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 28.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 28.
+ [1
+
+{/usr/share/texmf/dvips/config/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 72.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 72.
+
+Overfull \hbox (3.80621pt too wide) in paragraph at lines 107--110
+[]/cmr10/Other semidef-i-nite pro-gram-ming pack-ages use slight vari-a-tions o
+n this primal--
+ []
+
+[2
+
+]
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter:  5 Ap: 1.00e+00 Pobj:  7.5846337e+00 Ad: 1.00e+00 Dobj:  4.2853
+659e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter:  6 Ap: 1.00e+00 Pobj:  1.5893126e+01 Ad: 1.00e+00 Dobj:  3.0778
+169e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter:  7 Ap: 1.00e+00 Pobj:  1.9887401e+01 Ad: 1.00e+00 Dobj:  2.4588
+662e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter:  8 Ap: 1.00e+00 Pobj:  2.1623330e+01 Ad: 1.00e+00 Dobj:  2.3465
+172e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter:  9 Ap: 1.00e+00 Pobj:  2.2611983e+01 Ad: 1.00e+00 Dobj:  2.3097
+049e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter: 10 Ap: 1.00e+00 Pobj:  2.2939498e+01 Ad: 1.00e+00 Dobj:  2.3010
+908e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter: 11 Ap: 1.00e+00 Pobj:  2.2996259e+01 Ad: 1.00e+00 Dobj:  2.3000
+637e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter: 12 Ap: 1.00e-00 Pobj:  2.2999835e+01 Ad: 1.00e+00 Dobj:  2.3000
+020e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter: 13 Ap: 1.00e+00 Pobj:  2.2999993e+01 Ad: 1.00e+00 Dobj:  2.2999
+999e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/Iter: 14 Ap: 1.00e+00 Pobj:  2.3000000e+01 Ad: 1.00e+00 Dobj:  2.3000
+000e+01[] 
+ []
+
+[3]
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+[]/cmtt10/DIMACS error measures: 1.11e-16 0.00e+00 1.00e-07 0.00e+00 7.21e-09 7
+.82e-09[] 
+ []
+
+[4] [5]
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 319--319
+[]/cmtt10/%                         info=100 indicates a failure in the MATLAB[
+] 
+ []
+
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 319--319
+[]/cmtt10/%                         interface, such as inability to write to[] 
+
+ []
+
+
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% Note: This interface makes use of temporary files with names given 
+by the[] 
+ []
+
+
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% tempname function.  This will fail if there is no working temporary
+[] 
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% directory or there isn't enough space available in this directory.[
+] 
+ []
+
+
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% Note: This code writes its own param.csdp file in the current worki
+ng[] 
+ []
+
+
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% directory.  Any param.csdp file already in the directory will be de
+leted.[] 
+ []
+
+
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% Note: It is assumed that csdp is the search path made available thr
+ough[] 
+ []
+
+
+Overfull \hbox (64.49643pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% the ``system'' or ``dos'' command.  Typically, having the csdp exec
+utable in[] 
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% current working directory will work, although some paranoid system[
+] 
+ []
+
+
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% administrators keep . out of the path.  In that case, you'll need t
+o[] 
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 319--319
+[]/cmtt10/% install csdp in one of the directories that is in the search path.[
+] 
+ []
+
+[6]
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  0 Ap: 0.00e+00 Pobj:  3.6037961e+02 Ad: 0.00e+00 Dobj:  0.0000
+000e+00[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  1 Ap: 9.56e-01 Pobj:  3.7527534e+02 Ad: 9.60e-01 Dobj:  6.4836
+002e+04[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  2 Ap: 8.55e-01 Pobj:  4.0344779e+02 Ad: 9.67e-01 Dobj:  6.9001
+508e+04[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  3 Ap: 8.77e-01 Pobj:  1.4924982e+02 Ad: 1.00e+00 Dobj:  6.0425
+319e+04[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  4 Ap: 7.14e-01 Pobj:  8.2819408e+01 Ad: 1.00e+00 Dobj:  1.2926
+534e+04[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  5 Ap: 8.23e-01 Pobj:  4.7411688e+01 Ad: 1.00e+00 Dobj:  4.9040
+115e+03[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  6 Ap: 7.97e-01 Pobj:  2.6300212e+01 Ad: 1.00e+00 Dobj:  1.4672
+743e+03[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  7 Ap: 7.12e-01 Pobj:  1.5215577e+01 Ad: 1.00e+00 Dobj:  4.0561
+826e+02[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  8 Ap: 8.73e-01 Pobj:  7.5119215e+00 Ad: 1.00e+00 Dobj:  1.7418
+715e+02[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter:  9 Ap: 9.87e-01 Pobj:  5.3076518e+00 Ad: 1.00e+00 Dobj:  5.2097
+312e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 10 Ap: 1.00e+00 Pobj:  7.8594672e+00 Ad: 1.00e+00 Dobj:  2.2172
+435e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 11 Ap: 8.33e-01 Pobj:  1.5671237e+01 Ad: 1.00e+00 Dobj:  2.1475
+840e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 12 Ap: 1.00e+00 Pobj:  1.7250217e+01 Ad: 1.00e+00 Dobj:  1.8082
+715e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 13 Ap: 1.00e+00 Pobj:  1.7710018e+01 Ad: 1.00e+00 Dobj:  1.7814
+069e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 14 Ap: 9.99e-01 Pobj:  1.7779600e+01 Ad: 1.00e+00 Dobj:  1.7787
+170e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 15 Ap: 1.00e+00 Pobj:  1.7783579e+01 Ad: 1.00e+00 Dobj:  1.7785
+175e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 16 Ap: 1.00e+00 Pobj:  1.7784494e+01 Ad: 1.00e+00 Dobj:  1.7784
+708e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 17 Ap: 1.00e+00 Pobj:  1.7784610e+01 Ad: 1.00e+00 Dobj:  1.7784
+627e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 18 Ap: 1.00e+00 Pobj:  1.7784626e+01 Ad: 1.00e+00 Dobj:  1.7784
+620e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 19 Ap: 1.00e-00 Pobj:  1.7784627e+01 Ad: 1.00e+00 Dobj:  1.7784
+627e+01[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 390--390
+[]/cmtt10/Iter: 20 Ap: 9.60e-01 Pobj:  1.7784627e+01 Ad: 9.60e-01 Dobj:  1.7784
+627e+01[] 
+ []
+
+
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 390--390
+[]/cmtt10/DIMACS error measures: 1.08e-09 0.00e+00 7.02e-10 0.00e+00 -3.50e-10 
+6.05e-11[] 
+ []
+
+[7]
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 415--415
+[]/cmtt10/%  This function takes a problem in SeDuMi MATLAB format and writes i
+t out[] 
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 415--415
+[]/cmtt10/%                      pars.printlevel=0           No printed output[
+] 
+ []
+
+
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 415--415
+[]/cmtt10/%                      pars.prinlevel=1 (default)  Some printed outpu
+t.[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 415--415
+[]/cmtt10/%                      pars.check=0 (default)      Do not check probl
+em data[] 
+ []
+
+
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 415--415
+[]/cmtt10/%                      pars.check=1                Check problem data
+ for[] 
+ []
+
+
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 427--427
+[]/cmtt10/%  converts free variables in a SeDuMi problem into nonnegative LP va
+riables.[] 
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 445--458
+
+ []
+
+[9] [10] <cmat.pdf, id=75, 244.915pt x 429.605pt>
+File: cmat.pdf Graphic file (type pdf)
+ <use cmat.pdf>
+<constraints.pdf, id=76, 321.2pt x 131.49126pt>
+File: constraints.pdf Graphic file (type pdf)
+ <use constraints.pdf>
+<a1block1.pdf, id=77, 392.46625pt x 258.9675pt>
+File: a1block1.pdf Graphic file (type pdf)
+ <use a1block1.pdf> [11 <./cmat.pdf> <./constraints.pdf>] [12 <./a1block1.pdf>]
+ [13
+
+]
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 734--734
+[]/cmtt10/int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj
+)[] 
+ []
+
+
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 734--734
+[]   /cmtt10/double *a;                             /* right hand side vector *
+/[] 
+ []
+
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 734--734
+[]   /cmtt10/double constant_offset;                /* added to objective */[] 
+
+ []
+
+[14] [15]
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 817--817
+[]/cmtt10/int user_exit(n,k,C,a,dobj,pobj,constant_offset,constraints,X,y,Z,par
+ams)[] 
+ []
+
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 817--817
+[]   /cmtt10/double constant_offset;                /* added to objective */[] 
+
+ []
+
+[16]
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 817--817
+[]   /cmtt10/struct paramstruc params;              /* parameters sdp called wi
+th */[] 
+ []
+
+
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 833--833
+[]   /cmtt10/double *a;                              /* right hand side vector 
+*/[] 
+ []
+
+
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 833--833
+[]   /cmtt10/struct blockmatrix *pX0;                /* Initial primal solution
+ */[] 
+ []
+
+
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 833--833
+[]   /cmtt10/double **py0;                           /* Initial dual solution *
+/[] 
+ []
+
+
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 833--833
+[]   /cmtt10/struct blockmatrix *pZ0;                /* Initial dual solution *
+/[] 
+ []
+
+[17]
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 883--883
+[]   /cmtt10/char *fname;                     /* Name of the file to write to *
+/[] 
+ []
+
+(./csdpuser.bbl [18]) [19] (./csdpuser.aux) ) 
+Here is how much of TeX's memory you used:
+ 926 strings out of 95437
+ 11015 string characters out of 1190233
+ 64011 words of memory out of 1000001
+ 3963 multiletter control sequences out of 10000+50000
+ 8409 words of font info for 30 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 25i,7n,21p,210b,301s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 133 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 15 words of extra memory for PDF output out of 65536
+{/usr/share/texmf/dvips/tetex/74af
+c74c.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb>{/usr/share/texmf/
+dvips/tetex/f7b6d320.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb>{/
+usr/share/texmf/dvips/tetex/09fbbfac.enc}</usr/share/texmf/fonts/type1/bluesky/
+cm/cmtt10.pfb>{/usr/share/texmf/dvips/tetex/0ef0afca.enc}</usr/share/texmf/font
+s/type1/bluesky/cm/cmr5.pfb>{/usr/share/texmf/dvips/tetex/aae443f0.enc}</usr/sh
+are/texmf/fonts/type1/bluesky/cm/cmmi5.pfb>{/usr/share/texmf/dvips/tetex/bbad15
+3f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy7.pfb></usr/share/texmf/fon
+ts/type1/bluesky/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb
+></usr/share/texmf/fonts/type1/bluesky/cm/cmex10.pfb></usr/share/texmf/fonts/ty
+pe1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb><
+/usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/type1
+/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr
+/share/texmf/fonts/type1/bluesky/cm/cmr17.pfb>
+Output written on csdpuser.pdf (19 pages, 250067 bytes).
