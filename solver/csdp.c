@@ -50,7 +50,7 @@ int main(argc,argv)
 
   if ((argc < 2) || (argc > 4)) 
     {
-      printf("CSDP 6.0RC2\n");
+      printf("CSDP 6.0.1\n");
       printf(" \n");
       printf("Usage: \n");
       printf("\n");

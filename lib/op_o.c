@@ -439,4 +439,5 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
       free(work[i*2+1]);
       free(work[i*2+2]);
     };
+  free(work);
 }
