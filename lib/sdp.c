@@ -40,6 +40,7 @@
 #include <math.h>
 #include "declarations.h"
 
+#ifdef USEGETTIME
 /*
  * Stuff for keeping track of time.
  */
@@ -62,7 +63,7 @@ double t2=0.0;
 double starttime=0.0;
 double endtime=0.0;
 
-
+#endif
 
 int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	cholzinv,pobj,dobj,work1,work2,work3,workvec1,workvec2,workvec3,
@@ -629,15 +630,18 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Now, compute the system matrix.  
 	   */
 
+#ifdef USEGETTIME
 	   gettimeofday(&tp,NULL);
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
+#endif
 
 	   op_o(k,constraints,byblocks,Zi,X,O,work1,work2);
 
+#ifdef USEGETTIME
 	   gettimeofday(&tp,NULL);
 	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   opotime=opotime+t2-t1;
-
+#endif
 
 	   /*
 	    * Print out the actual density of Z and X.
@@ -755,8 +759,10 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Next, compute the cholesky factorization of the system matrix.
 	   */
 
+#ifdef USEGETTIME
 	   gettimeofday(&tp,NULL);
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
+#endif
 
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
@@ -772,9 +778,11 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   #endif
 #endif
 
+#ifdef USEGETTIME
 	   gettimeofday(&tp,NULL);
 	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   factortime=factortime+t2-t1;
+#endif
 
 	   if (info != 0) 
 	     {
@@ -1053,12 +1061,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   scale1=-1.0;
 	   scale2=0.0;
-	   gettimeofday(&tp,NULL);
-	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   mat_mult(scale1,scale2,work2,X,dX);
-	   gettimeofday(&tp,NULL);
-	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-	   othertime1=othertime1+t2-t1;
 
 	   sym_mat(dX);
 
@@ -1075,10 +1078,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   /*
 	    * Next, determine mu.
 	    */
-
-
-	   gettimeofday(&tp,NULL);
-	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 
 	   if (relpinfeas < parameters.axtol)
 	     alphap1=linesearch(n,dX,work1,work2,work3,cholxinv,workvec4,
@@ -1097,11 +1096,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     alphad1=linesearch(n,dZ,work1,work2,work3,cholzinv,workvec4,
 				workvec5,workvec6,mystepfrac,1.0,
 				printlevel);
-
-	   gettimeofday(&tp,NULL);
-	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-	   othertime2+=t2-t1;
-
 
 	   oldmu=mu;
 
@@ -1395,12 +1389,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   make_i(work1);
 	   scale1=0.0;
 	   scale2=mu;
-	   gettimeofday(&tp,NULL);
-	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   mat_mult(scale1,scale2,work2,work2,work1);
-	   gettimeofday(&tp,NULL);
-	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-	   othertime3=othertime3+t2-t1;
 
 	   scale1=-1.0;
 	   scale2=1.0;
@@ -1637,16 +1626,10 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	      Find maximum possible step sizes.
 	   */
 
-	   gettimeofday(&tp,NULL);
-	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-
 	   alphap=linesearch(n,dX,work1,work2,work3,cholxinv,workvec4,
 			     workvec5,workvec6,mystepfrac,1.0,
 			     printlevel);
 
-	   gettimeofday(&tp,NULL);
-	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-	   othertime2+=t2-t1;
 
 	   /*
 	    * Compute the objective value of the new solution.
@@ -1654,15 +1637,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   newpobj=calc_pobj(C,work1,constant_offset);
 
-	   gettimeofday(&tp,NULL);
-	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-
 	   alphad=linesearch(n,dZ,work1,work2,work3,cholzinv,workvec4,
 			     workvec5,workvec6,mystepfrac,1.0,
 			     printlevel);
-	   gettimeofday(&tp,NULL);
-	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
-	   othertime2+=t2-t1;
 
 	   if (printlevel >= 3)
 	     {

@@ -97,13 +97,15 @@ LIBS=-L../lib -lsdp -llapack -lblas -lg2c -lm
 #
 # LIBS=-L../lib -lsdp -llapack -lf77blas -lcblas -latlas -lg2c -lm 
 #
-# 3. Special note on gcc 4.  In the gcc 4.x versions of gcc, -lg2c has
-#    been replaced by -lgfortran.
+# 3. Special note on gcc 4.  In the gcc 4.x versions of gcc, -lg2c should be
+#    replaced by -lgfortran.
 #
 # 4. An alternative set of flags for use with the ATLAS BLAS, gcc 4.2, and
 #    OpenMP on a linux system.
 #
-# LIBS=-L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lphtread -lgfortran -lm
+
+#
+# LIBS=-L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm
 #
 #
 # Target all builds everything.
