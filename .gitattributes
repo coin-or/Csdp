@@ -71,6 +71,7 @@ matlab/control1.correct -text
 matlab/control1.mat -text
 matlab/convertf.m -text
 matlab/csdp.m -text
+matlab/readsdpa.m -text
 matlab/readsol.m -text
 matlab/writesdpa.m -text
 solver/Makefile -text
