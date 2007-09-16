@@ -59,33 +59,33 @@ end
 %
 
 if (isfield(pars,'axtol'))
-  fprintf(fid,'axtol= %e\n',pars.axtol);
+  fprintf(fid,'axtol= %.18e\n',pars.axtol);
 else
-  fprintf(fid,'axtol=%e\n',1.0e-8);
+  fprintf(fid,'axtol=1.0e-8\n');
 end
 
 if (isfield(pars,'atytol'))
-  fprintf(fid,'atytol= %e\n',pars.atytol);
+  fprintf(fid,'atytol= %.18e\n',pars.atytol);
 else
-  fprintf(fid,'atytol=%e\n',1.0e-8);
+  fprintf(fid,'atytol=1.0e-8\n');
 end
 
 if (isfield(pars,'objtol'))
-  fprintf(fid,'objtol= %e\n',pars.objtol);
+  fprintf(fid,'objtol= %.18e\n',pars.objtol);
 else
-  fprintf(fid,'objtol=%e\n',1.0e-8);
+  fprintf(fid,'objtol=1.0e-8\n',1.0e-8);
 end
 
 if (isfield(pars,'pinftol'))
-  fprintf(fid,'pinftol= %e\n',pars.pinftol);
+  fprintf(fid,'pinftol= %.18e\n',pars.pinftol);
 else
-  fprintf(fid,'pinftol=%e\n',1.0e8);
+  fprintf(fid,'pinftol=1.0e8\n',1.0e8);
 end
 
 if (isfield(pars,'dinftol'))
-  fprintf(fid,'dinftol= %e\n',pars.dinftol);
+  fprintf(fid,'dinftol= %.18e\n',pars.dinftol);
 else
-  fprintf(fid,'dinftol=%e\n',1.0e8);
+  fprintf(fid,'dinftol=1.0e8\n');
 end
 
 if (isfield(pars,'maxiter'))
@@ -94,27 +94,27 @@ else
   fprintf(fid,'maxiter=%d\n',100);
 end
 if (isfield(pars,'minstepfrac'))
-  fprintf(fid,'minstepfrac= %e\n',pars.minstepfrac);
+  fprintf(fid,'minstepfrac= %.18e\n',pars.minstepfrac);
 else
-  fprintf(fid,'minstepfrac=%e\n',0.90);
+  fprintf(fid,'minstepfrac=0.90\n');
 end
 
 if (isfield(pars,'maxstepfrac'))
-  fprintf(fid,'maxstepfrac= %e\n',pars.maxstepfrac);
+  fprintf(fid,'maxstepfrac= %.18e\n',pars.maxstepfrac);
 else
-  fprintf(fid,'maxstepfrac=%e\n',0.97);
+  fprintf(fid,'maxstepfrac=0.97\n');
 end
 
 if (isfield(pars,'minstepp'))
-  fprintf(fid,'minstepp= %e\n',pars.minstepp);
+  fprintf(fid,'minstepp= %.18e\n',pars.minstepp);
 else
-  fprintf(fid,'minstepp=%e\n',1.0e-8);
+  fprintf(fid,'minstepp=1.0e-8\n');
 end
 
 if (isfield(pars,'minstepd'))
-  fprintf(fid,'minstepd= %e\n',pars.minstepd);
+  fprintf(fid,'minstepd= %.18e\n',pars.minstepd);
 else
-  fprintf(fid,'minstepd=%e\n',1.0e-8);
+  fprintf(fid,'minstepd=1.0e-8\n');
 end
 
 if (isfield(pars,'usexzgap'))
@@ -142,17 +142,16 @@ else
 end
 
 if (isfield(pars,'perturbobj'))
-  fprintf(fid,'printlevel= %d\n',pars.perturbobj);
+  fprintf(fid,'perturbobj= %d\n',pars.perturbobj);
 else
-  fprintf(fid,'printlevel=%d\n',1);
+  fprintf(fid,'perturbobj=%d\n',1);
 end
 
 if (isfield(pars,'fastmode'))
-  fprintf(fid,'printlevel= %d\n',pars.fastmode);
+  fprintf(fid,'fastmode= %d\n',pars.fastmode);
 else
-  fprintf(fid,'printlevel=%d\n',0);
+  fprintf(fid,'fastmode=%d\n',0);
 end
-
 
 %
 % close the parameter file.

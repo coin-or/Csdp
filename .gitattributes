@@ -74,6 +74,7 @@ matlab/csdp.m -text
 matlab/readsdpa.m -text
 matlab/readsol.m -text
 matlab/writesdpa.m -text
+matlab/writesol.m -text
 solver/Makefile -text
 solver/csdp.c -text
 test/Makefile -text
