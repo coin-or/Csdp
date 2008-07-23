@@ -79,7 +79,15 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 # An Intel Pentum 4 based machine:
 #  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS  -I../include
 #
-# 7. If you change the CFLAGS, make sure that you use the same CFLAGS
+# 7. The code can be built with Intel's icc C compiler and MKL BLAS/
+#    LAPACK libraries.  Assuming that you have a core2 processor, use
+#
+#      CC=icc
+#      CFLAGS==-O3 -fno-alias -no-alias-args -march=core2 -g -ansi -openmp 
+#               -DUSEOPENMP -DNOSHORTS -DUSEGETTIME -I../include
+#
+#
+# 8. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
 #
 #  Build the library.

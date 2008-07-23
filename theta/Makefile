@@ -103,9 +103,14 @@ LIBS=-L../lib -lsdp -llapack -lblas -lg2c -lm
 # 4. An alternative set of flags for use with the ATLAS BLAS, gcc 4.2, and
 #    OpenMP on a linux system.
 #
-
 #
 # LIBS=-L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm
+#
+# 5. An alternative set of flags for use with Intel's icc and MKL.
+#
+#  LIBS=-openmp -L../lib -lsdp -L/opt/intel/mkl/10.0.3.020/lib/32 
+#       -lmkl_lapack -lmkl_blas -lmkl -lguide -lpthread -lm
+#
 #
 #
 # Target all builds everything.
