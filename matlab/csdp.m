@@ -13,7 +13,7 @@
 %        info             CSDP return code.
 %                         info=100 indicates a failure in the MATLAB
 %                         interface, such as inability to write to 
-%                         a temporary file.
+%                         a temporary file or read back the solution.
 %
 % Note: This interface makes use of temporary files with names given by the
 % tempname function.  This will fail if there is no working temporary
@@ -34,125 +34,112 @@ function [x,y,z,info]=csdp(At,b,c,K,pars)
 % First, put a dummy pars in place if no argument was given.  Also
 % set pars.printlevel if not given.
 %
-if (nargin<5)
+if (nargin<5),
   pars.printlevel=1;
 else
-  if (isfield(pars,'printlevel'))
+  if (isfield(pars,'printlevel')),
     pars.printlevel=pars.printlevel;
   else
     pars.printlevel=1;
-  end
-end
+  end;
+end;
 %
 % Write out the param.csdp file.
 %
 fid=fopen('param.csdp','w');
 if (fid==-1)
-  if (pars.printlevel ~= 0) 
+  if (pars.printlevel ~= 0), 
     fprintf('Could not open param.csdp\n');
-  end
+  end;
   info=100;
-  return 
-end
+  return; 
+end;
 %
 % Now, go through the parameters.
 %
 
-if (isfield(pars,'axtol'))
-  fprintf(fid,'axtol= %.18e\n',pars.axtol);
+if (isfield(pars,'axtol')),
+  fprintf(fid,'axtol= %e\n',pars.axtol);
 else
-  fprintf(fid,'axtol=1.0e-8\n');
-end
+  fprintf(fid,'axtol=%e\n',1.0e-8);
+end;
 
-if (isfield(pars,'atytol'))
-  fprintf(fid,'atytol= %.18e\n',pars.atytol);
+if (isfield(pars,'atytol')),
+  fprintf(fid,'atytol= %e\n',pars.atytol);
 else
-  fprintf(fid,'atytol=1.0e-8\n');
-end
+  fprintf(fid,'atytol=%e\n',1.0e-8);
+end;
 
-if (isfield(pars,'objtol'))
-  fprintf(fid,'objtol= %.18e\n',pars.objtol);
+if (isfield(pars,'objtol')),
+  fprintf(fid,'objtol= %e\n',pars.objtol);
 else
-  fprintf(fid,'objtol=1.0e-8\n',1.0e-8);
-end
+  fprintf(fid,'objtol=%e\n',1.0e-8);
+end;
 
-if (isfield(pars,'pinftol'))
-  fprintf(fid,'pinftol= %.18e\n',pars.pinftol);
+if (isfield(pars,'pinftol')),
+  fprintf(fid,'pinftol= %e\n',pars.pinftol);
 else
-  fprintf(fid,'pinftol=1.0e8\n',1.0e8);
-end
+  fprintf(fid,'pinftol=%e\n',1.0e8);
+end;
 
-if (isfield(pars,'dinftol'))
-  fprintf(fid,'dinftol= %.18e\n',pars.dinftol);
+if (isfield(pars,'dinftol')),
+  fprintf(fid,'dinftol= %e\n',pars.dinftol);
 else
-  fprintf(fid,'dinftol=1.0e8\n');
-end
+  fprintf(fid,'dinftol=%e\n',1.0e8);
+end;
 
-if (isfield(pars,'maxiter'))
+if (isfield(pars,'maxiter')),
   fprintf(fid,'maxiter= %d\n',pars.maxiter);
 else
   fprintf(fid,'maxiter=%d\n',100);
-end
-if (isfield(pars,'minstepfrac'))
-  fprintf(fid,'minstepfrac= %.18e\n',pars.minstepfrac);
+end;
+if (isfield(pars,'minstepfrac')),
+  fprintf(fid,'minstepfrac= %e\n',pars.minstepfrac);
 else
-  fprintf(fid,'minstepfrac=0.90\n');
-end
+  fprintf(fid,'minstepfrac=%e\n',0.90);
+end;
 
-if (isfield(pars,'maxstepfrac'))
-  fprintf(fid,'maxstepfrac= %.18e\n',pars.maxstepfrac);
+if (isfield(pars,'maxstepfrac')),
+  fprintf(fid,'maxstepfrac= %e\n',pars.maxstepfrac);
 else
-  fprintf(fid,'maxstepfrac=0.97\n');
-end
+  fprintf(fid,'maxstepfrac=%e\n',0.97);
+end;
 
-if (isfield(pars,'minstepp'))
-  fprintf(fid,'minstepp= %.18e\n',pars.minstepp);
+if (isfield(pars,'minstepp')),
+  fprintf(fid,'minstepp= %e\n',pars.minstepp);
 else
-  fprintf(fid,'minstepp=1.0e-8\n');
-end
+  fprintf(fid,'minstepp=%e\n',1.0e-8);
+end;
 
-if (isfield(pars,'minstepd'))
-  fprintf(fid,'minstepd= %.18e\n',pars.minstepd);
+if (isfield(pars,'minstepd')),
+  fprintf(fid,'minstepd= %e\n',pars.minstepd);
 else
-  fprintf(fid,'minstepd=1.0e-8\n');
-end
+  fprintf(fid,'minstepd=%e\n',1.0e-8);
+end;
 
-if (isfield(pars,'usexzgap'))
+if (isfield(pars,'usexzgap')),
   fprintf(fid,'usexzgap= %d\n',pars.usexzgap);
 else
-  fprintf(fid,'usexzgap=%d\n',1);
-end
+  fprintf(fid,'usexzgap=%d\n',0);
+end;
 
-if (isfield(pars,'tweakgap'))
+if (isfield(pars,'tweakgap')),
   fprintf(fid,'tweakgap= %d\n',pars.tweakgap);
 else
   fprintf(fid,'tweakgap=%d\n',0);
-end
+end;
 
-if (isfield(pars,'affine'))
+if (isfield(pars,'affine')),
   fprintf(fid,'affine= %d\n',pars.affine);
 else
   fprintf(fid,'affine=%d\n',0);
-end
+end;
 
-if (isfield(pars,'printlevel'))
+if (isfield(pars,'printlevel')),
   fprintf(fid,'printlevel= %d\n',pars.printlevel);
 else
   fprintf(fid,'printlevel=%d\n',1);
-end
-
-if (isfield(pars,'perturbobj'))
-  fprintf(fid,'perturbobj= %d\n',pars.perturbobj);
-else
-  fprintf(fid,'perturbobj=%d\n',1);
-end
-
-if (isfield(pars,'fastmode'))
-  fprintf(fid,'fastmode= %d\n',pars.fastmode);
-else
-  fprintf(fid,'fastmode=%d\n',0);
-end
-
+end;
 %
 % close the parameter file.
 %
@@ -162,29 +149,45 @@ fclose(fid);
 %
 fname=tempname;
 ret=writesdpa([fname '.dat-s'],At,b,c,K,pars);
-if (ret==1)
+if (ret==1),
   info=100;
-  x=[];
-  y=[];
-  z=[];
-  return
-end
+  return;
+end;
 %
 % Solve the problem.
 %
-if (ispc==1)
+if (ispc==1),
   info=dos(['csdp ' fname '.dat-s' ' ' fname '.sol'],'-echo');
 else
-  if (pars.printlevel ~=0)
+  if (pars.printlevel ~=0),
     info=system(['time csdp ' fname '.dat-s' ' ' fname '.sol']);
   else
     info=system(['csdp ' fname '.dat-s' ' ' fname '.sol']);
-  end
-end
+  end;
+end;
+%
+% Only try to read the solution if csdp succeeded at least to a point.
+%
+if (info <= 3)
 %
 % Read back the solution.
 %
-[x,y,z]=readsol([fname '.sol'],K,length(b));
+  [x,y,z]=readsol([fname '.sol'],K,length(b));
+%
+% If readsol couldn't open the file, then return info=100 to show
+% the error.
+%
+  if (isnan(x))
+    info=100;
+  end
+else
+%
+% CSDP failed.  Set x, y, and z to NaN. 
+%
+  x=NaN;
+  y=NaN;
+  z=NaN;
+end
 %
 % Delete the temporary files, including param.csdp if we wrote one!
 %

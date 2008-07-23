@@ -14,68 +14,62 @@ function [x,y,z]=readsol(fname,K,m)
 %
 %  Check for any quadratic cone constraints.
 %
-if isfield(K,'q') 
-  if ((~isempty(K.q)) & (K.q ~= 0))
-    fprintf('quadratic cone constraints are not supported.\n');
-    return
-  end
-end 
+if (isfield(K,'q') & (~isempty(K.q)) & (K.q ~= 0)),
+  fprintf('quadratic cone constraints are not supported.\n');
+  return;
+end; 
 %
 %  Check for any rotated cone constraints.
 %
-if isfield(K,'r')
-  if ((~isempty(K.r)) & (K.r ~= 0))
-    fprintf('rotated cone constraints are not supported.\n');
-    return
-  end
-end 
+if (isfield(K,'r') & (~isempty(K.r)) & (K.r ~= 0)),
+  fprintf('rotated cone constraints are not supported.\n');
+  return;
+end; 
 %
 % Check for any free variables.
 %
-if isfield(K,'f')
-  if ((~isempty(K.f)) & (K.f ~= 0))
-    fprintf('Free variables are not supported.\n');
-    return
-  end
-end 
+if (isfield(K,'f') & (~isempty(K.f)) & (K.f ~= 0)),
+  fprintf('Free variables are not supported.\n');
+  return;
+end; 
 %
 % Figure out the structure of the LP and SDP blocks.
 %
-if (isfield(K,'l'))
+if (isfield(K,'l')),
   if (K.l > 0)
     nlin=K.l;
   else
     K.l=0;
     nlin=0;
-  end
+  end;
 else
   K.l=0;
   nlin=0;
-end
+end;
 %
 % Patched on 10/23/03 to handle all kinds of stupid ways of indicating
 % no SDP block.
 %
-if (isfield(K,'s'))
-  if (length(K.s) > 1)
+if (isfield(K,'s')),
+  if (length(K.s) > 1),
     nsdpblocks=length(K.s);
   else
-    if (length(K.s)==1)
+    if (length(K.s)==1),
       if (K.s==0)
         nsdpblocks=0;
         K.s=[];
       else
         nsdpblocks=1;
-      end
+      end;
     else
       nsdpblocks=0;
       K.s=[]; 
-    end
-  end
+    end;
+  end;
 else
   K.s=[];
   nsdpblocks=0;
-end
+end;
 
 %
 % First, where everything is in the vector.
@@ -84,10 +78,10 @@ end
 % v(1..nlin)         LP variables.
 %
 base=nlin+1;
-for i=1:length(K.s)
+for i=1:length(K.s),
   vecsdpbase(i)=base;
   base=base+(K.s(i))^2;
-end
+end;
 
 %
 % Second, where everything is in the matrix.
@@ -96,30 +90,33 @@ end
 % matlpbase        index of start of LP block.
 %
 base=1;
-for i=1:length(K.s)
+for i=1:length(K.s),
   matsdpbase(i)=base;
   base=base+K.s(i);
-end 
+end; 
 matlpbase=base;
 %
 % Setup an array containing blocksizes. blocksize(i) is used as a faster
 % synonym for K.s(i) in what follows.  This is because MATLAB doesn't
 % accelerate statements involving fields.  
 %
-if (nsdpblocks >= 1)
+if (nsdpblocks >= 1),
   blocksizes=zeros(nsdpblocks,1);
-  for i=1:nsdpblocks
+  for i=1:nsdpblocks,
     blocksizes(i)=K.s(i);
-  end
-end
+  end;
+end;
 %
 %  Open up the file.
 %
 fid=fopen(fname,'r');
-if (fid == -1)
+if (fid == -1),
   fprintf('file does not exist!\n');
-  return
-end
+  x=NaN;
+  y=NaN;
+  z=NaN;
+  return;
+end;
 %
 % Read y.
 %
@@ -132,11 +129,11 @@ count=count/5;
 %
 % Allocate storage for x and z.
 %
-if ((length(K.s) > 1) | (length(K.s==1) & (K.s>0)))
+if ((length(K.s) > 1) | (length(K.s==1) & (K.s>0))),
   veclength=vecsdpbase(length(K.s))+K.s(nsdpblocks)^2-1;
 else
   veclength=nlin;
-end
+end;
 %
 % Allocate space for x and z.  We could use sparse vectors here, but 
 % the dense vector is vastly faster.
@@ -146,8 +143,8 @@ z=zeros(veclength,1);
 %
 % now, loop through the entries and put them into x and z.
 %
-for i=1:count
-  if (A(1,i)==1)
+for i=1:count,
+  if (A(1,i)==1),
 %
 % A z entry.
 %    
@@ -166,7 +163,7 @@ for i=1:count
 
       z(vecsdpbase(blk)+indexi+(indexj-1)*blocksizes(blk)-1)=ent;
       z(vecsdpbase(blk)+indexj+(indexi-1)*blocksizes(blk)-1)=ent;
-    end
+    end;
   else
 %
 % An x entry.
@@ -184,9 +181,9 @@ for i=1:count
 %      
       x(vecsdpbase(blk)+indexi+(indexj-1)*blocksizes(blk)-1)=ent;
       x(vecsdpbase(blk)+indexj+(indexi-1)*blocksizes(blk)-1)=ent;
-    end
-  end
-end
+    end;
+  end;
+end;
 %
 % Correction for the difference between CSDP and SeDuMi primal/dual pair.
 %
