@@ -99,8 +99,6 @@ void sort_entries(k,C,constraints)
 	    {
 	      entries[j-1].indexi=ptr->iindices[j];
 	      entries[j-1].indexj=ptr->jindices[j];
-	      entries[j-1].indexk=ptr->kindices[j];
-	      entries[j-1].indexl=ptr->lindices[j];
 	      entries[j-1].entry=ptr->entries[j];
 	    };
 
@@ -119,8 +117,6 @@ void sort_entries(k,C,constraints)
 	    {
 	      ptr->iindices[j]=entries[j-1].indexi;
 	      ptr->jindices[j]=entries[j-1].indexj;
-	      ptr->kindices[j]=entries[j-1].indexk;
-	      ptr->lindices[j]=entries[j-1].indexl;
 	      ptr->entries[j]=entries[j-1].entry;
 	    };
 
