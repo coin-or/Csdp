@@ -1,4 +1,12 @@
 /*
+ * CSDPDECLARATIONS is used to prevent redefinitions if this file is included
+ * twice.
+ */
+
+#ifndef CSDPDECLARATIONS
+#define CSDPDECLARATIONS 
+
+/*
   Other important includes that we need.
  */
 
@@ -274,3 +282,4 @@ void dtrtri_();
 #endif
 
 
+#endif
