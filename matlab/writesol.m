@@ -10,7 +10,7 @@
 %
 % 
 %
-function writesol(fname,x,y,z,K);
+function ret=writesol(fname,x,y,z,K);
 %
 %  First, eliminate special cases that we don't handle.
 %
@@ -19,6 +19,7 @@ function writesol(fname,x,y,z,K);
 %
 if (isfield(K,'q') & (~isempty(K.q)) & (K.q ~= 0)),
   fprintf('quadratic cone constraints are not supported.\n');
+  ret=100;
   return
 end 
 %
@@ -26,6 +27,7 @@ end
 %
 if (isfield(K,'r') & (~isempty(K.r)) & (K.r ~= 0)),
   fprintf('rotated cone constraints are not supported.\n');
+  ret=100;
   return
 end 
 %
@@ -33,6 +35,7 @@ end
 %
 if (isfield(K,'f') & (~isempty(K.f)) & (K.f ~= 0)),
   fprintf('Free variables are not supported.\n');
+  ret=100;
   return
 end 
 %
@@ -89,7 +92,7 @@ for i=1:length(K.s),
   vecsdpbase(i)=base;
   base=base+(K.s(i))^2;
 end
-
+veclpbase=1;
 %
 % Second, where everything is in the matrix.
 %
@@ -120,6 +123,7 @@ end
 fid=fopen(fname,'w');
 if (fid == -1),
   fprintf('file open failed!\n');
+  ret=100;
   return
 end
 %
@@ -136,7 +140,7 @@ fprintf(fid,'\n');
 % First, the SDP blocks.
 %
 for i=1:nsdpblocks
-  base=matsdpbase(i);
+  base=vecsdpbase(i);
   tempmat=reshape(z(base:base+K.s(i)^2-1),K.s(i),K.s(i));
   for j=1:K.s(i)
     for k=j:K.s(i)
@@ -150,10 +154,10 @@ end
 % The linear block is last.
 %
 if (nlin > 0)
-  for i=matlpbase:length(z)
+  for i=veclpbase:nlin
     if (x(i) ~= 0)
-      fprintf(fid,'1 %d %d %d %.18e \n',[nsdpblocks+1 i-matlpbase+1 ...
-		    i-matlpbase+1 z(i)]);
+      fprintf(fid,'1 %d %d %d %.18e \n',[nsdpblocks+1 i-veclpbase+1 ...
+		    i-veclpbase+1 z(i)]);
     end
   end
 end
@@ -164,7 +168,7 @@ end
 % First, the SDP blocks.
 %
 for i=1:nsdpblocks
-  base=matsdpbase(i);
+  base=vecsdpbase(i);
   tempmat=reshape(x(base:base+K.s(i)^2-1),K.s(i),K.s(i));
   for j=1:K.s(i)
     for k=j:K.s(i)
@@ -178,10 +182,10 @@ end
 % The linear block is last.
 %
 if (nlin > 0)
-  for i=matlpbase:length(x)
+  for i=veclpbase:nlin
     if (x(i) ~= 0)
-      fprintf(fid,'2 %d %d %d %.18e \n',[nsdpblocks+1 i-matlpbase+1 ...
-		    i-matlpbase+1 x(i)]);
+      fprintf(fid,'2 %d %d %d %.18e \n',[nsdpblocks+1 i-veclpbase+1 ...
+		    i-veclpbase+1 x(i)]);
     end
   end
 end
@@ -191,3 +195,4 @@ end
 % Close the output file and return.
 %
 fclose(fid);
+ret=0;

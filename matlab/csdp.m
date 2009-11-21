@@ -29,7 +29,7 @@
 % install csdp in one of the directories that is in the search path.
 % A simple test is to run csdp from a command line prompt.  
 %
-function [x,y,z,info]=csdp(At,b,c,K,pars)
+function [x,y,z,info]=csdp(At,b,c,K,pars,x0,y0,z0)
 %
 % First, put a dummy pars in place if no argument was given.  Also
 % set pars.printlevel if not given.
@@ -140,6 +140,19 @@ if (isfield(pars,'printlevel')),
 else
   fprintf(fid,'printlevel=%d\n',1);
 end;
+
+if (isfield(pars,'perturbobj')),
+  fprintf(fid,'printlevel= %d\n',pars.perturbobj);
+else
+  fprintf(fid,'printlevel=%d\n',1);
+end;
+
+if (isfield(pars,'fastmode')),
+  fprintf(fid,'printlevel= %d\n',pars.fastmode);
+else
+  fprintf(fid,'printlevel=%d\n',0);
+end;
+
 %
 % close the parameter file.
 %
@@ -154,21 +167,55 @@ if (ret==1),
   return;
 end;
 %
+% If an initial solution was provided, write it out too.
+%
+if (nargin == 8)
+  initsolname=tempname;
+  ret=writesol([initsolname '.sol'],x0,y0,z0,K);
+  if (ret~=0)
+     info=100;
+     delete([initsolname '.sol']);
+     return;
+  end;
+end  
+
+%
 % Solve the problem.
 %
-if (ispc==1),
-  info=dos(['csdp ' fname '.dat-s' ' ' fname '.sol'],'-echo');
-else
-  if (pars.printlevel ~=0),
-    info=system(['time csdp ' fname '.dat-s' ' ' fname '.sol']);
+if (nargin==8)
+%
+% An inital solution was provided, so include it in the command line.
+%
+  if (ispc==1),
+    info=dos(['csdp ' fname '.dat-s' ' ' fname '.sol' ' ' initsolname '.sol'],'-echo');
   else
-    info=system(['csdp ' fname '.dat-s' ' ' fname '.sol']);
+    if (pars.printlevel ~=0),
+      info=system(['time csdp ' fname '.dat-s' ' ' fname '.sol' ' ' ...
+		  initsolname '.sol']);
+    else
+      info=system(['csdp ' fname '.dat-s' ' ' fname '.sol' ' ' ...
+		   initsolname '.sol']);
+    end;
   end;
-end;
+else
+%
+% no initial solution was provided.
+%
+  if (ispc==1),
+    info=dos(['csdp ' fname '.dat-s' ' ' fname '.sol'],'-echo');
+  else
+    if (pars.printlevel ~=0),
+      info=system(['time csdp ' fname '.dat-s' ' ' fname '.sol']);
+    else
+      info=system(['csdp ' fname '.dat-s' ' ' fname '.sol']);
+    end;
+  end;
+end
+
 %
 % Only try to read the solution if csdp succeeded at least to a point.
 %
-if (info <= 3)
+if (info <= 4)
 %
 % Read back the solution.
 %
@@ -193,4 +240,7 @@ end
 %
 delete([fname '.dat-s']);
 delete([fname '.sol']);
+if (nargin==8)
+  delete([initsolname '.sol']);
+end
 delete('param.csdp');
