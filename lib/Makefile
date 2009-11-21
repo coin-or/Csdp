@@ -86,8 +86,12 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #      CFLAGS==-O3 -fno-alias -no-alias-args -march=core2 -g -ansi -openmp 
 #               -DUSEOPENMP -DNOSHORTS -DUSEGETTIME -I../include
 #
+# 8. The can works particularly well with the ATLAS BLAS/LAPACK routines 
+#    when compiled with gcc.  Use
 #
-# 8. If you change the CFLAGS, make sure that you use the same CFLAGS
+#      CFLAGS=
+#
+# 9. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
 #
 #  Build the library.

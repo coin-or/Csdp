@@ -1185,7 +1185,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		 };
 
 	       affreldinfeas=dinfeas(k,C,constraints,workvec1,work2,work3);
-	       affrelpinfeas=pinfeas(k,constraints,work1,a,workvec1);
+	       affrelpinfeas=pinfeas(k,constraints,work1,a,workvec4);
 	       
 	       if (printlevel >= 3)
 		 {
