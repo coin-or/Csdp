@@ -108,10 +108,10 @@ LIBS=-L../lib -lsdp -llapack -lblas -lg2c -lm
 #
 # 5. An alternative set of flags for use with Intel's icc and MKL.
 #
-#  LIBS=-openmp -L../lib -lsdp -L/opt/intel/mkl/10.0.3.020/lib/32 
-#       -lmkl_lapack -lmkl_blas -lmkl -lguide -lpthread -lm
-#
-#
+#      CC=icc
+#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
+#              -I../include
+#      LIBS=-openmp -L../lib -lsdp -mkl -lm       
 #
 # Target all builds everything.
 #
