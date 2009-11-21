@@ -20,6 +20,7 @@
 #                     after receiving a SIGTERM signal
 #  -DUSEGETTIME       Use ANSI C gettime() routine to determine clock
 #                     time used in different parts of the code.
+#  -DUSEATLAS         Turns on some special code for use with the ATLAS BLAS.
 #
 # The default settings for gcc:
 #
@@ -87,9 +88,13 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #               -DUSEOPENMP -DNOSHORTS -DUSEGETTIME -I../include
 #
 # 8. The can works particularly well with the ATLAS BLAS/LAPACK routines 
-#    when compiled with gcc.  Use
+#    when compiled with gcc. There are some important optimizations in the
+#    code that depend on the availability of routines within ATLAS, so use
+#    use -DUSEATLAS to turn these on.  e.g.  
 #
-#      CFLAGS=
+#      CFLAGS=-O3  -fopenmp  -ansi -Wall -DUSEATLAS -DNOSHORTS -DBIT64 
+#             -DUSEOPENMP -I../include
+#
 #
 # 9. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
