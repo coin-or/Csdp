@@ -81,11 +81,13 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS  -I../include
 #
 # 7. The code can be built with Intel's icc C compiler and MKL BLAS/
-#    LAPACK libraries.  Assuming that you have a core2 processor, use
+#    LAPACK libraries.  This has been tested with icc 11.0 and should 
+#    work with later versions as well.
 #
 #      CC=icc
-#      CFLAGS==-O3 -fno-alias -no-alias-args -march=core2 -g -ansi -openmp 
-#               -DUSEOPENMP -DNOSHORTS -DUSEGETTIME -I../include
+#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
+#              -I../include
+#      LIBS=-openmp -L../lib -lsdp -mkl -lm
 #
 # 8. The can works particularly well with the ATLAS BLAS/LAPACK routines 
 #    when compiled with gcc. There are some important optimizations in the
