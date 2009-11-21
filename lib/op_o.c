@@ -352,9 +352,15 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 	       */
 	      scale1 = 1.0;
 	      scale2 = 0.0;
+
+#ifdef USEATLAS
+	      mat_mult_rawatlas(blocksize, scale1, scale2, Ziblk, workblk, work2blk);
+	      mat_mult_rawatlas(blocksize, scale1, scale2, work2blk, Xblk, workblk);
+#else
 	      mat_mult_raw(blocksize, scale1, scale2, Ziblk, workblk, work2blk);
 	      mat_mult_raw(blocksize, scale1, scale2, work2blk, Xblk, workblk);
-	      
+#endif	      
+
 	      ptrj = byblocks[blocknum];
 	      while (ptrj != NULL) 
 		{
