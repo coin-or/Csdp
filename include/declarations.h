@@ -123,6 +123,9 @@ void mat_multspc(double scale1, double scale2, struct blockmatrix A,
 void mat_mult_raw(int n, double scale1, double scale2, double *ap,
 		  double *bp, double *cp);
 
+void mat_mult_rawatlas(int n, double scale1, double scale2, double *ap,
+		  double *bp, double *cp);
+
 void matvec(struct blockmatrix A, double *x, double *y);
 
 void alloc_mat(struct blockmatrix A, struct blockmatrix *pB);
