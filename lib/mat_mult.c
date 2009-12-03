@@ -108,6 +108,7 @@ void mat_mult_raw(n,scale1,scale2,ap,bp,cp)
 
 #ifdef USEATLAS
 
+
 void mat_mult_rawatlas(n,scale1,scale2,ap,bp,cp)
      int n;
      double scale1;
@@ -119,6 +120,10 @@ void mat_mult_rawatlas(n,scale1,scale2,ap,bp,cp)
 enum CBLAS_ORDER {CblasRowMajor=101, CblasColMajor=102 };
 enum CBLAS_TRANSPOSE {CblasNoTrans=111, CblasTrans=112, CblasConjTrans=113,
 		      AtlasConj=114};
+
+void  ATL_dgemm(enum CBLAS_TRANSPOSE transa,enum CBLAS_TRANSPOSE transb,
+                int m,int n, int k,double scale1,double *ap,int l,double *bp,
+                int p,double scale2,double *cp,int q);
 
  ATL_dgemm(CblasNoTrans,CblasNoTrans,n,n,n,scale1,ap,n,bp,n,scale2,cp,n);
 }
