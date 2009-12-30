@@ -77,7 +77,8 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #
 # In addition, if you're using gcc to compile the C code, then you'll need:
 #
-#  g2c                The gnu C/Fortran 77 compatibility library
+#  gfortran           The gnu C/Fortran 77 compatibility library (called
+#                     g2c in versions of gcc before gcc 4.0.)
 #  m                  The C math run time library.
 #   
 # Use this line to specify where the SDP and linear algebra libraries are
@@ -87,12 +88,13 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 # -lsdp               get libsdp.a from the ../lib directory
 # -llapack            get liblapack.a or liblapack.so 
 # -lblas              get libblas.a or libblas.so
-# -lg2c               get libg2c.a or libg2c.so
+# -lgfortran          get libgfortran.a or libgfortran.so
 # -lm                 get libm.a or libm.so
 #
-# The default settings for a Linux system with gcc3, lapack, blas, and g2c:
+# The default settings for a Linux system with gcc3, lapack, blas, and 
+# gfortran:
 #
-LIBS=-L../lib -lsdp -llapack -lblas -lg2c -lm
+LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS
 # package in debian has the BLAS library named libblas-3.a, rather than
@@ -101,10 +103,10 @@ LIBS=-L../lib -lsdp -llapack -lblas -lg2c -lm
 #
 # 2. An alternative set of flags for use with the ATLAS BLAS on a Linux system.
 #
-# LIBS=-L../lib -lsdp -llapack -lf77blas -lcblas -latlas -lg2c -lm 
+# LIBS=-L../lib -lsdp -llapack -lf77blas -lcblas -latlas -lgfortran -lm 
 #
-# 3. Special note on gcc 4.  In the gcc 4.x versions of gcc, -lg2c should be
-#    replaced by -lgfortran.
+# 3. Special note on gcc 4.  In versions of gcc before gcc 4.0, use -lg2c 
+#    instead of -lgfortran.
 #
 # 4. An alternative set of flags for use with the ATLAS BLAS, gcc 4.2, and
 #    OpenMP on a linux system.
