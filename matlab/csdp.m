@@ -1,11 +1,12 @@
 %
-% [x,y,z,info]=csdp(At,b,c,K,pars)
+% [x,y,z,info]=csdp(At,b,c,K,pars,x0,y0,z0)
 %
 % Uses CSDP to solve a problem in SeDuMi format.
 %
 % Input:
 %        At, b, c, K      SDP problem in SeDuMi format.
 %        pars             CSDP parameters (optional parameter.)
+%        x0,y0,z0         Optional starting point.  
 %
 % Output:
 %

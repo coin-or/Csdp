@@ -23,7 +23,7 @@
 \newcommand{\elprod}{\circ}
 
 \title{CSDP User's Guide}
-\date{November 1, 2006}
+\date{December 29, 2009}
 \author{Brian Borchers}
 \maketitle
 \section*{Introduction}
@@ -287,13 +287,14 @@ MATLAB package SeDuMi 1.05.  The usage is
 
 \begin{verbatim}
 %
-% [x,y,z,info]=csdp(At,b,c,K,pars)
+% [x,y,z,info]=csdp(At,b,c,K,pars,x0,y0,z0)
 %
 % Uses CSDP to solve a problem in SeDuMi format.
 %
 % Input:
 %        At, b, c, K      SDP problem in SeDuMi format.
 %        pars             CSDP parameters (optional parameter.)
+%        x0,y0,z0         Optional starting point.
 %
 % Output:
 %
@@ -796,7 +797,10 @@ user\_exit}.  CSDP passes the problem data and current solution to
 this subroutine.  If {\tt user\_exit} returns 0, then CSDP continues.
 However, if {\tt user\_exit} returns 1, then CSDP returns immediately
 to the calling program.  The default routine supplied in the CSDP
-library simply returns 0.  You can write your own routine and link it
+library simply returns 0.  If CSDP is compiled 
+with the ``-DUSESIGTERM'' flag, then default routine will also stop
+the solution process whenever the process receives a TERM signal.
+You can write your own routine and link it
 with your program in place of the default user exit routine.
 
 The calling sequence for the user exit routine is
