@@ -123,7 +123,7 @@ LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
 #  This builds the stand alone solver.
 #
 csdp: csdp.o 
-	$(CC) csdp.o $(LIBS) -o csdp
+	$(CC) $(CFLAGS) csdp.o $(LIBS) -o csdp
 #
 # To clean out the directory:
 #
