@@ -440,10 +440,14 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
    * Free storage allocated for parallel work space.
    */
 
-  for (i=1; i< max_threads; i++)
+  if (max_blknum>0)
     {
-      free(work[i*2+1]);
-      free(work[i*2+2]);
+      for (i=1; i< max_threads; i++)
+	{
+	  free(work[i*2+1]);
+	  free(work[i*2+2]);
+	};
+      free(work);
     };
-  free(work);
+
 }
