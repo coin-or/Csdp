@@ -232,9 +232,9 @@ else
 %
 % CSDP failed.  Set x, y, and z to NaN. 
 %
-  x=NaN;
-  y=NaN;
-  z=NaN;
+  x=NaN*ones(length(c),1);
+  y=NaN*ones(length(b),1);
+  z=NaN*ones(length(c),1);
 end
 %
 % Delete the temporary files, including param.csdp if we wrote one!
