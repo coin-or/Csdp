@@ -336,6 +336,17 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       for (i=1; i<=*pk; i++)
 	{
 	  (*pa)[i]=strtod(ptr1,&ptr2);
+	  /*
+	   * Check for a case where ptr2 didn't advance.  This indicates
+	   * a strtod failure.
+	   */
+	  if (ptr1==ptr2)
+	    {
+	      printf("Incorect SDPA file. Can't read RHS values.\n");
+	      fclose(fid);
+	      free(isdiag);
+	      return(1);
+	    };
 	  ptr1=ptr2;
 	};
     }
@@ -545,6 +556,17 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       for (i=1; i<=*pk; i++)
 	{
 	  (*pa)[i]=strtod(ptr1,&ptr2);
+	  /*
+	   * Check for a case where ptr2 didn't advance.  This indicates
+	   * a strtod failure.
+	   */
+	  if (ptr1==ptr2)
+	    {
+	      printf("Incorect SDPA file. Can't read RHS values.\n");
+	      fclose(fid);
+	      free(isdiag);
+	      return(1);
+	    };
 	  ptr1=ptr2;
 	};
     }
