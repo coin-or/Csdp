@@ -73,6 +73,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 
    initparams(&params,&printlevel);
 
+
   /*
    *  Allocate working storage
    */
@@ -429,6 +430,18 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    sort_entries(k,C,constraints);
 
    /*
+    * Check the symmetry of C.
+    */
+
+   checkc(n,C,printlevel);
+
+   /*
+    * Check constraints.
+    */
+
+   checkconstraints(n,k,C,constraints,printlevel);
+
+   /*
     *  Now, call sdp().
     */
 
@@ -666,3 +679,135 @@ int bandwidth(n,lda,A)
   return(bw);
 }
 
+/*
+ * Sanity checks for the C matrix data structure.  If this fails, we'll just
+ * exit(10) to indicate that there was improper input.  Otherwise, we'll 
+ * return 0;
+ */
+
+int checkc(int n,struct blockmatrix C,int printlevel)
+{
+  int i,j,k;
+  int totalsize;
+
+  totalsize=0;
+  for (k=1; k<=C.nblocks; k++)
+    {
+      printf("C block %d, blocksize, %d\n",k,C.blocks[k].blocksize);
+      if (C.blocks[k].blockcategory==DIAG)
+	{
+	  if (printlevel > 5)
+	    printf("blockcategory=diag\n");
+	};
+      if (C.blocks[k].blockcategory==MATRIX)
+	{
+	  if (printlevel > 5)
+	    printf("blockcategory=matrix\n");
+	};
+      
+      totalsize=totalsize+C.blocks[k].blocksize;
+
+      if (C.blocks[k].blockcategory==MATRIX)
+	{
+	  for (i=1; i<=C.blocks[k].blocksize; i++)
+	    {
+	      for (j=1; j<=C.blocks[k].blocksize; j++)
+		{
+		  if (C.blocks[k].data.mat[ijtok(i,j,C.blocks[k].blocksize)] !=
+		      C.blocks[k].data.mat[ijtok(j,i,C.blocks[k].blocksize)])
+		    {
+		      printf("C is not symmetric, %d, %d, %d\n",k,i,j);
+		      exit(10);
+		    }
+		};
+	    };
+	};
+    };
+
+  if (totalsize != n)
+    {
+      printf("Sum of block sizes does not equal n!\n");
+      exit(10);
+    };
+
+  return(0);
+}
+
+/*
+ * Sanity tests on the constraints data structure.
+ */
+
+int checkconstraints(n,k,C,constraints,printlevel)
+     int n;
+     int k;
+     struct blockmatrix C;
+     struct constraintmatrix *constraints;
+{
+  int i,j;
+  struct sparseblock *p;
+
+  for (i=1; i<=k; i++)
+    {
+      printf("Checking constraint %d \n",i);
+      p=constraints[i].blocks;
+      if (p==NULL)
+	{
+	  printf("Constraint %d is empty!\n",i);
+	  exit(10);
+	};
+      while (p != NULL)
+	{
+	  if (p->constraintnum != i)
+	    {
+	      printf("p->constraintnum != i, i=%d \n",i);
+	      exit(10);
+	    };
+	  if (p->blocksize != C.blocks[p->blocknum].blocksize)
+	    {
+	      printf("p->blocksize is wrong, constraint %d \n",i);
+	      exit(10);
+	    };
+	  if (printlevel > 5)
+	    printf("Constraint %d, block %d, entries %d\n",i,p->blocknum,p->numentries);
+	  for (j=1; j<=p->numentries; j++)
+	    {
+	      if (printlevel >6)
+		printf(" (%d, %d)=%lf\n",p->iindices[j],p->jindices[j],p->entries[j]);
+
+	      if (p->iindices[j] > C.blocks[p->blocknum].blocksize)
+		{
+		  printf("i index is larger than blocksize!\n");
+		  exit(10);
+		};
+
+	      if (p->jindices[j] > C.blocks[p->blocknum].blocksize)
+		{
+		  printf("j index is larger than blocksize!\n");
+		  exit(10);
+		};
+
+	      if (p->iindices[j] < 1)
+		{
+		  printf("i index is less than 1!\n");
+		  exit(10);
+		};
+	      if (p->jindices[j] < 1)
+		{
+		  printf("j index is less than 1!\n");
+		  exit(10);
+		};
+
+	      if (C.blocks[p->blocknum].blockcategory==DIAG)
+		{
+		  if (p->iindices[j] != p->jindices[j])
+		    {
+		      printf("Off diagonal entry in diagonal block!\n");
+		      exit(10);
+		    };
+		};
+	    };
+	  p=p->next;
+	};
+    };
+  return(0);
+} 
