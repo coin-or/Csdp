@@ -23,7 +23,7 @@
     7             Failure: Lack of progress
     8             Failure: X, Z, or O was singular.
     9             Failure: Detected NaN or Inf values.
-
+   10             Failure: Improper input (see error messages.)
 
   Notes on data storage:  All "2-d" arrays are stored in Fortran style,
   column major order.  macros in index.h are used to handle indexing into
