@@ -130,7 +130,7 @@ end
 % Write out y.
 %
 for i=1:m
-  fprintf(fid,'%.18e ',-y(i));
+  fprintf(fid,'%.18e ',full(-y(i)));
 end
 fprintf(fid,'\n');
 %
@@ -145,7 +145,7 @@ for i=1:nsdpblocks
   for j=1:K.s(i)
     for k=j:K.s(i)
       if (tempmat(j,k) ~= 0)
-	fprintf(fid,'1 %d %d %d %.18e \n',[i,j,k,tempmat(j,k)]);
+	fprintf(fid,'1 %d %d %d %.18e \n',full([i,j,k,tempmat(j,k)]));
       end
     end
   end
@@ -156,8 +156,8 @@ end
 if (nlin > 0)
   for i=veclpbase:nlin
     if (x(i) ~= 0)
-      fprintf(fid,'1 %d %d %d %.18e \n',[nsdpblocks+1 i-veclpbase+1 ...
-		    i-veclpbase+1 z(i)]);
+      fprintf(fid,'1 %d %d %d %.18e \n',full([nsdpblocks+1 i-veclpbase+1 ...
+		    i-veclpbase+1 z(i)]));
     end
   end
 end
@@ -173,7 +173,7 @@ for i=1:nsdpblocks
   for j=1:K.s(i)
     for k=j:K.s(i)
       if (tempmat(j,k) ~= 0)
-	fprintf(fid,'2 %d %d %d %.18e \n',[i,j,k,tempmat(j,k)]);
+	fprintf(fid,'2 %d %d %d %.18e \n',full([i,j,k,tempmat(j,k)]));
       end
     end
   end
@@ -184,8 +184,8 @@ end
 if (nlin > 0)
   for i=veclpbase:nlin
     if (x(i) ~= 0)
-      fprintf(fid,'2 %d %d %d %.18e \n',[nsdpblocks+1 i-veclpbase+1 ...
-		    i-veclpbase+1 x(i)]);
+      fprintf(fid,'2 %d %d %d %.18e \n',full([nsdpblocks+1 i-veclpbase+1 ...
+		    i-veclpbase+1 x(i)]));
     end
   end
 end

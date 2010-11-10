@@ -309,7 +309,7 @@ end
   [II,JJ,V]=find(work);
   cnt=length(II);
   if (cnt ~= 0)
-    fprintf(fid,'%d %d %d %d %.18e\n',[zeros(size(II)) i*ones(size(II)) II JJ -V]');
+    fprintf(fid,'%d %d %d %d %.18e\n',full([zeros(size(II)) i*ones(size(II)) II JJ -V]'));
   end
 
 %
@@ -322,7 +322,7 @@ end
 %
 for i=1:nlin
   if (c(i) ~= 0.0)
-    fprintf(fid,'%d %d %d %d %.18e\n',[0 nsdpblocks+1 i i -c(i)]);
+    fprintf(fid,'%d %d %d %d %.18e\n',full([0 nsdpblocks+1 i i -c(i)]));
   end
 end
 
@@ -362,7 +362,7 @@ for cn=1:m
     [II,JJ,V]=find(work);
     cnt=length(II);
     if (cnt ~= 0)
-      fprintf(fid,'%d %d %d %d %.18e\n',[cn*ones(size(II)) i*ones(size(II)) II JJ V]');
+      fprintf(fid,'%d %d %d %d %.18e\n',full([cn*ones(size(II)) i*ones(size(II)) II JJ V]'));
     end
 %
 %  Next, update to the next base.
@@ -378,7 +378,7 @@ for cn=1:m
   workrow=sparse(I,ones(size(I)),rowcn(I),nlin,1);
   [II,JJ,V]=find(workrow);
   if (length(II) > 0)
-    fprintf(fid,'%d %d %d %d %.18e\n',[cn*ones(length(II),1) (nsdpblocks+1)*ones(length(II),1) II II V]');
+    fprintf(fid,'%d %d %d %d %.18e\n',full([cn*ones(length(II),1) (nsdpblocks+1)*ones(length(II),1) II II V]'));
   end
 end
 %
