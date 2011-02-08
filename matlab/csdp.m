@@ -121,7 +121,7 @@ end;
 if (isfield(pars,'usexzgap')),
   fprintf(fid,'usexzgap= %d\n',pars.usexzgap);
 else
-  fprintf(fid,'usexzgap=%d\n',0);
+  fprintf(fid,'usexzgap=%d\n',1);
 end;
 
 if (isfield(pars,'tweakgap')),
