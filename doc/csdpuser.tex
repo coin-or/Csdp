@@ -112,7 +112,7 @@ Users of CSDP can specify their own termination criteria.  However, the
 default criteria are that 
 \begin{equation}
 \begin{array}{rcl}
-   \frac{\mbox{tr}(XZ)}{1+ | a^{T}y| } &  <  & 1.0 \times 10^{-8} \\ 
+   \frac{\mbox{tr}(XZ)}{1+ | a^{T}y| + | \mbox{tr}(CX)|} &  <  & 1.0 \times 10^{-8} \\ 
    \frac{\| A(x)- a\|_{2}}{1 + \| a \|_{2}} & < &  1.0 \times 10^{-8} \\ 
    \frac{\| A^{T}(y) -C -Z \|_{F}}{1 + \|C\|_{F}} & < & 1.0 \times 10^{-8} \\
    X,Z & \succeq & 0. \\
