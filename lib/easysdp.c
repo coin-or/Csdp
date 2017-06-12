@@ -693,7 +693,6 @@ int checkc(int n,struct blockmatrix C,int printlevel)
   totalsize=0;
   for (k=1; k<=C.nblocks; k++)
     {
-      printf("C block %d, blocksize, %d\n",k,C.blocks[k].blocksize);
       if (C.blocks[k].blockcategory==DIAG)
 	{
 	  if (printlevel > 5)
@@ -748,7 +747,6 @@ int checkconstraints(n,k,C,constraints,printlevel)
 
   for (i=1; i<=k; i++)
     {
-      printf("Checking constraint %d \n",i);
       p=constraints[i].blocks;
       if (p==NULL)
 	{
