@@ -48,6 +48,10 @@ void matvec(A,x,y)
 
 	  scale1=1.0;
 	  scale2=0.0;
+
+#ifdef HIDDENSTRLEN
+	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc,1);
+#else
 #ifdef NOUNDERBLAS
 #ifdef CAPSBLAS
 	  DGEMV("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
@@ -61,6 +65,8 @@ void matvec(A,x,y)
 	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
 #endif
 #endif
+#endif
+	  
 	  p=p+n;
 
 	  break;

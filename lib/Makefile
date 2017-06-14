@@ -21,6 +21,9 @@
 #  -DUSEGETTIME       Use ANSI C gettime() routine to determine clock
 #                     time used in different parts of the code.
 #  -DUSEATLAS         Turns on some special code for use with the ATLAS BLAS.
+#  -DHIDDENSTRLEN     Calls BLAS/LAPACK routines with hidden string length
+#                     arguments at the end of argument list.  Used by some
+#                     Fortran compilers and ACML BLAS/LAPCK.  
 #
 # The default settings for gcc:
 #

@@ -90,6 +90,9 @@ void mat_mult_raw(n,scale1,scale2,ap,bp,cp)
      double *bp;
      double *cp;
 {
+#ifdef HIDDENSTRLEN
+  dgemm_("N","N",&n,&n,&n,&scale1,ap,&n,bp,&n,&scale2,cp,&n,1,1);
+#else
 #ifdef NOUNDERBLAS
 #ifdef CAPSBLAS
 	  DGEMM("N","N",&n,&n,&n,&scale1,ap,&n,bp,&n,&scale2,cp,&n);
@@ -101,6 +104,7 @@ void mat_mult_raw(n,scale1,scale2,ap,bp,cp)
 	  DGEMM_("N","N",&n,&n,&n,&scale1,ap,&n,bp,&n,&scale2,cp,&n);
 #else
 	  dgemm_("N","N",&n,&n,&n,&scale1,ap,&n,bp,&n,&scale2,cp,&n);
+#endif
 #endif
 #endif
 

@@ -19,6 +19,9 @@ int solvesys(m,ldam,A,rhs)
 
   incx=1;
 
+#ifdef HIDDENSTRLEN
+  dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info,1);
+#else
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
 	   DPOTRS("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
@@ -31,6 +34,7 @@ int solvesys(m,ldam,A,rhs)
   #else
 	   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
   #endif
+#endif
 #endif
 
 	   if (info != 0)

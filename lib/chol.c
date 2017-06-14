@@ -20,7 +20,9 @@ int chol_blk(n,lda,A)
 
   info=0;
 
-
+#ifdef HIDDENSTRLEN
+  dpotrf_("U",&n,A,&lda,&info,1);
+#else
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
     DPOTRF("U",&n,A,&lda,&info);
@@ -34,7 +36,7 @@ int chol_blk(n,lda,A)
     dpotrf_("U",&n,A,&lda,&info);
   #endif
 #endif
-
+#endif
   if (info != 0)
     {
       return(1);
@@ -177,6 +179,9 @@ void chol_inv(A,work)
 	  ap=work.blocks[blk].data.mat;
           scale=1.0;
 
+#ifdef HIDDENSTRLEN
+	  dtrtri_("U","N",&n,ap,&n,&info,1,1);
+#else
 #ifdef NOUNDERLAPACK
 #ifdef CAPSLAPACK
 	  DTRTRI("U","N",&n,ap,&n,&info);
@@ -188,6 +193,7 @@ void chol_inv(A,work)
 	  DTRTRI_("U","N",&n,ap,&n,&info);
 #else
 	  dtrtri_("U","N",&n,ap,&n,&info);
+#endif
 #endif
 #endif
 
