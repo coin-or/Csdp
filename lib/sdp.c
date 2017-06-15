@@ -114,7 +114,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   double relgap;
   double mu=1.0e30;
   double muplus;
-  double oldmu;
   double muk;
   double gamma;
   double alphap,alphap1;
@@ -130,10 +129,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   double bestrelpinfeas;
   double limreldinfeas;
   double bestreldinfeas;
-  double maxrelinfeas=1.0e100;
-  double oldmaxrelinfeas=1.0e100;
-  double newpobj;
-  double newdobj;
   int iter=0;
   int m;
   int ret;
@@ -144,7 +139,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   int retries=0;
   int retcode=0;
   double bestmeas;
-  int lastimprove=0;
   double diagnrm;
   double diagfact=0.0;
   double diagadd;
@@ -373,17 +367,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
   if (reldinfeas < parameters.atytol)
     probdfeas=1;
-
-
-  oldmaxrelinfeas=maxrelinfeas;
-  if (relpinfeas > reldinfeas)
-    {
-      maxrelinfeas=relpinfeas;
-    }
-  else
-    {
-      maxrelinfeas=reldinfeas;
-    };
 
   /*
    * Record this solution as the best solution.
@@ -764,9 +747,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
-#ifdef HIDDENSTRLEN
-	   dpotrf_("U",&m,O,&ldam,&info,1);
-#else
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
 	   DPOTRF("U",&m,O,&ldam,&info);
@@ -780,8 +760,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   dpotrf_("U",&m,O,&ldam,&info);
   #endif
 #endif
-#endif
-	   
+
 #ifdef USEGETTIME
 	   gettimeofday(&tp,NULL);
 	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
@@ -1101,8 +1080,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 				workvec5,workvec6,mystepfrac,1.0,
 				printlevel);
 
-	   oldmu=mu;
-
 	   /* Here, work1 holds X+alphap1*dX, work2=Z+alphad1*dZ */
 
 	   addscaledmat(X,alphap1,dX,work1);
@@ -1204,8 +1181,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		   (affrelpinfeas/parameters.axtol <bestmeas) &&
 		   (affreldinfeas/parameters.atytol <bestmeas))
 		 {
-		   lastimprove=iter;
-		   
 		   bestmeas=affrelgap/parameters.objtol;
 		   if (affrelpinfeas/parameters.axtol > bestmeas)
 		     bestmeas=affrelpinfeas/parameters.axtol;
@@ -1223,8 +1198,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       if ((ispfeasprob==1) &&
 		   (affrelpinfeas/parameters.axtol < bestmeas))
 		 {
-		   lastimprove=iter;
-		   
 		   bestmeas=affrelpinfeas/parameters.axtol;
 		   
 		   store_packed(work1,bestx);
@@ -1241,8 +1214,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       if ((isdfeasprob==1) &&
 		   (affreldinfeas/parameters.atytol <bestmeas))
 		 {
-		   lastimprove=iter;
-		   
 		   bestmeas=affreldinfeas/parameters.atytol;
 		   
 		   zero_mat(work3);
@@ -1634,13 +1605,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 			     workvec5,workvec6,mystepfrac,1.0,
 			     printlevel);
 
-
-	   /*
-	    * Compute the objective value of the new solution.
-	    */
-
-	   newpobj=calc_pobj(C,work1,constant_offset);
-
 	   alphad=linesearch(n,dZ,work1,work2,work3,cholzinv,workvec4,
 			     workvec5,workvec6,mystepfrac,1.0,
 			     printlevel);
@@ -1652,12 +1616,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad*dy[i];
-
-	   /*
-	    * Calculate the prospective new dual objective.
-	    */
-
-	   newdobj=calc_dobj(k,a,workvec1,constant_offset);
 
 	   /*
 	    * Check on the feasibility of the new solutions.  If they're
@@ -1718,7 +1676,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       alphap=0.80*alphap;
 	       addscaledmat(X,alphap,dX,work1);
 	       newrelpinfeas=pinfeas(k,constraints,work1,a,workvec1);
-	       newpobj=calc_pobj(C,work1,constant_offset);
 	       i=i+1;
 
 	       if (i>20)
@@ -1808,7 +1765,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       
 	       newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,
 				     work2);
-	       newdobj=calc_dobj(k,a,workvec1,constant_offset);
 	       i=i+1;
 	       if (i>15)
 		 {
@@ -1893,13 +1849,11 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	    */
 
 	   addscaledmat(X,alphap,dX,work1);
-	   newpobj=calc_pobj(C,work1,constant_offset);
 	   newrelpinfeas=pinfeas(k,constraints,work1,a,workvec1);
 
 	   addscaledmat(Z,alphad,dZ,work1);
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad*dy[i];
-	   newdobj=calc_dobj(k,a,workvec1,constant_offset);
 	   
 	   newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,work2);
 
@@ -1994,13 +1948,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     y[i]=y[i]+alphad*dy[i];
 
 	   /*
-	    *  Update the objectives.
-	    */
-
-	   newdobj=calc_dobj(k,a,y,constant_offset);
-	   newpobj=calc_pobj(C,X,constant_offset);
-
-	   /*
 	     Recompute the objective function values.
 	   */
 
@@ -2038,16 +1985,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   if (reldinfeas < parameters.atytol)
 	     probdfeas=1;
 
-	   oldmaxrelinfeas=maxrelinfeas;
-	   if (relpinfeas > reldinfeas)
-	     {
-	       maxrelinfeas=relpinfeas;
-	     }
-	   else
-	     {
-	       maxrelinfeas=reldinfeas;
-	     };
-
 	   /*
 	    * Make sure that the objective value hasn't gone crazy.
 	    *
@@ -2083,8 +2020,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       (ispfeasprob==0) && (isdfeasprob==0) &&
 	       (reldinfeas/parameters.atytol <bestmeas))
 	     {
-	       lastimprove=iter;
-
 	       bestmeas=relgap/parameters.objtol;
 	       if (relpinfeas/parameters.axtol > bestmeas)
 		 bestmeas=relpinfeas/parameters.axtol;
@@ -2102,8 +2037,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   if ((ispfeasprob==1) &&
 	       (relpinfeas/parameters.axtol <bestmeas))
 	     {
-	       lastimprove=iter;
-
 	       bestmeas=relpinfeas/parameters.axtol;
 
 	       store_packed(X,bestx);
@@ -2120,8 +2053,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   if ((isdfeasprob==1) &&
 	       (reldinfeas/parameters.atytol <bestmeas))
 	     {
-	       lastimprove=iter;
-
 	       bestmeas=reldinfeas/parameters.atytol;
 
 	       zero_mat(work3);

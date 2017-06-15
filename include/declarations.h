@@ -189,6 +189,11 @@ int easy_sdp(int n, int k, struct blockmatrix C, double *a,
 	     struct blockmatrix *pX, double **py, struct blockmatrix *pZ,
 	     double *ppobj, double *pdobj);
 
+int checkconstraints(int n, int k, struct blockmatrix C,
+		     struct constraintmatrix *constraints, int printlevel);
+
+int checkc(int n, struct blockmatrix C, int printlevel);
+  
 void tweakgap(int n, int k, double *a, struct constraintmatrix *constraints,
 	      double gap, struct blockmatrix Z, struct blockmatrix dZ, 
 	      double *y, double *dy, struct blockmatrix work1, 

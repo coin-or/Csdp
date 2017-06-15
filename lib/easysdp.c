@@ -60,7 +60,6 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
   struct sparseblock *oldptr;
   int i;
   int j;
-  int blk;
   struct sparseblock *p;
   struct sparseblock *q;
   struct sparseblock *prev=NULL;
@@ -323,8 +322,6 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 	 {
 	   if (p->nextbyblock == NULL)
 	     {
-	       blk=p->blocknum;
-	       
 	       /*
 		* link in the remaining blocks.
 		*/
@@ -741,6 +738,7 @@ int checkconstraints(n,k,C,constraints,printlevel)
      int k;
      struct blockmatrix C;
      struct constraintmatrix *constraints;
+     int printlevel;
 {
   int i,j;
   struct sparseblock *p;
