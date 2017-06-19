@@ -40,6 +40,7 @@ int chol_blk(n,lda,A)
   #endif
 #endif
 #endif
+#endif
     
   if (info != 0)
     {
@@ -197,7 +198,8 @@ void chol_inv(A,work)
 	  dtrtri_("U","N",&n,ap,&n,&info);
 #endif
 #endif
-
+#endif
+          
 	  if (info != 0)
 	    {
 	      printf("DTTRI failed!\n");
