@@ -186,7 +186,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
       inc=1;
 
 #ifdef HIDDENSTRLEN
-      dgemv_("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc,1,1);
+      dgemv_("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc,1);
 #else
 #ifdef NOUNDERBLAS
 #ifdef CAPSBLAS
