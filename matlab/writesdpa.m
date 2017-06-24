@@ -86,7 +86,7 @@ end
 %  Check for any quadratic cone constraints.
 %
 if (isfield(K,'q'))
-  if ((~isempty(K.q)) & (K.q ~= 0))
+  if ((~isempty(K.q)) && (K.q ~= 0))
     if (quiet == 0)
       fprintf('quadratic cone constraints are not supported.\n');
     end
@@ -98,7 +98,7 @@ end
 %  Check for any rotated cone constraints.
 %
 if (isfield(K,'r'))
-  if ((~isempty(K.r)) & (K.r ~= 0))
+  if ((~isempty(K.r)) && (K.r ~= 0))
     if (quiet == 0)
       fprintf('rotated cone constraints are not supported.\n');
     end
@@ -110,7 +110,7 @@ end
 % Check for any free variables.
 %
 if (isfield(K,'f'))
-  if ((~isempty(K.f)) & (K.f ~= 0))
+  if ((~isempty(K.f)) && (K.f ~= 0))
     if (quiet == 0)
       fprintf('Free variables are not supported.\n');
     end

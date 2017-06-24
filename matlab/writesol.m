@@ -17,7 +17,7 @@ function ret=writesol(fname,x,y,z,K);
 %
 %  Check for any quadratic cone constraints.
 %
-if (isfield(K,'q') & (~isempty(K.q)) & (K.q ~= 0)),
+if (isfield(K,'q') && (~isempty(K.q)) && (K.q ~= 0)),
   fprintf('quadratic cone constraints are not supported.\n');
   ret=100;
   return
@@ -25,7 +25,7 @@ end
 %
 %  Check for any rotated cone constraints.
 %
-if (isfield(K,'r') & (~isempty(K.r)) & (K.r ~= 0)),
+if (isfield(K,'r') && (~isempty(K.r)) && (K.r ~= 0)),
   fprintf('rotated cone constraints are not supported.\n');
   ret=100;
   return
@@ -33,7 +33,7 @@ end
 %
 % Check for any free variables.
 %
-if (isfield(K,'f') & (~isempty(K.f)) & (K.f ~= 0)),
+if (isfield(K,'f') && (~isempty(K.f)) && (K.f ~= 0)),
   fprintf('Free variables are not supported.\n');
   ret=100;
   return

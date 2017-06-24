@@ -14,21 +14,21 @@ function [x,y,z]=readsol(fname,K,m)
 %
 %  Check for any quadratic cone constraints.
 %
-if (isfield(K,'q') & (~isempty(K.q)) & (K.q ~= 0)),
+if (isfield(K,'q') && (~isempty(K.q)) && (K.q ~= 0)),
   fprintf('quadratic cone constraints are not supported.\n');
   return;
 end; 
 %
 %  Check for any rotated cone constraints.
 %
-if (isfield(K,'r') & (~isempty(K.r)) & (K.r ~= 0)),
+if (isfield(K,'r') && (~isempty(K.r)) && (K.r ~= 0)),
   fprintf('rotated cone constraints are not supported.\n');
   return;
 end; 
 %
 % Check for any free variables.
 %
-if (isfield(K,'f') & (~isempty(K.f)) & (K.f ~= 0)),
+if (isfield(K,'f') && (~isempty(K.f)) && (K.f ~= 0)),
   fprintf('Free variables are not supported.\n');
   return;
 end; 
@@ -129,7 +129,7 @@ count=count/5;
 %
 % Allocate storage for x and z.
 %
-if ((length(K.s) > 1) | (length(K.s==1) & (K.s>0))),
+if ((length(K.s) > 1) || (length(K.s==1) && (K.s>0))),
   veclength=vecsdpbase(length(K.s))+K.s(nsdpblocks)^2-1;
 else
   veclength=nlin;
