@@ -42,8 +42,8 @@ else
     pars.printlevel=pars.printlevel;
   else
     pars.printlevel=1;
-  end;
-end;
+  end
+end
 %
 % Write out the param.csdp file.
 %
@@ -51,10 +51,10 @@ fid=fopen('param.csdp','w');
 if (fid==-1)
   if (pars.printlevel ~= 0), 
     fprintf('Could not open param.csdp\n');
-  end;
+  end
   info=100;
-  return; 
-end;
+  return 
+end
 %
 % Now, go through the parameters.
 %
@@ -63,96 +63,96 @@ if (isfield(pars,'axtol')),
   fprintf(fid,'axtol= %e\n',pars.axtol);
 else
   fprintf(fid,'axtol=%e\n',1.0e-8);
-end;
+end
 
 if (isfield(pars,'atytol')),
   fprintf(fid,'atytol= %e\n',pars.atytol);
 else
   fprintf(fid,'atytol=%e\n',1.0e-8);
-end;
+end
 
 if (isfield(pars,'objtol')),
   fprintf(fid,'objtol= %e\n',pars.objtol);
 else
   fprintf(fid,'objtol=%e\n',1.0e-8);
-end;
+end
 
 if (isfield(pars,'pinftol')),
   fprintf(fid,'pinftol= %e\n',pars.pinftol);
 else
   fprintf(fid,'pinftol=%e\n',1.0e8);
-end;
+end
 
 if (isfield(pars,'dinftol')),
   fprintf(fid,'dinftol= %e\n',pars.dinftol);
 else
   fprintf(fid,'dinftol=%e\n',1.0e8);
-end;
+end
 
 if (isfield(pars,'maxiter')),
   fprintf(fid,'maxiter= %d\n',pars.maxiter);
 else
   fprintf(fid,'maxiter=%d\n',100);
-end;
+end
 if (isfield(pars,'minstepfrac')),
   fprintf(fid,'minstepfrac= %e\n',pars.minstepfrac);
 else
   fprintf(fid,'minstepfrac=%e\n',0.90);
-end;
+end
 
 if (isfield(pars,'maxstepfrac')),
   fprintf(fid,'maxstepfrac= %e\n',pars.maxstepfrac);
 else
   fprintf(fid,'maxstepfrac=%e\n',0.97);
-end;
+end
 
 if (isfield(pars,'minstepp')),
   fprintf(fid,'minstepp= %e\n',pars.minstepp);
 else
   fprintf(fid,'minstepp=%e\n',1.0e-8);
-end;
+end
 
 if (isfield(pars,'minstepd')),
   fprintf(fid,'minstepd= %e\n',pars.minstepd);
 else
   fprintf(fid,'minstepd=%e\n',1.0e-8);
-end;
+end
 
 if (isfield(pars,'usexzgap')),
   fprintf(fid,'usexzgap= %d\n',pars.usexzgap);
 else
   fprintf(fid,'usexzgap=%d\n',1);
-end;
+end
 
 if (isfield(pars,'tweakgap')),
   fprintf(fid,'tweakgap= %d\n',pars.tweakgap);
 else
   fprintf(fid,'tweakgap=%d\n',0);
-end;
+end
 
 if (isfield(pars,'affine')),
   fprintf(fid,'affine= %d\n',pars.affine);
 else
   fprintf(fid,'affine=%d\n',0);
-end;
+end
 
 if (isfield(pars,'printlevel')),
   fprintf(fid,'printlevel= %d\n',pars.printlevel);
 else
   fprintf(fid,'printlevel=%d\n',1);
-end;
+end
 
 if (isfield(pars,'perturbobj')),
   fprintf(fid,'printlevel= %d\n',pars.perturbobj);
 else
   fprintf(fid,'printlevel=%d\n',1);
-end;
+end
 
 if (isfield(pars,'fastmode')),
   fprintf(fid,'printlevel= %d\n',pars.fastmode);
 else
   fprintf(fid,'printlevel=%d\n',0);
-end;
+end
 
 %
 % close the parameter file.
@@ -165,8 +165,8 @@ fname=tempname;
 ret=writesdpa([fname '.dat-s'],At,b,c,K,pars);
 if (ret==1),
   info=100;
-  return;
-end;
+  return
+end
 %
 % If an initial solution was provided, write it out too.
 %
@@ -176,8 +176,8 @@ if (nargin == 8)
   if (ret~=0)
      info=100;
      delete([initsolname '.sol']);
-     return;
-  end;
+     return
+  end
 end  
 
 %
@@ -196,8 +196,8 @@ if (nargin==8)
     else
       info=system(['csdp ' fname '.dat-s' ' ' fname '.sol' ' ' ...
 		   initsolname '.sol']);
-    end;
-  end;
+    end
+  end
 else
 %
 % no initial solution was provided.
@@ -209,8 +209,8 @@ else
       info=system(['time csdp ' fname '.dat-s' ' ' fname '.sol']);
     else
       info=system(['csdp ' fname '.dat-s' ' ' fname '.sol']);
-    end;
-  end;
+    end
+  end
 end
 
 %
