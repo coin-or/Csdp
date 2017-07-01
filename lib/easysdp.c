@@ -421,7 +421,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
      printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
 
    /*
-    * Sort entries in diagonal blocks of constraints.
+    * Sort entries in the constraints.
     */
 
    sort_entries(k,C,constraints);
@@ -712,7 +712,8 @@ int checkc(int n,struct blockmatrix C,int printlevel)
 		  if (C.blocks[k].data.mat[ijtok(i,j,C.blocks[k].blocksize)] !=
 		      C.blocks[k].data.mat[ijtok(j,i,C.blocks[k].blocksize)])
 		    {
-		      printf("C is not symmetric, %d, %d, %d\n",k,i,j);
+                      if (printlevel >= 1)
+                        printf("C is not symmetric, %d, %d, %d\n",k,i,j);
 		      exit(10);
 		    }
 		};
@@ -722,7 +723,8 @@ int checkc(int n,struct blockmatrix C,int printlevel)
 
   if (totalsize != n)
     {
-      printf("Sum of block sizes does not equal n!\n");
+      if (printlevel >= 1)
+        printf("Sum of block sizes does not equal n!\n");
       exit(10);
     };
 
@@ -748,56 +750,108 @@ int checkconstraints(n,k,C,constraints,printlevel)
       p=constraints[i].blocks;
       if (p==NULL)
 	{
-	  printf("Constraint %d is empty!\n",i);
+          if (printlevel >= 1)
+            printf("Constraint %d is empty!\n",i);
 	  exit(10);
 	};
       while (p != NULL)
 	{
 	  if (p->constraintnum != i)
 	    {
-	      printf("p->constraintnum != i, i=%d \n",i);
+              if (printlevel >= 1)
+                printf("p->constraintnum != i, i=%d \n",i);
 	      exit(10);
 	    };
 	  if (p->blocksize != C.blocks[p->blocknum].blocksize)
 	    {
-	      printf("p->blocksize is wrong, constraint %d \n",i);
+              if (printlevel >= 1)
+                printf("p->blocksize is wrong, constraint %d \n",i);
 	      exit(10);
 	    };
 	  if (printlevel > 5)
 	    printf("Constraint %d, block %d, entries %d\n",i,p->blocknum,p->numentries);
 	  for (j=1; j<=p->numentries; j++)
 	    {
+
+              /*
+               * For debugging, print out the constraint entry.
+               */
+              
 	      if (printlevel >6)
 		printf(" (%d, %d)=%lf\n",p->iindices[j],p->jindices[j],p->entries[j]);
 
+              /*
+               * Make sure that all indices are in range.
+               */
+              
 	      if (p->iindices[j] > C.blocks[p->blocknum].blocksize)
 		{
-		  printf("i index is larger than blocksize!\n");
+                  if (printlevel >= 1)
+                    printf("i index is larger than blocksize!\n");
 		  exit(10);
 		};
 
 	      if (p->jindices[j] > C.blocks[p->blocknum].blocksize)
 		{
-		  printf("j index is larger than blocksize!\n");
+                  if (printlevel >= 1)
+                    printf("j index is larger than blocksize!\n");
 		  exit(10);
 		};
 
 	      if (p->iindices[j] < 1)
 		{
-		  printf("i index is less than 1!\n");
+                  if (printlevel >= 1)
+                    printf("i index is less than 1!\n");
 		  exit(10);
 		};
+              
 	      if (p->jindices[j] < 1)
 		{
-		  printf("j index is less than 1!\n");
+                  if (printlevel >= 1)
+                    printf("j index is less than 1!\n");
 		  exit(10);
 		};
 
+              /*
+               * Make sure that entries are sorted properly.
+               */
+              
+              if (p->iindices[j] < p->jindices[j])
+                {
+                  if (printlevel >= 1)
+                    {
+                      printf("i index is less than j index!\n");
+                      printf("iindex=%d\n",p->iindices[j]);
+                      printf("jindex=%d\n",p->jindices[j]);
+                    };
+
+		  exit(10);
+                };
+
+              /*
+               * Check for any duplicate entries that snuck in.
+               */
+              
+              if (j < p->numentries)
+                if ((p->iindices[j]==p->iindices[j+1]) &
+                    (p->jindices[j]==p->jindices[j+1]))
+                  {
+                    if (printlevel >= 1)
+                      {
+                        printf("i index is less than j index!\n");
+                        printf("iindex=%d\n",p->iindices[j]);
+                        printf("jindex=%d\n",p->jindices[j]);
+                      };
+
+                    exit(10);
+                  };
+              
 	      if (C.blocks[p->blocknum].blockcategory==DIAG)
 		{
 		  if (p->iindices[j] != p->jindices[j])
 		    {
-		      printf("Off diagonal entry in diagonal block!\n");
+                      if (printlevel >= 1)
+                        printf("Off diagonal entry in diagonal block!\n");
 		      exit(10);
 		    };
 		};

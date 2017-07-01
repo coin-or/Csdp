@@ -43,8 +43,6 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
   double ent;
   int ret;
   struct sparseblock *p;
-  struct sparseblock *q;
-  struct sparseblock *prev;
   int *isdiag;
   double *tempdiag;
 
@@ -718,77 +716,11 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       p=myconstraints[i].blocks;
       while (p != NULL)
 	{
-	  /*
-	   * First, set issparse.
-	   */
-	  if (((p->numentries) > 0.25*(p->blocksize)) && ((p->numentries) > 15))
-	    {
-	      p->issparse=0;
-	    }
-	  else
-	    {
-	      p->issparse=1;
-	    };
-	  
-	  if (pC->blocks[p->blocknum].blockcategory == DIAG)
-	    p->issparse=1;
-	  
-	  /*
-	   * Setup the cross links.
-	   */
-	  
 	  p->nextbyblock=NULL;
 	  p=p->next;
 	};
     };
   
-  /*
-   * Now, cross link.
-   */
-  
-  prev=NULL;
-  for (i=1; i<=*pk; i++)
-    {
-      p=myconstraints[i].blocks;
-      while (p != NULL)
-	{
-	  if (p->nextbyblock == NULL)
-	    {
-	      blk=p->blocknum;
-	      
-	      /*
-	       * link in the remaining blocks.
-	       */
-	      for (j=i+1; j<=*pk; j++)
-		{
-		  q=myconstraints[j].blocks;
-		  
-		  while (q != NULL)
-		    {
-		      if (q->blocknum == p->blocknum)
-			{
-			  if (p->nextbyblock == NULL)
-			    {
-			      p->nextbyblock=q;
-			      q->nextbyblock=NULL;
-			      prev=q;
-			    }
-			  else
-			    {
-			      prev->nextbyblock=q;
-			      q->nextbyblock=NULL;
-			      prev=q;
-			    };
-			  break;
-			};
-		      q=q->next;
-		    };
-		};
-	    };
-	  p=p->next;
-	};
-    };
-
   /*
    * Free unneeded memory.
    */
