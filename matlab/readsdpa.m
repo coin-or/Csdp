@@ -87,8 +87,7 @@ b=sscanf(inputline,'%le',m);
 %
 c=zeros(1,n);
 At=sparse(n,m);
-[entries,count]=fscanf(fid,'%d %d %d %d %le',[5,inf]);
-count=count/5;
+entries=fscanf(fid,'%d %d %d %d %le',[5,inf]);
 [entriesm,entriesn]=size(entries);
 for i=1:entriesn,
   if (entries(1,i)==0),
