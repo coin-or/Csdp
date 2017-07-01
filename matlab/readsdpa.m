@@ -19,9 +19,8 @@ function [At,b,c,K]=readsdpa(fname)
 %
 fid=fopen(fname,'r');
 if (fid == -1),
-  fprintf('file does not exist!\n');
-  return;
-end;
+  error('file does not exist'); 
+end
 %
 % Skip over the initial comments.
 %
@@ -56,16 +55,16 @@ for i=1:nblocks,
      blocktypes(i)=1;
   else
      blocktypes(i)=2;
-  end;
-end;
+  end
+end
 blockbases=zeros(nblocks,1);
 lpbase=1;
 for i=1:nblocks,
   if (blocktypes(i)==1)
     blockbases(i)=lpbase;
     lpbase=lpbase+blocksizes(i);
-  end;
-end;
+  end
+end
 K.l=lpbase-1;
 sdpbase=lpbase;
 K.s=[];
@@ -74,8 +73,8 @@ for i=1:nblocks,
     blockbases(i)=sdpbase;
     sdpbase=sdpbase+blocksizes(i)^2;
     K.s=[K.s blocksizes(i)];
-  end;
-end;
+  end
+end
 n=sdpbase-1;
 %
 % Now, read in the right hand side.
@@ -98,16 +97,30 @@ for i=1:entriesn,
 %
 % LP data.
 %
-      c(1,blockbases(block)+entries(3,i)-1)=entries(5,i);
+      if (c(1,blockbases(block)+entries(3,i)-1) ~= 0)
+        warning('SDPA input: Repeat entry in objective');
+        c(1,blockbases(block)+entries(3,i)-1)=entries(5,i);
+      else
+        c(1,blockbases(block)+entries(3,i)-1)=entries(5,i);
+      end
     else
 %
 % SDP block entry
 %
-      c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
-        entries(4,i)-1)=entries(5,i);
-      c(1,blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
-        entries(3,i)-1)=entries(5,i);
-    end;
+      if (c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+        entries(4,i)-1) ~= 0)
+        warning('SDPA input: Repeat entry in objective');
+        c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+          entries(4,i)-1)=entries(5,i);
+        c(1,blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
+          entries(3,i)-1)=entries(5,i);
+      else
+        c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+          entries(4,i)-1)=entries(5,i);
+        c(1,blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
+          entries(3,i)-1)=entries(5,i);
+      end
+    end
   else
 %
 % Constraint entry.
@@ -118,18 +131,37 @@ for i=1:entriesn,
 %
 % LP data.
 %
-      At(blockbases(block)+entries(3,i)-1,constraint)=entries(5,i);
+      if (At(blockbases(block)+entries(3,i)-1,constraint) ~= 0)
+        warning('SDPA input: Repeat entry in constraint');
+        constraint
+        block
+        At(blockbases(block)+entries(3,i)-1,constraint)=entries(5,i);
+      else
+        At(blockbases(block)+entries(3,i)-1,constraint)=entries(5,i);
+      end
+
     else
 %
 % SDP block entry
 %
-      At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
-        entries(4,i)-1,constraint)=entries(5,i);
-      At(blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
-        entries(3,i)-1,constraint)=entries(5,i);
-    end;
-  end;
-end;
+      if (At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+        entries(4,i)-1,constraint) ~= 0)
+        warning('SDPA input: Repeat entry in constraint');
+        constraint
+        block
+        At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+           entries(4,i)-1,constraint)=entries(5,i);
+        At(blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
+           entries(3,i)-1,constraint)=entries(5,i);
+      else
+        At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
+           entries(4,i)-1,constraint)=entries(5,i);
+        At(blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
+           entries(3,i)-1,constraint)=entries(5,i);
+      end
+    end
+  end
+end
 %
 % Fix up the sign of c to match SeDuMi's convention.  Also, make c
 % a column vector to match SeDuMi's fromsdpa(). 
