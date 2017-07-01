@@ -97,8 +97,7 @@ for i=1:entriesn,
 % LP data.
 %
       if (c(1,blockbases(block)+entries(3,i)-1) ~= 0)
-        warning('SDPA input: Repeat entry in objective');
-        c(1,blockbases(block)+entries(3,i)-1)=entries(5,i);
+        error('SDPA input: Repeat entry in objective');
       else
         c(1,blockbases(block)+entries(3,i)-1)=entries(5,i);
       end
@@ -108,11 +107,7 @@ for i=1:entriesn,
 %
       if (c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
         entries(4,i)-1) ~= 0)
-        warning('SDPA input: Repeat entry in objective');
-        c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
-          entries(4,i)-1)=entries(5,i);
-        c(1,blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
-          entries(3,i)-1)=entries(5,i);
+        error('SDPA input: Repeat entry in objective');
       else
         c(1,blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
           entries(4,i)-1)=entries(5,i);
@@ -131,10 +126,9 @@ for i=1:entriesn,
 % LP data.
 %
       if (At(blockbases(block)+entries(3,i)-1,constraint) ~= 0)
-        warning('SDPA input: Repeat entry in constraint');
         constraint
         block
-        At(blockbases(block)+entries(3,i)-1,constraint)=entries(5,i);
+        error('SDPA input: Repeat entry in constraint');
       else
         At(blockbases(block)+entries(3,i)-1,constraint)=entries(5,i);
       end
@@ -145,13 +139,9 @@ for i=1:entriesn,
 %
       if (At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
         entries(4,i)-1,constraint) ~= 0)
-        warning('SDPA input: Repeat entry in constraint');
         constraint
         block
-        At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
-           entries(4,i)-1,constraint)=entries(5,i);
-        At(blockbases(block)+(entries(4,i)-1)*blocksizes(block)+ ...
-           entries(3,i)-1,constraint)=entries(5,i);
+        error('SDPA input: Repeat entry in constraint');
       else
         At(blockbases(block)+(entries(3,i)-1)*blocksizes(block)+ ...
            entries(4,i)-1,constraint)=entries(5,i);
