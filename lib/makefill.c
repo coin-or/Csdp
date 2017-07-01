@@ -141,11 +141,8 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      printf("Storage Allocation Failed!\n");
 	      exit(10);
 	    };
-#ifdef NOSHORTS
+
 	  ptr->iindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
-#else
-	  ptr->iindices=(unsigned short *) malloc((ptr->blocksize+1)*sizeof(unsigned short));
-#endif
 
 	  if (ptr->iindices == NULL)
 	    {
@@ -153,11 +150,8 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      exit(10);
 	    };
 
-#ifdef NOSHORTS
 	  ptr->jindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
-#else
-	  ptr->jindices=(unsigned short *) malloc((ptr->blocksize+1)*sizeof(unsigned short));
-#endif
+
 	  if (ptr->jindices == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
@@ -194,11 +188,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      exit(10);
 	    };
 
-#ifdef NOSHORTS
 	  ptr->iindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
-#else
-	  ptr->iindices=(unsigned short *) malloc((ptr->numentries+1)*sizeof(unsigned short));
-#endif
 
 	  if (ptr->iindices == NULL)
 	    {
@@ -206,11 +196,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      exit(10);
 	    };
 
-#ifdef NOSHORTS
 	  ptr->jindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
-#else
-	  ptr->jindices=(unsigned short *) malloc((ptr->numentries+1)*sizeof(unsigned short));
-#endif
 
 	  if (ptr->jindices == NULL)
 	    {

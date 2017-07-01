@@ -13,7 +13,6 @@
 #  -DNOUNDERBLAS      if BLAS routine names have no underscore.
 #  -DNOUNDERLAPACK    if LAPACK routine names have no underscore.
 #  -DBIT64            For I32LP64 systems.
-#  -DNOSHORTS         Allow for (LP) blocks of more than 65535 variables.
 #  -DUSEOPENMP        Build an OpenMP parallel version.
 #  -DSETNUMTHREADS    Work with OpenMP aware BLAS.  
 #  -DUSESIGTERM       Terminate nicely at the end of the next iteration
@@ -27,14 +26,10 @@
 #
 # The default settings for gcc:
 #
-CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
+CFLAGS=-O3 -ansi -Wall -DUSEGETTIME -I../include
 #
 # Notes on CFLAGS.
 #
-# 1. The -DNOSHORTS flag should always be used.  When this is turned off,
-#    it causes the code to use unsigned short integers (maximum value 65535)
-#    in the data structures that describe the problem.  This can cause problems
-#    when some of the size parameters are larger than 65535.  
 #
 # 2. -DUSEGETTIME is generally useful.  However, this functionality isn't
 #    available under Windows/MSYS/MINGW, so you should remove it when compiling
@@ -79,16 +74,16 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #     http://gcc.gnu.org/onlinedocs/gcc/i386-and-x86_002d64-Options.html
 #
 # An AMD Athlon XP  based machine:
-#  CFLAGS=-march=athlon-xp -O3 -ansi -Wall -DNOSHORTS  -I../include
+#  CFLAGS=-march=athlon-xp -O3 -ansi -Wall -I../include
 # An Intel Pentum 4 based machine:
-#  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS  -I../include
+#  CFLAGS=-march=pentum4 -O3 -ansi -Wall  -I../include
 #
 # 7. The code can be built with Intel's icc C compiler and MKL BLAS/
 #    LAPACK libraries.  This has been tested with icc 11.0 and should 
 #    work with later versions as well.
 #
 #      CC=icc
-#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
+#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DSETNUMTHREADS
 #              -I../include
 #      LIBS=-openmp -L../lib -lsdp -mkl -lm
 #
@@ -97,7 +92,7 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include
 #    code that depend on the availability of routines within ATLAS, so use
 #    use -DUSEATLAS to turn these on.  e.g.  
 #
-#      CFLAGS=-O3  -fopenmp  -ansi -Wall -DUSEATLAS -DNOSHORTS -DBIT64 
+#      CFLAGS=-O3  -fopenmp  -ansi -Wall -DUSEATLAS -DBIT64 
 #             -DUSEOPENMP -I../include
 #
 #

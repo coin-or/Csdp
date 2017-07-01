@@ -13,20 +13,14 @@
 #  -DNOUNDERBLAS      if BLAS routine names have no underscore.
 #  -DNOUNDERLAPACK    if LAPACK routine names have no underscore.
 #  -DBIT64            For I32LP64 systems.
-#  -DNOSHORTS         Allow for (LP) blocks of more than 65535 variables.
 #  -DUSEOPENMP        To turn on OpenMP parallelization
 #  -DSETNUMTHREADS    To use with an OpenMP aware BLAS library.
 #
 # The default settings for gcc:
 #
-CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include 
+CFLAGS=-O3 -ansi -Wall -I../include 
 #
 # Notes on CFLAGS.
-#
-# 1. The -DNOSHORTS flag should always be used.  When this is turned off,
-# it causes the code to use unsigned short integers (maximum value 65535)
-# in the data structures that describe the problem.  This can cause problems
-# when some of the size parameters are larger than 65535.  
 #
 # 2. By default, we assume that BLAS routines have names like ddot_(),
 # but some systems use ddot(), DDOT(), or DDOT_() instead.  A similar issue
@@ -56,9 +50,9 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 #     http://gcc.gnu.org/onlinedocs/gcc/i386-and-x86_002d64-Options.html
 #
 # An AMD Athlon XP  based machine:
-#  CFLAGS=-march=athlon-xp -O3 -ansi -Wall -DNOSHORTS  -I../include 
+#  CFLAGS=-march=athlon-xp -O3 -ansi -Wall -I../include 
 # An Intel Pentum 4 based amchine:
-#  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS -I../include 
+#  CFLAGS=-march=pentum4 -O3 -ansi -Wall -I../include 
 #
 # 5. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
@@ -110,7 +104,7 @@ LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
 # 5. An alternative set of flags for use with Intel's icc and MKL.
 #
 #      CC=icc
-#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
+#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DSETNUMTHREADS
 #              -I../include
 #      LIBS=-openmp -L../lib -lsdp -mkl -lm       
 #

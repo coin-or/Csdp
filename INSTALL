@@ -171,7 +171,7 @@ following CFLAGS and LIBS have been used to build a parallel version
 of CSDP on a Red Hat Enterprise Linux system using Red Hat's version
 of gcc4.1 with ATLAS. 
  
-CFLAGS=CFLAGS=-O3 -march=nocona -m64 -fprefetch-loop-arrays -ftree-vectorize -ftree-vectorizer-verbose=1 -fopenmp  -ansi -Wall -DNOSHORTS -DBIT64 -DUSEOPENMP -I../include
+CFLAGS=CFLAGS=-O3 -march=nocona -m64 -fprefetch-loop-arrays -ftree-vectorize -ftree-vectorizer-verbose=1 -fopenmp  -ansi -Wall -DBIT64 -DUSEOPENMP -I../include
 
 LIBS=LIBS=-static -L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm 
 

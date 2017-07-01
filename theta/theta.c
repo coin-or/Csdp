@@ -126,13 +126,8 @@ int main(argc,argv)
   constraints[1].blocks->nextbyblock=NULL;
 
   constraints[1].blocks->entries=(double *) malloc((n+1)*sizeof(double));
-#ifdef NOSHORTS
   constraints[1].blocks->iindices=(int *) malloc((n+1)*sizeof(int));
   constraints[1].blocks->jindices=(int *) malloc((n+1)*sizeof(int));
-#else
-  constraints[1].blocks->iindices=(unsigned short *) malloc((n+1)*sizeof(unsigned short));
-  constraints[1].blocks->jindices=(unsigned short *) malloc((n+1)*sizeof(unsigned short));
-#endif
 
   for (i=1; i<=n; i++)
     {
@@ -167,13 +162,8 @@ int main(argc,argv)
       constraints[i].blocks->nextbyblock=NULL;
       
       constraints[i].blocks->entries=(double *) malloc((2)*sizeof(double));
-#ifdef NOSHORTS
       constraints[i].blocks->iindices=(int *) malloc((2)*sizeof(int));
       constraints[i].blocks->jindices=(int *) malloc((2)*sizeof(int));
-#else
-      constraints[i].blocks->iindices=(unsigned short *) malloc((2)*sizeof(unsigned short));
-      constraints[i].blocks->jindices=(unsigned short *) malloc((2)*sizeof(unsigned short));
-#endif
 
       constraints[i].blocks->entries[1]=1.0;
       constraints[i].blocks->iindices[1]=start;

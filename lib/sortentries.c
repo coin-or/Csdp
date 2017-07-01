@@ -4,19 +4,11 @@
 #include "declarations.h"
 
 struct entry {
-#ifndef NOSHORTS
-  unsigned short indexi;
-  unsigned short indexj;
-  unsigned short indexk;
-  unsigned short indexl;
-  double entry;
-#else
   int indexi;
   int indexj;
   int indexk;
   int indexl;
   double entry;
-#endif
 };
 
 int mycompare(const void *p1, const void *p2)
