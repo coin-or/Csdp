@@ -575,22 +575,24 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     if (matno != 0)
       {
 	if (ent != 0.0)
+          {
 	  ret=addentry(myconstraints,matno,blkno,indexi,indexj,ent);
         
-        if (ret != 0)
-          {
-            if (printlevel >= 1)
-              {
-                printf("Incorrect SDPA file. Duplicate entry.\n");
-                printf("matno=%d\n",matno);
-                printf("blkno=%d\n",blkno);
-                printf("indexi=%d\n",indexi);
-                printf("indexj=%d\n",indexj);
-              };
-
-            fclose(fid);
-            free(isdiag);
-            return(1);
+          if (ret != 0)
+            {
+              if (printlevel >= 1)
+                {
+                  printf("Incorrect SDPA file. Duplicate entry.\n");
+                  printf("matno=%d\n",matno);
+                  printf("blkno=%d\n",blkno);
+                  printf("indexi=%d\n",indexi);
+                  printf("indexj=%d\n",indexj);
+                };
+              
+              fclose(fid);
+              free(isdiag);
+              return(1);
+            };
           };
       }
     else
