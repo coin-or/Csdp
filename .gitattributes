@@ -24,7 +24,6 @@ doc/example.c -text
 doc/sdp.bib -text
 example/Makefile -text
 example/example.c -text
-/foo -text
 include/blockmat.h -text
 include/declarations.h -text
 include/index.h -text
