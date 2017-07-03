@@ -65,6 +65,8 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
   struct sparseblock *prev=NULL;
   double gap;
   int nnz;
+  int denseblocks;
+  int numblocks;
 
    /*
     *  Initialize the parameters.
@@ -275,11 +277,6 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
     */
 
    /*
-    * Set up the cross links used by op_o
-    * While we're at it, determine which blocks are sparse and dense.
-    */
-
-   /*
     * Next, setup issparse and NULL out all nextbyblock pointers.
     */
 
@@ -359,17 +356,29 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
     * If necessary, print out information on sparsity of blocks.
     */
    
-   if (printlevel >= 4)
+   if (printlevel >= 1)
      {
+       numblocks=0;
+       denseblocks=0;
        for (i=1; i<=k; i++)
 	 {
 	   p=constraints[i].blocks;
 	   while (p != NULL)
 	     {
-	       printf("%d,%d,%d,%d \n",i,p->blocknum,p->issparse,p->numentries);
+               if (printlevel >= 4)
+                 printf("Sparsity of constraint blocks: %d,%d,%d,%d \n",i,p->blocknum,p->issparse,p->numentries);
+               
+               if (((p->numentries*1.0)/(p->blocksize*p->blocksize*1.0)) > 0.2)
+                 denseblocks=denseblocks+1;
+
+               numblocks=numblocks+1;
 	       p=p->next;
 	     };
 	 };
+
+       if (printlevel >= 1)
+         printf("Percentage of dense constraint blocks is %f\n",
+                (100.0*denseblocks)/(1.0*numblocks));
      };
    
    /*
@@ -417,7 +426,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 
    nnz=structnnz(n,k,C,constraints);
 
-   if (printlevel >= 3)
+   if (printlevel >= 1)
      printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
 
    /*
