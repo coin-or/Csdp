@@ -286,9 +286,10 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
        while (p != NULL)
 	 {
 	   /*
-	    * First, set issparse.
+	    * First, set issparse.  The 0.125 parameter was hand tuned.
 	    */
-	   if (((p->numentries) > 0.25*(p->blocksize)) && ((p->numentries) > 15))
+
+	   if (((1.0*k*k*p->numentries*p->numentries) > 0.125*(1.0*k*p->blocksize*p->blocksize*p->blocksize)) && ((p->numentries) > 5))
 	     {
 	       p->issparse=0;
 	     }
@@ -296,10 +297,10 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 	     {
 	       p->issparse=1;
 	     };
-	   
+
 	   if (C.blocks[p->blocknum].blockcategory == DIAG)
 	     p->issparse=1;
-	   
+
 	   /*
 	    * Setup the cross links.
 	    */
@@ -368,7 +369,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
                if (printlevel >= 4)
                  printf("Sparsity of constraint blocks: %d,%d,%d,%d \n",i,p->blocknum,p->issparse,p->numentries);
                
-               if (((p->numentries*1.0)/(p->blocksize*p->blocksize*1.0)) > 0.2)
+               if (p->issparse == 0)
                  denseblocks=denseblocks+1;
 
                numblocks=numblocks+1;
