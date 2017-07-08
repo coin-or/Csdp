@@ -39,12 +39,37 @@ int user_exit(n,k,C,a,dobj,pobj,constant_offset,constraints,X,y,Z,params)
      struct blockmatrix Z;     
      struct paramstruc params;
 {
+  /*
+   * Stop on any of the following signals.  SIGTERM, SIGXCPU, SIGINT, SIGQUIT
+   */
+  
   signal(SIGTERM,catch_sigterm);
+  signal(SIGXCPU,catch_sigterm);
+  signal(SIGINT,catch_sigterm);
+  signal(SIGQUIT,catch_sigterm);
+  
+  /*
+   * If a signal to terminate has been raised, then quit.
+   */
+  
   if (sigterm_signaled==1)
-    return(1);
+    {
+      /*
+       * This will stop CSDP with a return code of 10.
+       */
+      return(1);
+    }
   else
-    return(0);
-
+    {
+      /*
+       * This will tell CSDP to continue.
+       */
+      return(0);
+    };
+  
+  /*
+   * Any other positive value >= 2 returned will stop CSDP with a success.
+   */
 }
 
 #else
@@ -63,7 +88,16 @@ int user_exit(n,k,C,a,dobj,pobj,constant_offset,constraints,X,y,Z,params)
      struct blockmatrix Z;     
      struct paramstruc params;
 {
+  /*
+   * This will tell CSDP to continue.
+   */
   return(0);
+
+  /*
+   * A returned value of 1 stops CSDP with failure (10)
+   * Any other positive value >= 2 returned will stop CSDP with a success.
+   */
+
 }
 
 #endif

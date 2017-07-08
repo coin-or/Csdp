@@ -404,10 +404,26 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	    * Call the user exit routine, and let the user stop the process
 	    * if he wants to.
 	    */
-	   if (user_exit(n,k,C,a,*dobj,*pobj,constant_offset,constraints,
-			 X,y,Z,parameters) == 1)
+           
+           ret=user_exit(n,k,C,a,*dobj,*pobj,constant_offset,constraints,
+			 X,y,Z,parameters);
+	   if (ret >= 1)
 	     {
-	       return(0);
+               if (ret==1)
+                 {
+                   /*
+                    * Received SIGTERM, SIGQUIT, SIGXCPU, ...
+                    */
+                   return(11);
+                 }
+               else
+                 {
+                   /*
+                    * User exit was good enough, returning success.
+                    */
+                   return(0);                   
+                 };
+
 	     }
 
 	   bestarray[iter % BASIZE]=bestmeas;
@@ -1136,19 +1152,30 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       /*
 		* run user exit to check if the affine solution is good enough
 		*/
-	       if (user_exit(n,k,C,a,affdobj,affpobj,constant_offset,constraints,
-			     work1,workvec1,work2,parameters) == 1) 
-		 {
-		   *dobj=affdobj;
-		   *pobj=affpobj;
-		   copy_mat(work1,X);
-		   copy_mat(work2,Z);
-		   for(i=1; i<=k; i++)
-		     y[i]=workvec1[i];
-		   if(printlevel>=3)
-		     printf("Affine step good enough, exiting\n");
-		   return(0);
-		 };
+               ret=user_exit(n,k,C,a,affdobj,affpobj,constant_offset,constraints,
+			     work1,workvec1,work2,parameters);
+	       if (ret >= 1)
+                 {
+                   if (ret == 1)
+                     {
+                       /*
+                        * Received SIGTERM, SIGQUIT, ...
+                        */
+                       return(11);
+                     }
+                   else
+                     {
+                       *dobj=affdobj;
+                       *pobj=affpobj;
+                       copy_mat(work1,X);
+                       copy_mat(work2,Z);
+                       for(i=1; i<=k; i++)
+                         y[i]=workvec1[i];
+                       if(printlevel>=3)
+                         printf("Affine step good enough, exiting\n");
+                       return(0);
+                     };
+                 };
 
 	       if (parameters.usexzgap==0)
 		 {
