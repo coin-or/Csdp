@@ -938,7 +938,7 @@ int addentry(constraints,matno,blkno,indexi,indexj,ent)
    * Arrange things so that indexi <= indexj.
    */
 
-  if (indexi < indexj)
+  if (indexi > indexj)
     {
       itemp=indexi;
       indexi=indexj;

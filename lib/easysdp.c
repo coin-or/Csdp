@@ -399,6 +399,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    /*
     * Fill in byblocks pointers.
     */
+   
    for (i=1; i<=k; i++)
      {
        ptr=constraints[i].blocks;
@@ -422,13 +423,16 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    makefill(k,C,constraints,&fill,work1,printlevel);
 
    /*
-    * Compute the nonzero structure of O.
+    * Compute the nonzero structure of O. This is only used for debugging
+    * at this point.
     */
 
-   nnz=structnnz(n,k,C,constraints);
-
    if (printlevel >= 2)
-     printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
+     {
+       nnz=structnnz(n,k,C,constraints);
+       printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
+     };
+
 
    /*
     * Sort entries in the constraints.
@@ -825,18 +829,20 @@ int checkconstraints(n,k,C,constraints,printlevel)
               /*
                * Make sure that entries are sorted properly.
                */
-              
-              if (p->iindices[j] < p->jindices[j])
+
+              if (p->iindices[j] > p->jindices[j])
                 {
                   if (printlevel >= 1)
                     {
-                      printf("i index is less than j index!\n");
+                      printf("i index is greater than j index!\n");
+                      printf("constraint=%d\n",i);
                       printf("iindex=%d\n",p->iindices[j]);
                       printf("jindex=%d\n",p->jindices[j]);
                     };
 
 		  exit(10);
                 };
+
 
               /*
                * Check for any duplicate entries that snuck in.
@@ -848,7 +854,8 @@ int checkconstraints(n,k,C,constraints,printlevel)
                   {
                     if (printlevel >= 1)
                       {
-                        printf("i index is less than j index!\n");
+                        printf("Duplicate entry!\n");
+                        printf("constraint=%d\n",i);
                         printf("iindex=%d\n",p->iindices[j]);
                         printf("jindex=%d\n",p->jindices[j]);
                       };
