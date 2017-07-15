@@ -25,7 +25,8 @@ int main(argc,argv)
   int start;
   int finish;
   int *G;
-
+  int ret;
+  
   /*
    * Check for the right number of arguments.
    */
@@ -46,8 +47,8 @@ int main(argc,argv)
    * Get the size parameters.
    */
 
-  fscanf(fidin,"%d",&n);
-  fscanf(fidin,"%d",&m);
+  ret=fscanf(fidin,"%d",&n);
+  ret=fscanf(fidin,"%d",&m);
 
   /*
    * Allocate the array.
@@ -72,7 +73,13 @@ int main(argc,argv)
 
   for (i=1; i<=m; i++)
     {
-      fscanf(fidin,"%d %d",&start,&finish);
+      ret=fscanf(fidin,"%d %d",&start,&finish);
+      if (ret != 2)
+        {
+          printf("error in input file.\n");
+          exit(1);
+        };
+      
       G[ijtok(start,finish,n)]=0;
       G[ijtok(finish,start,n)]=0;
     };

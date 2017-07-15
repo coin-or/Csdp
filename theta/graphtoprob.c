@@ -168,8 +168,13 @@ int main(argc,argv)
       constraints[i].blocks->nextbyblock=NULL;
       
       constraints[i].blocks->entries=(double *) malloc((2)*sizeof(double));
+#ifdef NOSHORTS
       constraints[i].blocks->iindices=(int *) malloc((2)*sizeof(int));
       constraints[i].blocks->jindices=(int *) malloc((2)*sizeof(int));
+#else
+      constraints[i].blocks->iindices=(unsigned short *) malloc((2)*sizeof(unsigned short));
+      constraints[i].blocks->jindices=(unsigned short *) malloc((2)*sizeof(unsigned short));
+#endif
 
       constraints[i].blocks->entries[1]=1.0;
       constraints[i].blocks->iindices[1]=start;
