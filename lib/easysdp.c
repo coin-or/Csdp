@@ -377,7 +377,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 	     };
 	 };
 
-       if (printlevel >= 1)
+       if (printlevel >= 2)
          printf("Percentage of dense constraint blocks is %f\n",
                 (100.0*denseblocks)/(1.0*numblocks));
      };
@@ -427,7 +427,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 
    nnz=structnnz(n,k,C,constraints);
 
-   if (printlevel >= 1)
+   if (printlevel >= 2)
      printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
 
    /*
