@@ -126,7 +126,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k) private(j,i)
   for (j = 1; j <= k; j++)
     for (i = 1; i <= k; i++)
-      O[ijtok(i, j, ldam)] = 0.0;
+      O[ijtok(i, j, (long int) ldam)] = 0.0;
 
   /* Loop over i, then the blocks, then j */
 #ifdef USEOPENMP
@@ -196,7 +196,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 			};
 		    };
 		  
-		  O[ijtok(i, j, ldam)] += contrib;
+		  O[ijtok(i, j, (long int) ldam)] += contrib;
 		  
 		  /* Next j */
 		  ptrj = ptrj->nextbyblock;
@@ -312,7 +312,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 			    }
 			}
 		      
-		      O[ijtok(i, j, ldam)] += contrib;
+		      O[ijtok(i, j, (long int) ldam)] += contrib;
 		    }
 		  ptrj = ptrj->nextbyblock;
 		}
@@ -409,7 +409,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 		       * loop, so we don't need to use #pragma atomic here.
 		       */
 		      
-		      O[ijtok(i,j,ldam)] +=contrib;
+		      O[ijtok(i,j, (long int) ldam)] +=contrib;
 		      
 		    }
 		  ptrj = ptrj->nextbyblock;
@@ -434,7 +434,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k) private(j,i)
   for (j = 2; j <= k; j++)
     for (i = 1; i < j; i++)
-      O[ijtok(i, j, ldam)] += O[ijtok(j,i,ldam)];
+      O[ijtok(i, j, (long int) ldam)] += O[ijtok(j,i, (long int) ldam)];
 
   /*
    * Free storage allocated for parallel work space.

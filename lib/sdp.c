@@ -209,7 +209,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
    */
 
 #define BASIZE 100
-  double bestarray[BASIZE+1];
+    double bestarray[BASIZE+1];
 
   /*
    * Used in checking whether the primal-dual affine step gives us a new
@@ -218,6 +218,13 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   
   double affgap,affpobj,affdobj,affrelgap,affrelpinfeas,affreldinfeas;
 
+  /*
+   * Indicate the version of CSDP.
+   */
+
+  if (printlevel >= 1)
+    printf("CSDP 6.2.0\n");
+  
   /*
    * Precompute norms of a and C, so that we don't keep doing this 
    * again and again.
@@ -674,10 +681,10 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   for (i=1; i<=k-1; i++)
 	     for (j=i; j<=k; j++)
-	       O[ijtok(j,i,ldam)]=O[ijtok(i,j,ldam)];
+	       O[ijtok(j,i, (long int) ldam)]=O[ijtok(i,j, (long int) ldam)];
 	   
 	   for (i=1; i<=k; i++)
-	     diagO[i]=O[ijtok(i,i,ldam)];
+	     diagO[i]=O[ijtok(i,i,(long int) ldam)];
 
 	   mindiag=1.0e30;
 
@@ -734,14 +741,14 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     printf("diagnrm is %e, adding diagadd %e \n",diagnrm,diagadd);
 
 	   for (i=1; i<=k; i++)
-	     O[ijtok(i,i,ldam)] += diagadd;
+	     O[ijtok(i,i, (long int) ldam)] += diagadd;
 
 	   /*
 	    * Scale the O matrix.
 	    */
 
 	   for (i=1; i<=k; i++)
-	     workvec8[i]=1.0/sqrt(O[ijtok(i,i,ldam)]);
+	     workvec8[i]=1.0/sqrt(O[ijtok(i,i, (long int) ldam)]);
 
 	   for (i=1; i<=k; i++)
 	     {
@@ -752,7 +759,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k,workvec8) private(i,j)
 	  for (j=1; j<=k; j++)
 	     for (i=1; i<=j; i++)
-	       O[ijtok(i,j,ldam)]=O[ijtok(i,j,ldam)]*(workvec8[i]*workvec8[j]);
+	       O[ijtok(i,j, (long int) ldam)]=O[ijtok(i,j, (long int) ldam)]*(workvec8[i]*workvec8[j]);
 
 	   /*
 	     Next, compute the cholesky factorization of the system matrix.
@@ -797,9 +804,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(O,k,ldam)
 		   for (i=1; i<=k-1; i++)
 		     for (j=i; j<=k; j++)
-		       O[ijtok(i,j,ldam)]=O[ijtok(j,i,ldam)];
+		       O[ijtok(i,j, (long int) ldam)]=O[ijtok(j,i, (long int) ldam)];
 		   for (i=1; i<=k; i++)
-		     O[ijtok(i,i,ldam)]=diagO[i];
+		     O[ijtok(i,i,(long int) ldam)]=diagO[i];
 		   goto RETRYFACTOR;
 		 }
 	       else
@@ -1718,9 +1725,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		       diagfact=diagfact*10.0;
 		       for (i=1; i<=k-1; i++)
 			 for (j=i; j<=k; j++)
-			   O[ijtok(i,j,ldam)]=O[ijtok(j,i,ldam)];
+			   O[ijtok(i,j, (long int) ldam)]=O[ijtok(j,i, (long int) ldam)];
 		       for (i=1; i<=k; i++)
-			 O[ijtok(i,i,ldam)]=diagO[i];
+			 O[ijtok(i,i,(long int) ldam)]=diagO[i];
 		       goto RETRYFACTOR;
 		     }
 		   else
@@ -1806,9 +1813,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		       diagfact=diagfact*10.0;
 		       for (i=1; i<=k-1; i++)
 			 for (j=i; j<=k; j++)
-			   O[ijtok(i,j,ldam)]=O[ijtok(j,i,ldam)];
+			   O[ijtok(i,j,(long int) ldam)]=O[ijtok(j,i,(long int) ldam)];
 		       for (i=1; i<=k; i++)
-			 O[ijtok(i,i,ldam)]=diagO[i];
+			 O[ijtok(i,i,(long int) ldam)]=diagO[i];
 		       goto RETRYFACTOR;
 		     }
 		   else
@@ -1851,9 +1858,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		   diagfact=diagfact*10.0;
 		   for (i=1; i<=k-1; i++)
 		     for (j=i; j<=k; j++)
-		       O[ijtok(i,j,ldam)]=O[ijtok(j,i,ldam)];
+		       O[ijtok(i,j,(long int) ldam)]=O[ijtok(j,i,(long int) ldam)];
 		   for (i=1; i<=k; i++)
-		     O[ijtok(i,i,ldam)]=diagO[i];
+		     O[ijtok(i,i,(long int) ldam)]=diagO[i];
 		   goto RETRYFACTOR;
 		 }
 	       else
