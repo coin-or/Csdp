@@ -11,15 +11,15 @@ Iter:  8 Ap: 1.00e+00 Pobj:  2.1767179e+01 Ad: 1.00e+00 Dobj:  2.3397824e+01
 Iter:  9 Ap: 1.00e+00 Pobj:  2.2707691e+01 Ad: 1.00e+00 Dobj:  2.3068698e+01 
 Iter: 10 Ap: 1.00e+00 Pobj:  2.2952986e+01 Ad: 1.00e+00 Dobj:  2.3008482e+01 
 Iter: 11 Ap: 1.00e+00 Pobj:  2.2997432e+01 Ad: 9.99e-01 Dobj:  2.3000437e+01 
-Iter: 12 Ap: 1.00e-00 Pobj:  2.2999888e+01 Ad: 1.00e+00 Dobj:  2.3000011e+01 
+Iter: 12 Ap: 1.00e+00 Pobj:  2.2999888e+01 Ad: 1.00e+00 Dobj:  2.3000011e+01 
 Iter: 13 Ap: 1.00e+00 Pobj:  2.2999995e+01 Ad: 1.00e+00 Dobj:  2.3000000e+01 
 Iter: 14 Ap: 9.55e-01 Pobj:  2.3000000e+01 Ad: 9.60e-01 Dobj:  2.3000000e+01 
 Success: SDP solved
 Primal objective value: 2.3000000e+01 
 Dual objective value: 2.3000000e+01 
-Relative primal infeasibility: 2.78e-16 
+Relative primal infeasibility: 1.33e-15 
 Relative dual infeasibility: 7.34e-09 
 Real Relative Gap: 4.13e-09 
 XZ Relative Gap: 5.26e-09 
-DIMACS error measures: 2.78e-16 0.00e+00 1.87e-07 0.00e+00 4.13e-09 5.26e-09
+DIMACS error measures: 1.33e-15 0.00e+00 1.87e-07 0.00e+00 4.13e-09 5.26e-09
 The Lovasz Theta Number is 2.3000000e+01 
