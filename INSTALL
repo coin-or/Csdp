@@ -32,18 +32,6 @@ there's a good chance that these are the reference implementations.
 Using them is a reasonable way to start, but you may well find that
 you need faster routines to get acceptable performance.  
 
-ATLAS (automatically tuned linear algebra software) is an open source
-implementation of BLAS and part of LAPACK that is sufficient for our
-purposes. ATLAS obtains good performance on a variety of systems by 
-automatically adjusting blocksizes and other parameters to get the
-best performance out of any particular system.  ATLAS is availible at
-
-    http://math-atlas.sourceforge.net/
-
-If possible, use their precompiled, optimized libraries that are 
-availible for several architectures, otherwise build it yourself
-from source.
-
 Most hardware manufacturers have developed optimized BLAS/LAPACK 
 libraries for their systems, such as Apple's veclib for G5 
 systems, Intel's Math Kernel Library (MKL), AMD's Core Mathematical
@@ -51,13 +39,10 @@ Library (ACML), IBM's extended scientific subroutine library (ESSL),
 and Sun's sunperf library.  These typically have restrictive licenses and
 may be expensive to purchase, but can provide very good performance.
 
-In practice, on Intel or AMD Linux systems, we find that ATLAS
-provides very good performance (close to if not better than MKL or
-ACML.)  Thus we recommend ATLAS.  However, to make the build process
-simpler and more flexible, the make files are setup to use whatever
-LAPACK and BLAS libraries are already installed on your system.  If
-you decide to use ATLAS, the make files contain ATLAS specific
-instructions.
+An open source library that I recommend for use with CSDP is OpenBLAS.
+See
+
+  http://www.openblas.net/
 
 CSDP also includes a set of routines for interfacing CSDP to MATLAB
 and Octave.  This interface is entirely optional- CSDP works fine
@@ -74,24 +59,19 @@ The current version of CSDP can be obtained using subversion from
 the COIN-OR web site.  To do this, first install the subversion 
 tools, then issue the command
 
-  svn co https://projects.coin-or.org/svn/Csdp Csdp
+  svn co https://projects.coin-or.org/svn/Csdp/trunk
  
 Or use a GUI to access the repository.  
 
-Source and binaries for older stable versions of CSDP can be
-downloaded from
- 
-  http://www.nmt.edu/~borchers/csdp.html
-
 INSTALLING CSDP:
 
-The following instructions assume that you're using a Linux system with
-gcc, g77, LAPACK, and BLAS installed.  The make files will have to be
-altered for other systems, but the basic process of building the software
-will be similar.
+The following instructions assume that you're using a Linux system
+with gcc, gfortran, LAPACK, and BLAS installed.  The make files will
+have to be altered for other systems, but the basic process of
+building the software will be similar.
 
 After you've downloaded the source code, unpack the tar archive if you
-downloaded a .tar archive of CSDP 5.0, and then go into the csdp
+downloaded a .tar archive of CSDP, and then go into the csdp
 directory (this directory is called "Csdp" in subversion) Issue the
 command
  
@@ -148,33 +128,4 @@ matlab path.  This requires use of the path(...) command in
 matlab. See '>help path' for instructions on adding a new directory to
 your matlab path (you can put the .m files in any directory you wish,
 then add that directory to your matlab path). 
-
-USING GCC 4:
-
-In gcc 3.x, the C/Fortran compatibility library was linked with -lg2c.  In
-gcc 4.x, you will need to link with -lgfortran instead.  
- 
-Note that OpenMP support first appears in Red Hat's version of gcc 4.1.1
-and also appears in the general release of gcc 4.2.  There is no OpenMP
-support in earlier versions of gcc!  
- 
-RUNNING CSDP IN PARALLEL:
-
-Version 6 of CSDP includes support for a parallel version of CSDP on
-multi-processor shared memory systems.  This is done using the OpenMP
-standard for #pragma's that tell the C compiler how to parallelize
-various loops in the code.  On systems that don't support OpenMP,
-these pragma's are simply ignored.  On systems that do support OpenMP,
-it will typically be necessary to modify the CFLAGS and LIBS in the
-Makefiles to build a parallel version of CSDP.  As an example, the 
-following CFLAGS and LIBS have been used to build a parallel version
-of CSDP on a Red Hat Enterprise Linux system using Red Hat's version
-of gcc4.1 with ATLAS. 
- 
-CFLAGS=CFLAGS=-O3 -march=nocona -m64 -fprefetch-loop-arrays -ftree-vectorize -ftree-vectorizer-verbose=1 -fopenmp  -ansi -Wall -DBIT64 -DUSEOPENMP -I../include
-
-LIBS=LIBS=-static -L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm 
-
-
-
 
