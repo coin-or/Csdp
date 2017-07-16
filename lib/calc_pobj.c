@@ -36,7 +36,7 @@ double calc_pobj(C,X,constant_offset)
           break;
 	default:
 	  printf("calc_pobj illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

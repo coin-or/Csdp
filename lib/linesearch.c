@@ -45,7 +45,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
   if (lanczosvectors==NULL)
     {
       printf("Storage Allocation Failed!\n");
-      exit(10);
+      exit(205);
     };
 
   /*

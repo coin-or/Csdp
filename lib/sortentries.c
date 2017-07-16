@@ -75,7 +75,7 @@ void sort_entries(k,C,constraints)
   if (entries==NULL)
     {
       printf("Storage allocation failed in sortentries.\n");
-      exit(10);
+      exit(205);
     };
   
   for (i=1; i<=k; i++)

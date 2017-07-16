@@ -112,7 +112,7 @@ int chol(A)
 	  break;
 	default:
 	  printf("Unknown block type! \n");
-	  exit(12);
+	  exit(206);
 	};
       if (ret != 0)
 	return(1);
@@ -146,7 +146,7 @@ void trans(A)
 	  break;
 	default:
 	  printf("Unknown block type! \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -203,13 +203,13 @@ void chol_inv(A,work)
 	  if (info != 0)
 	    {
 	      printf("DTTRI failed!\n");
-	      exit(11);
+	      exit(206);
 	    };
 
 	  break;
 	default:
 	  printf("Unknown block type! \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

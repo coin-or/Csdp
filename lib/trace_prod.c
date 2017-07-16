@@ -35,7 +35,7 @@ double trace_prod(A,B)
 	case PACKEDMATRIX:
 	default:
 	  printf("trace_prod illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
   return(sum);

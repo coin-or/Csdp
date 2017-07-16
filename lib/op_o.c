@@ -88,7 +88,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 	{
 	  printf("Failed to allocate memory for parallel execution (1)!\n");
 	  printf("omp_get_max_threads() was %d \n",max_threads);
-	  exit(10);
+	  exit(205);
 	}
       work[1] = work1.blocks[max_blknum].data.mat;
       work[2] = work2.blocks[max_blknum].data.mat;
@@ -105,7 +105,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 	      printf("Failed to allocate memory for parallel execution (2)!\n");
 	      printf("max_blksize is %d \n",max_blksize);
 	      printf("omp_get_max_threads() was %d \n",max_threads);
-	      exit(10);
+	      exit(205);
 	    }; 
 	}; 
     }; 

@@ -36,7 +36,7 @@ void store_packed(A,B)
 	  break;
 	default:
 	  printf("store_packed illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     }
 
@@ -75,7 +75,7 @@ void store_unpacked(A,B)
 	  break;
 	default:
 	  printf("store_unpacked block type \n");
-	  exit(12);
+	  exit(206);
 	};
     }
 
@@ -108,7 +108,7 @@ void alloc_mat_packed(A,pB)
   if (pB->blocks == NULL)
     {
       printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
   /*
    *  Now, fill in the info for each block.
@@ -126,7 +126,7 @@ void alloc_mat_packed(A,pB)
 	  if (pB->blocks[blk].data.vec == NULL)
 	    {
 	      printf("Storage allocation failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 	  break;
 	case MATRIX:
@@ -137,12 +137,12 @@ void alloc_mat_packed(A,pB)
 	  if (pB->blocks[blk].data.mat == NULL)
 	    {
 	      printf("Storage allocation failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 	  break;
 	default:
 	  printf("Illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 }
@@ -170,7 +170,7 @@ void free_mat_packed(A)
 	  break;
 	default:
 	  printf("Illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -203,7 +203,7 @@ void triu(A)
 	  break;
 	default:
 	  printf("triu illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
   

@@ -38,7 +38,7 @@ void zero_mat(A)
 	  break;
 	default:
 	  printf("Illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

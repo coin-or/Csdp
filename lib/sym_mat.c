@@ -40,7 +40,7 @@ void sym_mat(A)
 	case PACKEDMATRIX:
 	default:
 	  printf("sym_mat illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

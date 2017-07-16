@@ -73,7 +73,7 @@ void matvec(A,x,y)
 	case PACKEDMATRIX:
 	default:
 	  printf("matvec illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
 
     };

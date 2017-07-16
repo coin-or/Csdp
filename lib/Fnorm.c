@@ -30,7 +30,7 @@ double Fnorm(A)
 	case PACKEDMATRIX:
 	default:
 	  printf("Fnorm illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -66,7 +66,7 @@ double Knorm(A)
 	case PACKEDMATRIX:
 	default:
 	  printf("Fnorm illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -98,7 +98,7 @@ double mat1norm(A)
 	case PACKEDMATRIX:
 	default:
 	  printf("Fnorm illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -135,7 +135,7 @@ double matinfnorm(A)
 	case PACKEDMATRIX:
 	default:
 	  printf("Fnorm illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

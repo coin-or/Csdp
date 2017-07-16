@@ -32,7 +32,7 @@ void add_mat(A,B)
 	case PACKEDMATRIX:
 	default:
 	  printf("addscaledmat illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

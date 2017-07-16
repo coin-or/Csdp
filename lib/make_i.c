@@ -33,7 +33,7 @@ void make_i(A)
 	  break;
 	default:
 	  printf("make_i illegal block type\n");
-	  exit(12);
+	  exit(206);
 	};
     }
 }

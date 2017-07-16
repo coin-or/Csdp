@@ -57,7 +57,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Couldn't open problem file for reading! \n");
-      exit(11);
+      exit(201);
     };
 
   buflen=max_line_length(fid)+10;
@@ -68,7 +68,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
 
   /*
@@ -82,7 +82,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Couldn't open problem file for reading! \n");
-      exit(11);
+      exit(201);
     };
 
   /*
@@ -134,7 +134,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("This problem is too large to be solved in 32 bit mode!\n");
-      exit(10);
+      exit(206);
     };
 #endif
   /*
@@ -178,7 +178,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     }
 
   /*
@@ -191,7 +191,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
   
   /*
@@ -208,7 +208,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
 
   /*
@@ -252,7 +252,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 		{
                   if (printlevel >= 1)
                     printf("Storage allocation failed!\n");
-		  exit(10);
+		  exit(205);
 		};
 	      for (i=1; i<=abs(blksz); i++)
 		pC->blocks[blk].data.vec[i]=0.0;
@@ -270,7 +270,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 		{
                   if (printlevel >= 1)
                     printf("Storage allocation failed!\n");
-		  exit(10);
+		  exit(205);
 		};
 
 	      for (j=1; j<=blksz; j++)
@@ -408,7 +408,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 	    {
               if (printlevel >= 1)
                 printf("Storage allocation failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  p->iindices=(int *)malloc((p->numentries+1)*sizeof(int));
@@ -417,7 +417,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 	    {
               if (printlevel >= 1)
                 printf("Storage allocation failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  p->jindices=(int *)malloc((p->numentries+1)*sizeof(int));
@@ -426,7 +426,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 	    {
               if (printlevel >= 1)
                 printf("Storage allocation failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  p->numentries=0;
@@ -452,7 +452,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
     {
       if (printlevel >= 1)
         printf("Couldn't open problem file for reading! \n");
-      exit(11);
+      exit(201);
     };
 
   /*
@@ -851,7 +851,7 @@ void countentry(constraints,matno,blkno,blocksize)
       if (p==NULL)
 	{
           printf("Storage allocation failed!\n");
-	  exit(10);
+	  exit(205);
 	};
       p->constraintnum=matno;
       p->blocknum=blkno;
@@ -901,7 +901,7 @@ void countentry(constraints,matno,blkno,blocksize)
       if (q==NULL)
 	{
           printf("Storage allocation failed!\n");
-	  exit(10);
+	  exit(205);
 	};
       /*
        * Fill in information for this block.
@@ -953,8 +953,8 @@ int addentry(constraints,matno,blkno,indexi,indexj,ent)
   
   if (p == NULL)
     {
-      printf("Internal Error in CSDP!\n");
-      exit(100);
+      printf("Internal Error in readprob.c !\n");
+      exit(206);
     }
   else
     {
@@ -1003,8 +1003,8 @@ int addentry(constraints,matno,blkno,indexi,indexj,ent)
       /*
        * If we get here, we have an internal error.
        */
-      printf("Internal Error in CSDP!\n");
-      exit(100);
+      printf("Internal Error in CSDP readprob.c !\n");
+      exit(206);
     };
 
   /*

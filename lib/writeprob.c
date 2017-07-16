@@ -29,7 +29,7 @@ int write_prob(fname,n,k,C,a,constraints)
     {
       printf("Couldn't open problem file for writing! \n");
 
-      exit(11);
+      exit(203);
     };
 
 
@@ -50,7 +50,7 @@ int write_prob(fname,n,k,C,a,constraints)
 	  break;
 	default:
 	  printf("Illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
 
     };
@@ -89,7 +89,7 @@ int write_prob(fname,n,k,C,a,constraints)
 	  break;
 	default:
 	  printf("Illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

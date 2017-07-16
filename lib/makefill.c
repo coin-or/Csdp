@@ -49,7 +49,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	case PACKEDMATRIX:
 	default:
 	  printf("makefill illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -80,7 +80,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("addscaledmat illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };  
 
 	  ptr=ptr->next;
@@ -98,7 +98,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
   if (ptr == NULL)
     {
       printf("Storage Allocation Failed!\n");
-      exit(10);
+      exit(205);
     };
   pfill->blocks=ptr;
   ptr->next=NULL;
@@ -112,7 +112,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
       if (ptr->next == NULL)
 	{
 	  printf("Storage Allocation Failed!\n");
-	  exit(10);
+	  exit(205);
 	};
       ptr=ptr->next;
       ptr->blocknum=i;
@@ -139,7 +139,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr->entries == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  ptr->iindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
@@ -147,7 +147,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr->iindices == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  ptr->jindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
@@ -155,7 +155,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr->jindices == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  for (j=1; j<=ptr->numentries; j++)
@@ -185,7 +185,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  ptr->iindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
@@ -193,7 +193,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr->iindices == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
 	  ptr->jindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
@@ -201,7 +201,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  if (ptr->jindices == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
-	      exit(10);
+	      exit(205);
 	    };
 
           ptr->numentries=0;
@@ -223,7 +223,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	case PACKEDMATRIX:
 	default:
 	  printf("makefill illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
 
       ptr=ptr->next;

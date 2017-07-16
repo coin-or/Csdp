@@ -36,7 +36,7 @@ int read_sol(fname,n,k,C,pX,py,pZ)
   if (*py == NULL)
     {
       printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
 
   /*
@@ -48,7 +48,7 @@ int read_sol(fname,n,k,C,pX,py,pZ)
   if (fid == (FILE *) NULL)
     {
       printf("Couldn't open solution file for reading. \n");
-      exit(11);
+      exit(202);
     };
 
 
@@ -104,7 +104,7 @@ int read_sol(fname,n,k,C,pX,py,pZ)
 	    break;
 	  default:
 	    printf("Illegal block type! \n");
-	    exit(12);
+	    exit(206);
 	  };
       }
     else
@@ -120,7 +120,7 @@ int read_sol(fname,n,k,C,pX,py,pZ)
 	    break;
 	  default:
 	    printf("Illegal block type! \n");
-	    exit(12);
+	    exit(206);
 	  };
       };
   } while (ret != EOF);

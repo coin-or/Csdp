@@ -59,7 +59,7 @@ int main(argc,argv)
       printf("Usage: \n");
       printf("\n");
       printf("csdp <input problem> [<final solution>] [<initial solution>]\n");
-      exit(1);
+      exit(200);
     };
 
 
@@ -71,7 +71,7 @@ int main(argc,argv)
   if (ret != 0)
     {
       printf("Giving up.\n");
-      exit(10);
+      exit(201);
     };
 
   if (argc == 4)
@@ -80,7 +80,7 @@ int main(argc,argv)
       if (ret != 0)
 	{
 	  printf("Giving up.\n");
-	  exit(10);
+	  exit(202);
 	};
     }
   else

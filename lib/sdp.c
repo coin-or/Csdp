@@ -9,7 +9,7 @@
 
   Return codes:
  
-    0             Success.
+    0             Success.  Problem solved to optimality.
     1             Success.  The problem is primal infeasibile, and we
                             have a certificate.
     2             Success.  The problem is dual infeasible, and we have 
@@ -23,7 +23,7 @@
     7             Failure: Lack of progress
     8             Failure: X, Z, or O was singular.
     9             Failure: Detected NaN or Inf values.
-   10             Failure: Improper input (see error messages.)
+   10             Failure: Stopped by QUIT, KILL, TERM, SIGXCPU signal
 
   Notes on data storage:  All "2-d" arrays are stored in Fortran style,
   column major order.  macros in index.h are used to handle indexing into
@@ -421,7 +421,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
                    /*
                     * Received SIGTERM, SIGQUIT, SIGXCPU, ...
                     */
-                   return(11);
+                   return(10);
                  }
                else
                  {
@@ -1168,7 +1168,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
                        /*
                         * Received SIGTERM, SIGQUIT, ...
                         */
-                       return(11);
+                       return(10);
                      }
                    else
                      {
@@ -1872,7 +1872,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		    * Tighten up the solution as much as possible.
 		    */
 		   
-		   retcode=9;
+		   retcode=7;
 		   goto RETURNBEST;
 		   
 		 };
@@ -2029,7 +2029,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   if ((gap) != (gap))
 	     {
-	       retcode=12;
+	       retcode=9;
 	       goto RETURNBEST;
 	     };
 
@@ -2040,7 +2040,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	   if ((gap > 1.0e100) || (gap < -1.0e100))
 	     {
-	       retcode=12;
+	       retcode=9;
 	       goto RETURNBEST;
 	     };
 

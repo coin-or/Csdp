@@ -34,7 +34,7 @@ void copy_mat(A,B)
 	  break;
 	default:
 	  printf("copy_mat illegal block type \n");
-	  exit(12);
+	  exit(206);
 	};
     }
 }

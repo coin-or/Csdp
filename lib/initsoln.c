@@ -34,7 +34,7 @@ void initsoln(n,k,C,a,constraints,pX0,py0,pZ0)
   if (py0 == NULL)
     {
       printf("Storage allocation failed!\n");
-      exit(10);
+      exit(205);
     };
 
   /*

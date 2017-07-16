@@ -4,7 +4,7 @@
  *  blocks or eye's or other special cases.
  *
  *  A and B can have blocks of all supported types.  Unsupported types
- *  generate exit(1).
+ *  generate exit(206).
  *
  *  It is assumed that all three matrices are of compatible block strucutre.
  *
@@ -145,7 +145,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 	  /*
 	   * Move on to the next block.
@@ -176,7 +176,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 
 	    };
 	};
@@ -264,7 +264,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 
 	  /*
@@ -381,7 +381,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 
 	  /*
@@ -414,7 +414,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 
 	    };
 	};
@@ -505,7 +505,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 
 	  /*
@@ -606,7 +606,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 
 
@@ -639,7 +639,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 
 	    };
 	};
@@ -705,7 +705,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 	    case PACKEDMATRIX:
 	    default:
 	      printf("mat_multsp illegal block type \n");
-	      exit(12);
+	      exit(206);
 	    };
 
 	  /*

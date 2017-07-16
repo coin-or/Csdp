@@ -29,7 +29,7 @@ int write_sol(fname,n,k,X,y,Z)
   if (fid == (FILE *) NULL)
     {
       printf("Failed to open output file for writing solution. \n");
-      exit(11);
+      exit(204);
     };
 
   /*
@@ -67,7 +67,7 @@ int write_sol(fname,n,k,X,y,Z)
 	  break;
 	default:
 	  printf("Illegal block type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 
@@ -100,7 +100,7 @@ int write_sol(fname,n,k,X,y,Z)
 	case PACKEDMATRIX:
 	default:
 	  printf("writesol Invalid Block Type!\n");
-	  exit(12);
+	  exit(206);
 	};
     };
 

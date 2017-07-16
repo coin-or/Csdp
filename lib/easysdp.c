@@ -91,7 +91,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (besty == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -105,7 +105,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec1 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -119,7 +119,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec2 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -133,7 +133,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec3 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -147,7 +147,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec4 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -161,7 +161,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec5 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -175,7 +175,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec6 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -189,7 +189,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec7 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    if (n > k)
@@ -203,7 +203,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (workvec8 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
 
@@ -218,7 +218,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (diagO == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
 
@@ -227,28 +227,28 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (rhs == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    dy=malloc(sizeof(double)*(k+1));
    if (dy == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    dy1=malloc(sizeof(double)*(k+1));
    if (dy1 == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    Fp=malloc(sizeof(double)*(k+1));
    if (Fp == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    /*
@@ -264,7 +264,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (O == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    alloc_mat(C,&Zi);
@@ -390,7 +390,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (byblocks == NULL)
      {
        printf("Storage Allocation Failed!\n");
-       exit(10);
+       exit(205);
      };
 
    for (i=1; i<=C.nblocks; i++)
@@ -692,7 +692,7 @@ int bandwidth(n,lda,A)
 
 /*
  * Sanity checks for the C matrix data structure.  If this fails, we'll just
- * exit(10) to indicate that there was improper input.  Otherwise, we'll 
+ * exit(206) to indicate that there was improper input.  Otherwise, we'll 
  * return 0;
  */
 
@@ -728,7 +728,7 @@ int checkc(int n,struct blockmatrix C,int printlevel)
 		    {
                       if (printlevel >= 1)
                         printf("C is not symmetric, %d, %d, %d\n",k,i,j);
-		      exit(10);
+		      exit(206);
 		    }
 		};
 	    };
@@ -739,7 +739,7 @@ int checkc(int n,struct blockmatrix C,int printlevel)
     {
       if (printlevel >= 1)
         printf("Sum of block sizes does not equal n!\n");
-      exit(10);
+      exit(206);
     };
 
   return(0);
@@ -766,7 +766,7 @@ int checkconstraints(n,k,C,constraints,printlevel)
 	{
           if (printlevel >= 1)
             printf("Constraint %d is empty!\n",i);
-	  exit(10);
+	  exit(206);
 	};
       while (p != NULL)
 	{
@@ -774,13 +774,13 @@ int checkconstraints(n,k,C,constraints,printlevel)
 	    {
               if (printlevel >= 1)
                 printf("p->constraintnum != i, i=%d \n",i);
-	      exit(10);
+	      exit(206);
 	    };
 	  if (p->blocksize != C.blocks[p->blocknum].blocksize)
 	    {
               if (printlevel >= 1)
                 printf("p->blocksize is wrong, constraint %d \n",i);
-	      exit(10);
+	      exit(206);
 	    };
 	  if (printlevel > 5)
 	    printf("Constraint %d, block %d, entries %d\n",i,p->blocknum,p->numentries);
@@ -802,28 +802,28 @@ int checkconstraints(n,k,C,constraints,printlevel)
 		{
                   if (printlevel >= 1)
                     printf("i index is larger than blocksize!\n");
-		  exit(10);
+		  exit(206);
 		};
 
 	      if (p->jindices[j] > C.blocks[p->blocknum].blocksize)
 		{
                   if (printlevel >= 1)
                     printf("j index is larger than blocksize!\n");
-		  exit(10);
+		  exit(206);
 		};
 
 	      if (p->iindices[j] < 1)
 		{
                   if (printlevel >= 1)
                     printf("i index is less than 1!\n");
-		  exit(10);
+		  exit(206);
 		};
               
 	      if (p->jindices[j] < 1)
 		{
                   if (printlevel >= 1)
                     printf("j index is less than 1!\n");
-		  exit(10);
+		  exit(206);
 		};
 
               /*
@@ -840,7 +840,7 @@ int checkconstraints(n,k,C,constraints,printlevel)
                       printf("jindex=%d\n",p->jindices[j]);
                     };
 
-		  exit(10);
+		  exit(206);
                 };
 
 
@@ -860,7 +860,7 @@ int checkconstraints(n,k,C,constraints,printlevel)
                         printf("jindex=%d\n",p->jindices[j]);
                       };
 
-                    exit(10);
+                    exit(206);
                   };
               
 	      if (C.blocks[p->blocknum].blockcategory==DIAG)
@@ -869,7 +869,7 @@ int checkconstraints(n,k,C,constraints,printlevel)
 		    {
                       if (printlevel >= 1)
                         printf("Off diagonal entry in diagonal block!\n");
-		      exit(10);
+		      exit(206);
 		    };
 		};
 	    };
