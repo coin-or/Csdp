@@ -15,9 +15,6 @@ doc/constraints.eps -text
 doc/constraints.fig -text
 doc/constraints.pdf -text
 doc/csdpuser.aux -text
-doc/csdpuser.bbl -text
-doc/csdpuser.blg -text
-doc/csdpuser.log -text
 doc/csdpuser.pdf -text
 doc/csdpuser.tex -text
 doc/example.c -text
