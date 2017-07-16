@@ -22,8 +22,8 @@
 
 \newcommand{\elprod}{\circ}
 
-\title{CSDP User's Guide}
-\date{December 29, 2009}
+\title{CSDP 6.2.0 User's Guide}
+\date{July 17, 2017}
 \author{Brian Borchers}
 \maketitle
 \section*{Introduction}
@@ -35,9 +35,11 @@ outdated description of the algorithms in CSDP can be found in
 \cite{BorchersB:CSDCls}.  CSDP is written in C for efficiency and
 portability.  On systems with multiple processors and shared memory,
 CSDP can run in parallel.  CSDP uses OpenMP directives in the C source
-code to tell the compiler how to parallelize various loops.  The code
-is designed to make use of highly optimized linear algebra routines
-from the LAPACK and BLAS libraries.
+code to tell the compiler how to parallelize various loops.  The
+parallel implementation is described in
+\cite{borchers2007implementation}.  The code is designed to make use
+of highly optimized linear algebra routines from the LAPACK and BLAS
+libraries.
 
 CSDP also has a number of features that make it very flexible.  CSDP
 can work with general symmetric matrices or with matrices that have
@@ -220,7 +222,7 @@ On a system that is running other programs, the wall clock time may be
 considerably larger than the CPU time.  On multiprocessor systems, the
 wall clock time will not include all of the CPU time used by the
 different processors.  The reported time will typically vary on
-repeated runs of CSDP, particularly for samll problems like the one
+repeated runs of CSDP, particularly for small problems like the one
 solved here.
 
 CSDP searches for a file named ``param.csdp'' in the current directory.
@@ -778,10 +780,21 @@ of less than 1000.
 \item Failure.  Stuck at edge of dual infeasibility.
 \item Failure.  Lack of progress.
 \item Failure.  X, Z, or O was singular.
-\item Failure.  Detected NaN or Inf values.  
+\item Failure.  Detected NaN or Inf values.
+\item Failure.  Solution was terminated by a CPU time limit or TERM signal.
 \end{enumerate}
-\subsection*{The User Exit Routine}
 
+The return codes 0 through 10 are also used as exit status by the command
+line solver.
+
+Additional codes are used for significant errors that did not allow execution
+to contniue.  These are: 200- missing command line arguments, 201- could not
+open problem data file, 202- could not open initial solution file, 203, could
+not open problem data file for writing, 204, could not open solution file for
+writing, 205, could not allocate required storage, and 206, an internal
+error occurred.
+
+\subsection*{The User Exit Routine}
 By default, the {\tt easy\_sdp} routine stops when it has obtained a
 solution in which the relative primal and dual infeasibilities and the
 relative gap between the primal and dual objective values is less than

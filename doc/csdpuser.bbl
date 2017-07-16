@@ -5,6 +5,13 @@ B.~Borchers.
 \newblock {CSDP}, a {C} library for semidefinite programming.
 \newblock {\em Optimization Methods \& Software}, 11-2(1-4):613 -- 623, 1999.
 
+\bibitem{borchers2007implementation}
+Brian Borchers and Joseph~G Young.
+\newblock Implementation of a primal--dual method for sdp on a shared memory
+  parallel architecture.
+\newblock {\em Computational Optimization and Applications}, 37(3):355--369,
+  2007.
+
 \bibitem{SDPA}
 K.~Fujisawa, M.~Kojima, K.~Nakata, and M.~Yamashita.
 \newblock {SDPA} (semidefinite programming algorithm) users manual - version

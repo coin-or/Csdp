@@ -1,45 +1,46 @@
-This is BibTeX, Version 0.99c (Web2C 7.4.5)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: csdpuser.aux
 The style file: plain.bst
 Database file #1: sdp.bib
-You've used 5 entries,
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            534 strings with 4778 characters,
-and the built_in function-call counts, 1686 in all, are:
-= -- 171
-> -- 67
+            542 strings with 4991 characters,
+and the built_in function-call counts, 2009 in all, are:
+= -- 203
+> -- 80
 < -- 1
-+ -- 29
-- -- 22
-* -- 137
-:= -- 289
-add.period$ -- 15
-call.type$ -- 5
-change.case$ -- 26
++ -- 34
+- -- 26
+* -- 162
+:= -- 343
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 31
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 53
-empty$ -- 132
-format.name$ -- 22
-if$ -- 335
+cite$ -- 6
+duplicate$ -- 64
+empty$ -- 159
+format.name$ -- 26
+if$ -- 403
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 4
-newline$ -- 28
-num.names$ -- 10
-pop$ -- 17
+int.to.str$ -- 6
+missing$ -- 5
+newline$ -- 33
+num.names$ -- 12
+pop$ -- 20
 preamble$ -- 1
-purify$ -- 21
+purify$ -- 25
 quote$ -- 0
-skip$ -- 33
+skip$ -- 41
 stack$ -- 0
-substring$ -- 151
-swap$ -- 5
+substring$ -- 177
+swap$ -- 6
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 20
+type$ -- 24
 warning$ -- 0
-while$ -- 18
-width$ -- 6
-write$ -- 57
+while$ -- 21
+width$ -- 7
+write$ -- 68

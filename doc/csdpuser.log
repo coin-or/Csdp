@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.10)  15 JUL 2017 14:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.10)  15 JUL 2017 20:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -142,11 +142,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 72.
+(Font)              <7> on input line 74.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 72.
+(Font)              <5> on input line 74.
 
-Overfull \hbox (3.80621pt too wide) in paragraph at lines 107--110
+Overfull \hbox (3.80621pt too wide) in paragraph at lines 109--112
 []\OT1/cmr/m/n/10 Other semidef-i-nite pro-gram-ming pack-ages use slight vari-
 a-tions on this primal--
  []
@@ -154,407 +154,407 @@ a-tions on this primal--
 [2
 
 ]
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter:  5 Ap: 1.00e+00 Pobj:  7.5846337e+00 Ad: 1.00e+00 Dobj
 :  4.2853659e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter:  6 Ap: 1.00e+00 Pobj:  1.5893126e+01 Ad: 1.00e+00 Dobj
 :  3.0778169e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter:  7 Ap: 1.00e+00 Pobj:  1.9887401e+01 Ad: 1.00e+00 Dobj
 :  2.4588662e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter:  8 Ap: 1.00e+00 Pobj:  2.1623330e+01 Ad: 1.00e+00 Dobj
 :  2.3465172e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter:  9 Ap: 1.00e+00 Pobj:  2.2611983e+01 Ad: 1.00e+00 Dobj
 :  2.3097049e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter: 10 Ap: 1.00e+00 Pobj:  2.2939498e+01 Ad: 1.00e+00 Dobj
 :  2.3010908e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter: 11 Ap: 1.00e+00 Pobj:  2.2996259e+01 Ad: 1.00e+00 Dobj
 :  2.3000637e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter: 12 Ap: 1.00e-00 Pobj:  2.2999835e+01 Ad: 1.00e+00 Dobj
 :  2.3000020e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter: 13 Ap: 1.00e+00 Pobj:  2.2999993e+01 Ad: 1.00e+00 Dobj
 :  2.2999999e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 Iter: 14 Ap: 1.00e+00 Pobj:  2.3000000e+01 Ad: 1.00e+00 Dobj
 :  2.3000000e+01[] 
  []
 
 [3]
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 203--203
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 205--205
 []\OT1/cmtt/m/n/10 DIMACS error measures: 1.11e-16 0.00e+00 1.00e-07 0.00e+00 7
 .21e-09 7.82e-09[] 
  []
 
 [4] [5]
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 320--320
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 %                         info=100 indicates a failure in th
 e MATLAB[] 
  []
 
 
-Overfull \hbox (1.49698pt too wide) in paragraph at lines 320--320
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 %                         interface, such as inability to wr
 ite to[] 
  []
 
 
-Overfull \hbox (48.74657pt too wide) in paragraph at lines 320--320
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % Note: This interface makes use of temporary files with nam
 es given by the[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 320--320
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % tempname function.  This will fail if there is no working 
 temporary[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 320--320
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % directory or there isn't enough space available in this di
 rectory.[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 320--320
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % Note: This code writes its own param.csdp file in the curr
 ent working[] 
  []
 
 
-Overfull \hbox (48.74657pt too wide) in paragraph at lines 320--320
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % directory.  Any param.csdp file already in the directory w
 ill be deleted.[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 320--320
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % Note: It is assumed that csdp is the search path made avai
 lable through[] 
  []
 
 
-Overfull \hbox (64.49643pt too wide) in paragraph at lines 320--320
+Overfull \hbox (64.49643pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % the ``system'' or ``dos'' command.  Typically, having the 
 csdp executable in[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 320--320
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % current working directory will work, although some paranoi
 d system[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 320--320
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % administrators keep . out of the path.  In that case, you'
 ll need to[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 320--320
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 322--322
 []\OT1/cmtt/m/n/10 % install csdp in one of the directories that is in the sear
 ch path.[] 
  []
 
 [6]
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  0 Ap: 0.00e+00 Pobj:  3.6037961e+02 Ad: 0.00e+00 Dobj
 :  0.0000000e+00[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  1 Ap: 9.56e-01 Pobj:  3.7527534e+02 Ad: 9.60e-01 Dobj
 :  6.4836002e+04[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  2 Ap: 8.55e-01 Pobj:  4.0344779e+02 Ad: 9.67e-01 Dobj
 :  6.9001508e+04[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  3 Ap: 8.77e-01 Pobj:  1.4924982e+02 Ad: 1.00e+00 Dobj
 :  6.0425319e+04[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  4 Ap: 7.14e-01 Pobj:  8.2819408e+01 Ad: 1.00e+00 Dobj
 :  1.2926534e+04[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  5 Ap: 8.23e-01 Pobj:  4.7411688e+01 Ad: 1.00e+00 Dobj
 :  4.9040115e+03[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  6 Ap: 7.97e-01 Pobj:  2.6300212e+01 Ad: 1.00e+00 Dobj
 :  1.4672743e+03[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  7 Ap: 7.12e-01 Pobj:  1.5215577e+01 Ad: 1.00e+00 Dobj
 :  4.0561826e+02[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  8 Ap: 8.73e-01 Pobj:  7.5119215e+00 Ad: 1.00e+00 Dobj
 :  1.7418715e+02[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter:  9 Ap: 9.87e-01 Pobj:  5.3076518e+00 Ad: 1.00e+00 Dobj
 :  5.2097312e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 10 Ap: 1.00e+00 Pobj:  7.8594672e+00 Ad: 1.00e+00 Dobj
 :  2.2172435e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 11 Ap: 8.33e-01 Pobj:  1.5671237e+01 Ad: 1.00e+00 Dobj
 :  2.1475840e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 12 Ap: 1.00e+00 Pobj:  1.7250217e+01 Ad: 1.00e+00 Dobj
 :  1.8082715e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 13 Ap: 1.00e+00 Pobj:  1.7710018e+01 Ad: 1.00e+00 Dobj
 :  1.7814069e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 14 Ap: 9.99e-01 Pobj:  1.7779600e+01 Ad: 1.00e+00 Dobj
 :  1.7787170e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 15 Ap: 1.00e+00 Pobj:  1.7783579e+01 Ad: 1.00e+00 Dobj
 :  1.7785175e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 16 Ap: 1.00e+00 Pobj:  1.7784494e+01 Ad: 1.00e+00 Dobj
 :  1.7784708e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 17 Ap: 1.00e+00 Pobj:  1.7784610e+01 Ad: 1.00e+00 Dobj
 :  1.7784627e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 18 Ap: 1.00e+00 Pobj:  1.7784626e+01 Ad: 1.00e+00 Dobj
 :  1.7784620e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 19 Ap: 1.00e-00 Pobj:  1.7784627e+01 Ad: 1.00e+00 Dobj
 :  1.7784627e+01[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 391--391
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 Iter: 20 Ap: 9.60e-01 Pobj:  1.7784627e+01 Ad: 9.60e-01 Dobj
 :  1.7784627e+01[] 
  []
 
 
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 391--391
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 393--393
 []\OT1/cmtt/m/n/10 DIMACS error measures: 1.08e-09 0.00e+00 7.02e-10 0.00e+00 -
 3.50e-10 6.05e-11[] 
  []
 
 [7]
-Overfull \hbox (43.49661pt too wide) in paragraph at lines 416--416
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/10 %  This function takes a problem in SeDuMi MATLAB format and
  writes it out[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 416--416
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/10 %                      pars.printlevel=0           No printe
 d output[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 416--416
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/10 %                      pars.prinlevel=1 (default)  Some prin
 ted output.[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 416--416
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/10 %                      pars.check=0 (default)      Do not ch
 eck problem data[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 416--416
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/10 %                      pars.check=1                Check pro
 blem data for[] 
  []
 
 
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 428--428
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 430--430
 []\OT1/cmtt/m/n/10 %  converts free variables in a SeDuMi problem into nonnegat
 ive LP variables.[] 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 446--459
+Underfull \hbox (badness 10000) in paragraph at lines 448--461
 
  []
 
 [9] [10] <cmat.pdf, id=48, 244.915pt x 429.605pt>
 File: cmat.pdf Graphic file (type pdf)
  <use cmat.pdf>
-Package pdftex.def Info: cmat.pdf used on input line 583.
+Package pdftex.def Info: cmat.pdf used on input line 585.
 (pdftex.def)             Requested size: 244.91438pt x 429.60394pt.
 
 <constraints.pdf, id=49, 321.2pt x 131.49126pt>
 File: constraints.pdf Graphic file (type pdf)
  <use constraints.pdf>
-Package pdftex.def Info: constraints.pdf used on input line 597.
+Package pdftex.def Info: constraints.pdf used on input line 599.
 (pdftex.def)             Requested size: 321.19922pt x 131.49092pt.
 
 <a1block1.pdf, id=50, 392.46625pt x 258.9675pt>
 File: a1block1.pdf Graphic file (type pdf)
  <use a1block1.pdf>
-Package pdftex.def Info: a1block1.pdf used on input line 605.
+Package pdftex.def Info: a1block1.pdf used on input line 607.
 (pdftex.def)             Requested size: 392.46527pt x 258.96684pt.
  [11 <./cmat.pdf> <./constraints.pdf>] [12 <./a1block1.pdf>] [13
 
 ]
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 735--735
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 737--737
 []\OT1/cmtt/m/n/10 int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,pp
 obj,pdobj)[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 735--735
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 737--737
 []   \OT1/cmtt/m/n/10 double *a;                             /* right hand side
  vector */[] 
  []
 
 
-Overfull \hbox (1.49698pt too wide) in paragraph at lines 735--735
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 737--737
 []   \OT1/cmtt/m/n/10 double constant_offset;                /* added to object
 ive */[] 
  []
 
 [14] [15]
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 821--821
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 834--834
 []\OT1/cmtt/m/n/10 int user_exit(n,k,C,a,dobj,pobj,constant_offset,constraints,
 X,y,Z,params)[] 
  []
 
-
-Overfull \hbox (1.49698pt too wide) in paragraph at lines 821--821
+[16]
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 834--834
 []   \OT1/cmtt/m/n/10 double constant_offset;                /* added to object
 ive */[] 
  []
 
-[16]
-Overfull \hbox (43.49661pt too wide) in paragraph at lines 821--821
+
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 834--834
 []   \OT1/cmtt/m/n/10 struct paramstruc params;              /* parameters sdp 
 called with */[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 837--837
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 850--850
 []   \OT1/cmtt/m/n/10 double *a;                              /* right hand sid
 e vector */[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 837--837
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 850--850
 []   \OT1/cmtt/m/n/10 struct blockmatrix *pX0;                /* Initial primal
  solution */[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 837--837
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 850--850
 []   \OT1/cmtt/m/n/10 double **py0;                           /* Initial dual s
 olution */[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 837--837
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 850--850
 []   \OT1/cmtt/m/n/10 struct blockmatrix *pZ0;                /* Initial dual s
 olution */[] 
  []
 
 [17]
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 887--887
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 900--900
 []   \OT1/cmtt/m/n/10 char *fname;                     /* Name of the file to w
 rite to */[] 
  []
 
-(./csdpuser.bbl [18]) [19] (./csdpuser.aux) ) 
+[18] (./csdpuser.bbl) [19] (./csdpuser.aux) ) 
 Here is how much of TeX's memory you used:
- 1520 strings out of 494953
- 21621 string characters out of 6180977
- 84743 words of memory out of 5000000
- 4807 multiletter control sequences out of 15000+600000
+ 1521 strings out of 494953
+ 21649 string characters out of 6180977
+ 84746 words of memory out of 5000000
+ 4808 multiletter control sequences out of 15000+600000
  8409 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  38i,7n,23p,245b,257s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -573,7 +573,7 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
 /type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb>
-Output written on csdpuser.pdf (19 pages, 311722 bytes).
+Output written on csdpuser.pdf (19 pages, 313266 bytes).
 PDF statistics:
  151 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams
