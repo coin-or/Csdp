@@ -137,6 +137,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       exit(206);
     };
 #endif
+
   /*
    * Read in the number of blocks.
    */
@@ -261,8 +262,21 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 	  else
 	    {
 	      /*
-	       * It's a matrix block.
-	       */
+	       * It's a matrix block.  In the I32LP64 model, we can't do array 
+               * indexing for huge blocks using 32 bit integers.  46340 is 
+               * the largest sized block that we can handle.  Trying to 
+               * malloc a larger block could cause integer overflow and
+               * result in a negative malloc size.
+b	       */
+              if (blksz > 46340)
+                {
+                  printf("This problem is too large to be solved in I32LP64 mode.\n");
+                  exit(206);
+                  
+                };
+              /*
+               * Setup the block in C.
+               */
 	      pC->blocks[blk].blocksize=abs(blksz);
 	      pC->blocks[blk].blockcategory=MATRIX;
 	      pC->blocks[blk].data.mat=(double *)malloc((blksz*blksz)*sizeof(double));
