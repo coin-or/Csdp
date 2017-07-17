@@ -946,7 +946,6 @@ int addentry(constraints,matno,blkno,indexi,indexj,ent)
 {
   struct sparseblock *p;
   int itemp;
-  int i;
     
   /*
    * Arrange things so that indexi <= indexj.
@@ -982,25 +981,9 @@ int addentry(constraints,matno,blkno,indexi,indexj,ent)
 	  if (p->blocknum == blkno)
 	    {
 	      /*
-	       * Found the right block. Check to see if this is a duplicate 
-               * entry.  
+	       * Found the right block. 
 	       */
 
-              for (i=1; i<=p->numentries; i++)
-                {
-                  if ((p->iindices[i]==indexi) && (p->jindices[i]==indexj))
-                    {
-                      /*
-                       * We've got a duplicate entry.
-                       */
-                      return(1);
-                    };
-                };
-
-              /*
-               * We've got a new entry.
-               */
-              
 	      p->numentries=(p->numentries)+1;
 	      p->entries[(p->numentries)]=ent;
 	      p->iindices[(p->numentries)]=indexi;
