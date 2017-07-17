@@ -5,7 +5,7 @@
 %
 %  ret=writesdpa(fname,A,b,c,K,pars)
 %
-%      fname           Name of SDPpack file, in quotes
+%      fname           Name of SDPA file, in quotes
 %      A,b,c,K         Problem in SeDuMi form
 %      pars            Optional parameters.
 %                      pars.printlevel=0           No printed output  
