@@ -14,7 +14,6 @@ doc/cmat.pdf -text
 doc/constraints.eps -text
 doc/constraints.fig -text
 doc/constraints.pdf -text
-doc/csdpuser.aux -text
 doc/csdpuser.pdf -text
 doc/csdpuser.tex -text
 doc/example.c -text
