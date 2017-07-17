@@ -41,7 +41,7 @@ parallel implementation is described in
 of highly optimized linear algebra routines from the LAPACK and BLAS
 libraries.
 
-CSDP also has a number of features that make it very flexible.  CSDP
+CSDP also has a number of features that make it flexible.  CSDP
 can work with general symmetric matrices or with matrices that have
 defined block diagonal structure.  CSDP is designed to handle
 constraint matrices with general sparse structure.  The code takes
@@ -180,6 +180,12 @@ initial solution.
 The following example shows how CSDP would be used to solve a test problem.
 \begin{verbatim}
 >csdp theta1.dat-s
+CSDP 6.2.0
+Iter:  0 Ap: 0.00e+00 Pobj:  1.4644661e+04 Ad: 0.00e+00 Dobj:  0.0000000e+00 
+Iter:  1 Ap: 9.31e-01 Pobj:  5.7513865e+03 Ad: 1.00e+00 Dobj:  8.0172003e+01 
+Iter:  2 Ap: 9.21e-01 Pobj:  2.3227402e+02 Ad: 1.00e+00 Dobj:  8.2749235e+01 
+Iter:  3 Ap: 9.30e-01 Pobj:  1.0521019e+01 Ad: 1.00e+00 Dobj:  8.4447722e+01 
+Iter:  4 Ap: 1.00e+00 Pobj:  2.5047625e+00 Ad: 1.00e+00 Dobj:  7.2126480e+01 
 Iter:  5 Ap: 1.00e+00 Pobj:  7.5846337e+00 Ad: 1.00e+00 Dobj:  4.2853659e+01 
 Iter:  6 Ap: 1.00e+00 Pobj:  1.5893126e+01 Ad: 1.00e+00 Dobj:  3.0778169e+01 
 Iter:  7 Ap: 1.00e+00 Pobj:  1.9887401e+01 Ad: 1.00e+00 Dobj:  2.4588662e+01 
@@ -187,21 +193,21 @@ Iter:  8 Ap: 1.00e+00 Pobj:  2.1623330e+01 Ad: 1.00e+00 Dobj:  2.3465172e+01
 Iter:  9 Ap: 1.00e+00 Pobj:  2.2611983e+01 Ad: 1.00e+00 Dobj:  2.3097049e+01 
 Iter: 10 Ap: 1.00e+00 Pobj:  2.2939498e+01 Ad: 1.00e+00 Dobj:  2.3010908e+01 
 Iter: 11 Ap: 1.00e+00 Pobj:  2.2996259e+01 Ad: 1.00e+00 Dobj:  2.3000637e+01 
-Iter: 12 Ap: 1.00e-00 Pobj:  2.2999835e+01 Ad: 1.00e+00 Dobj:  2.3000020e+01 
+Iter: 12 Ap: 1.00e+00 Pobj:  2.2999835e+01 Ad: 1.00e+00 Dobj:  2.3000020e+01 
 Iter: 13 Ap: 1.00e+00 Pobj:  2.2999993e+01 Ad: 1.00e+00 Dobj:  2.2999999e+01 
 Iter: 14 Ap: 1.00e+00 Pobj:  2.3000000e+01 Ad: 1.00e+00 Dobj:  2.3000000e+01 
 Success: SDP solved
 Primal objective value: 2.3000000e+01 
 Dual objective value: 2.3000000e+01 
-Relative primal infeasibility: 1.11e-16 
+Relative primal infeasibility: 5.55e-17 
 Relative dual infeasibility: 3.93e-09 
 Real Relative Gap: 7.21e-09 
 XZ Relative Gap: 7.82e-09 
-DIMACS error measures: 1.11e-16 0.00e+00 1.00e-07 0.00e+00 7.21e-09 7.82e-09
-Elements time: 0.008845 
-Factor time: 0.008865 
-Other time: 0.198949 
-Total time: 0.216659 
+DIMACS error measures: 5.55e-17 0.00e+00 1.00e-07 0.00e+00 7.21e-09 7.82e-09
+Elements time: 0.001091 
+Factor time: 0.000620 
+Other time: 0.016636 
+Total time: 0.018348 
 \end{verbatim} 
 
 One line of output appears for each iteration of the algorithm, giving
@@ -229,7 +235,7 @@ CSDP searches for a file named ``param.csdp'' in the current directory.
 If no such file exists, then default values for all of CSDP's parameters
 are used.  If there is a parameter file, then CSDP reads the parameter
 values from this file.  A sample file containing the default parameter
-values is given below.
+values is given below.  
 
 \begin{verbatim}
 axtol=1.0e-8
@@ -250,35 +256,41 @@ perturbobj=1
 fastmode=0
 \end{verbatim}
 
-The first three parameters, axtol, atytol, and objtol are the
+The first three parameters, {\bf axtol}, {\bf atytol}, and {\bf objtol}
+are the
 tolerances for primal feasibility, dual feasibility, and relative
-duality gap.  The parameters pinftol and dinftol are tolerances used
-in determining primal and dual infeasibility.  The maxiter parameter
+duality gap.  The parameters {\bf pinftol} and {\bf dinftol}
+are tolerances used
+in determining primal and dual infeasibility.  The {\bf maxiter} parameter
 is used to limit the total number of iterations that CSDP may use.
-The minstepfrac and maxstepfrac parameters determine how close to the
+The {\bf minstepfrac} and {\bf maxstepfrac} parameters determine
+how close to the
 edge of the feasible region CSDP will step.  If the primal or dual
-step is shorter than minstepp or minstepd, then CSDP declares a line
-search failure.  If parameter usexzgap is 0, then CSDP will use the
+step is shorter than {\bf minstepp} or {\bf minstepd},
+then CSDP declares a line
+search failure.  If parameter {\bf usexzgap} is 0, then CSDP will use the
 objective function duality gap instead of the   
 $\mbox{tr}(XZ)$ gap.
-If tweakgap is
-set to 1, and usexzgap is set to 0, then CSDP will attempt to ``fix'' negative duality gaps.
-If parameter affine is set to 1, then CSDP will take only primal--dual
+If {\bf tweakgap} is
+set to 1, and usexzgap is set to 0, then
+CSDP will attempt to ``fix'' negative duality gaps.
+If parameter {\bf affine} is set to 1, then CSDP will take only primal--dual
 affine steps and not make use of the barrier term.  This can be useful
 for some problems that do not have feasible solutions that are strictly in the
 interior of the cone of semidefinite matrices.
-The printlevel parameter determines how much debugging information is
-output.  Use printlevel=0 for no output and printlevel=1 for normal
-output. Higher values of printlevel will generate more debugging
-output.  The perturbobj parameter determines whether the objective
+The {\bf printlevel} parameter determines how much debugging information is
+output.  Use {\bf printlevel=0} for no output and {\bf printlevel=1} for normal
+output. Higher values of {\bf printlevel} will generate more debugging
+output.  The {\bf perturbobj} parameter determines whether the objective
 function will be perturbed to help deal with problems that have unbounded
-optimal solution sets.  If perturbobj is 0, then the objective will not
-be perturbed.  If perturbobj=1, then the objective function will be perturbed
+optimal solution sets.  If {\bf perturbobj} is 0, then the objective will not
+be perturbed.  If {\bf perturbobj} is 1,
+then the objective function will be perturbed
 by a default amount.  Larger values of perturbobj (e.g. 100.0) increase the
 size of the perturbation.  This can be helpful in solving some difficult
-problems. The fastmode parameter determines whether or not
+problems. The {\bf fastmode} parameter determines whether or not
 CSDP will skip certain time consuming operations that slightly improve
-the accuracy of the solutions.  If fastmode is set to
+the accuracy of the solutions.  If {\bf fastmode} is set to
 1, then CSDP may be somewhat faster, but also somewhat less accurate.   
   
 \section*{Calling CSDP from MATLAB or Octave}
@@ -296,7 +308,7 @@ MATLAB package SeDuMi 1.05.  The usage is
 % Input:
 %        At, b, c, K      SDP problem in SeDuMi format.
 %        pars             CSDP parameters (optional parameter.)
-%        x0,y0,z0         Optional starting point.
+%        x0,y0,z0         Optional starting point.  
 %
 % Output:
 %
@@ -304,21 +316,8 @@ MATLAB package SeDuMi 1.05.  The usage is
 %        info             CSDP return code.
 %                         info=100 indicates a failure in the MATLAB
 %                         interface, such as inability to write to 
-%                         a temporary file.
+%                         a temporary file or read back the solution.
 %
-% Note: This interface makes use of temporary files with names given by the
-% tempname function.  This will fail if there is no working temporary
-% directory or there isn't enough space available in this directory.  
-%
-% Note: This code writes its own param.csdp file in the current working
-% directory.  Any param.csdp file already in the directory will be deleted.
-%
-% Note: It is assumed that csdp is the search path made available through
-% the ``system'' or ``dos'' command.  Typically, having the csdp executable in
-% current working directory will work, although some paranoid system
-% administrators keep . out of the path.  In that case, you'll need to
-% install csdp in one of the directories that is in the search path.
-% A simple test is to run csdp from a command line prompt. 
 \end{verbatim}   
 
 The following example shows the solution of a sample problem using this
@@ -329,15 +328,13 @@ of the usual 1.0e-8.
 \begin{verbatim}
 >> load control1.mat
 >> whos
-  Name      Size                   Bytes  Class
+  Name        Size            Bytes  Class     Attributes
 
-  At      125x21                    8488  double array (sparse)
-  K         1x1                      140  struct array
-  ans       2x1                       16  double array
-  b        21x1                      168  double array
-  c       125x1                       80  double array (sparse)
-
-Grand total is 732 elements using 8892 bytes
+  At        125x21            11376  double    sparse    
+  K           1x1               192  struct              
+  ans         2x1                16  double              
+  b          21x1               168  double              
+  c         125x1               112  double    sparse    
 
 >> pars.objtol=1.0e-9
 
@@ -345,11 +342,13 @@ pars =
 
     objtol: 1.0000e-09
 
->> [x,y,z,info]=csdp(At,b,c,K,pars);
+>> [x,y,z,info]=csdp(At,b,c,K);
 Transposing A to match b 
 Number of constraints: 21 
 Number of SDP blocks: 2 
 Number of LP vars: 0 
+Percentage of dense constraint blocks is 58.333333
+Structural density of O 441, 1.000000e+00 
 Iter:  0 Ap: 0.00e+00 Pobj:  3.6037961e+02 Ad: 0.00e+00 Dobj:  0.0000000e+00 
 Iter:  1 Ap: 9.56e-01 Pobj:  3.7527534e+02 Ad: 9.60e-01 Dobj:  6.4836002e+04 
 Iter:  2 Ap: 8.55e-01 Pobj:  4.0344779e+02 Ad: 9.67e-01 Dobj:  6.9001508e+04 
@@ -367,29 +366,27 @@ Iter: 13 Ap: 1.00e+00 Pobj:  1.7710018e+01 Ad: 1.00e+00 Dobj:  1.7814069e+01
 Iter: 14 Ap: 9.99e-01 Pobj:  1.7779600e+01 Ad: 1.00e+00 Dobj:  1.7787170e+01 
 Iter: 15 Ap: 1.00e+00 Pobj:  1.7783579e+01 Ad: 1.00e+00 Dobj:  1.7785175e+01 
 Iter: 16 Ap: 1.00e+00 Pobj:  1.7784494e+01 Ad: 1.00e+00 Dobj:  1.7784708e+01 
-Iter: 17 Ap: 1.00e+00 Pobj:  1.7784610e+01 Ad: 1.00e+00 Dobj:  1.7784627e+01 
-Iter: 18 Ap: 1.00e+00 Pobj:  1.7784626e+01 Ad: 1.00e+00 Dobj:  1.7784620e+01 
-Iter: 19 Ap: 1.00e-00 Pobj:  1.7784627e+01 Ad: 1.00e+00 Dobj:  1.7784627e+01 
-Iter: 20 Ap: 9.60e-01 Pobj:  1.7784627e+01 Ad: 9.60e-01 Dobj:  1.7784627e+01 
+Iter: 17 Ap: 1.00e+00 Pobj:  1.7784610e+01 Ad: 1.00e+00 Dobj:  1.7784632e+01 
+Iter: 18 Ap: 1.00e+00 Pobj:  1.7784626e+01 Ad: 1.00e+00 Dobj:  1.7784627e+01 
+Iter: 19 Ap: 9.60e-01 Pobj:  1.7784627e+01 Ad: 9.60e-01 Dobj:  1.7784627e+01 
 Success: SDP solved
 Primal objective value: 1.7784627e+01 
 Dual objective value: 1.7784627e+01 
-Relative primal infeasibility: 1.08e-09 
-Relative dual infeasibility: 3.12e-10 
-Real Relative Gap: -3.50e-10 
-XZ Relative Gap: 6.05e-11 
-DIMACS error measures: 1.08e-09 0.00e+00 7.02e-10 0.00e+00 -3.50e-10 6.05e-11
-Elements time: 0.003162 
-Factor time: 0.000430 
-Other time: 0.013774 
-Total time: 0.017366 
-0.012u 0.004s 0:00.02 50.0%     0+0k 0+0io 0pf+0w
+Relative primal infeasibility: 2.06e-09 
+Relative dual infeasibility: 7.31e-10 
+Real Relative Gap: 7.13e-10 
+XZ Relative Gap: 1.51e-09 
+DIMACS error measures: 2.06e-09 0.00e+00 1.65e-09 0.00e+00 7.13e-10 1.51e-09
+Elements time: 0.027664 
+Factor time: 0.011323 
+Other time: 1.187727 
+Total time: 1.226715 
+3.416u 0.015s 0:01.43 239.1%	0+0k 7688+16io 24pf+0w
 >> info
 
 info =
 
      0
-
 \end{verbatim}
 
 The {\bf writesdpa} function can be used to write out a problem in SDPA
@@ -403,15 +400,11 @@ sparse format.
 %
 %  ret=writesdpa(fname,A,b,c,K,pars)
 %
-%      fname           Name of SDPpack file, in quotes
+%      fname           Name of SDPA file, in quotes
 %      A,b,c,K         Problem in SeDuMi form
 %      pars            Optional parameters.
 %                      pars.printlevel=0           No printed output  
-%                      pars.prinlevel=1 (default)  Some printed output.
-%                      pars.check=0 (default)      Do not check problem data
-%                                                  for symmetry.
-%                      pars.check=1                Check problem data for
-%                                                  symmetry.       
+%                      pars.printlevel=1 (default) Some printed output.
 %      
 %      ret             ret=0 on success, ret=1 on failure.
 %
@@ -765,34 +758,53 @@ return code.  In many cases, CSDP will have actually found a good
 solution that doesn't quite satisfy one of the termination criteria.
 In particular, return code 3 is usually indicative of such a solution.
 Whenever there is a nonzero return code, you should examine the return 
-and the solution to see what happened.  
-    
-The nonzero return codes are
-\begin{enumerate}
-\item Success.  The problem is primal infeasible. 
-\item Success.  The problem is dual infeasible.
-\item Partial Success.  A solution has been found, but full accuracy was
-not achieved.  One or more of primal infeasibility, dual infeasibility, 
-or relative duality gap are larger than their tolerances, but by a factor
-of less than 1000.
-\item Failure.  Maximum iterations reached.
-\item Failure.  Stuck at edge of primal feasibility.
-\item Failure.  Stuck at edge of dual infeasibility.
-\item Failure.  Lack of progress.
-\item Failure.  X, Z, or O was singular.
-\item Failure.  Detected NaN or Inf values.
-\item Failure.  Solution was terminated by a CPU time limit or TERM signal.
-\end{enumerate}
+and the solution to see what happened.  In other cases, the code will
+stop because it can no longer make progress and the solution doesn't
+satisfy the required tolerances.  However, the solution may be good
+enough for your purposes.
 
-The return codes 0 through 10 are also used as exit status by the command
-line solver.
+The return codes from the easy\_sdp() routine are given in Table
+\ref{retcodetable}.  For the command line solver, csdp, these are also
+used as exit codes.  Additional exit codes are used for significant
+errors that did not allow execution.  These are given Table
+\ref{exitcodetable}.
 
-Additional codes are used for significant errors that did not allow execution
-to contniue.  These are: 200- missing command line arguments, 201- could not
-open problem data file, 202- could not open initial solution file, 203, could
-not open problem data file for writing, 204, could not open solution file for
-writing, 205, could not allocate required storage, and 206, an internal
-error occurred.
+\begin{table}
+\begin{tabular}{|r|r|} \hline
+  Code & Explanation \\  \hline
+  0    & Problem solved to optimality \\ \hline
+  1    & Problem is primal infeasible. \\  \hline
+  2    & Problem is dual infeasible. \\  \hline
+  3    & Problem solved to near optimality \\  \hline
+  4    & Maximum iterations reached. \\  \hline
+  5    & Stuck at edge of primal feasibility. \\ \hline
+  6    & Stuck at edge of dual feasibility.  \\  \hline
+  7    & Lack of progress. \\ \hline
+  8    & $X$, $Z$, or $O$ is singular. \\ \hline
+  9    & NaN or Inf values encountered. \\ \hline
+  10   & Program stopped by signal (SIXCPU, SIGTERM, etc.) \\ \hline
+\end{tabular}
+\caption{Return codes for easy\_sdp() and CSDP.}
+\label{retcodetable}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|r|r|} \hline
+  Code   & Explanation \\  \hline
+  200    & No problem data file named. \\   \hline
+  201    & Couldn't open problem data file. \\  \hline
+  202    & Couldn't open initial solution data file. \\   \hline
+  203    & Couldn't write problem data file. \\   \hline
+  204    & Couldn't write solution data file. \\  \hline
+  205    & Storage allocation failed. \\  \hline
+  206    & An internal error occurred. \\  \hline
+\end{tabular}
+\caption{Exit codes for non-recoverable errors.}
+\label{exitcodetable}
+\end{table}
+
+
+
 
 \subsection*{The User Exit Routine}
 By default, the {\tt easy\_sdp} routine stops when it has obtained a
@@ -841,7 +853,7 @@ initial solution.  The calling sequence for this routine is:
 void initsoln(n,k,C,a,constraints,pX0,py0,pZ0)
    int n;                                  /* dimension of X */
    int k;                                  /* # of constraints */
-   struct blockmatrix C;                   /* C matrix */
+   struct bqlockmatrix C;                   /* C matrix */
    double *a;                              /* right hand side vector */
    struct constraintmatrix *constraints;   /* constraints */
    struct blockmatrix *pX0;                /* Initial primal solution */
