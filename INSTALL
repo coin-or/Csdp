@@ -12,9 +12,8 @@ Although CSDP itself is written in C, the BLAS/LAPACK libraries used
 by CSDP were originally written in Fortran.  Combining C and Fortran
 is generally straight forward, but you may have to install a Fortran
 compiler in order to get run time libraries needed by the Fortran code
-in BLAS/LAPACK.  In particular, on Linux systems using gcc you will
-need the g2c C/Fortran compatibility library that comes as part of the
-g77 package.
+in BLAS/LAPACK.  In particular, on Linux systems using gcc and gfortran
+you will link CSDP with the -lgfortran library.
 
 Use of the CSDP library and the solver and theta functions requires
 the BLAS library and a few routines from the LAPACK library.  Using
@@ -44,6 +43,9 @@ See
 
   http://www.openblas.net/
 
+You will generally need to compile OpenBLAS from source rather than installing
+a binary version that is not optimized for your system.
+
 CSDP also includes a set of routines for interfacing CSDP to MATLAB
 and Octave.  This interface is entirely optional- CSDP works fine
 without it.  In order to use this interface, you will need MATLAB (6.5
@@ -72,20 +74,85 @@ building the software will be similar.
 
 After you've downloaded the source code, unpack the tar archive if you
 downloaded a .tar archive of CSDP, and then go into the csdp
-directory (this directory is called "Csdp" in subversion) Issue the
-command
+directory.  You will find subdirectories, lib, solver, theta,
+example, and doc.  These contain the CSDP library, the command line
+solver, an example program that computes the Lovasz theta number of
+a graph, and a small example program showing how to call CSDP.  There
+are Makefiles within these subdirectories.
+
+There are two lines in the top level Makefile that will likely need to
+be edited:
+
+1. CFLAGS.  The CFLAGS variable specifies command line arguments to the
+C compiler.  The default value of CFLAGS is appropriate for 64 bit Linux
+systems using the gcc compiler.  It is:
+
+CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBIT64
+       -DUSEOPENMP -DSETNUMTHREADS -DUSESIGTERM -DUSEGETTIME -I../include
+
+The flags -m64 through -fopenmp tell gcc to produce optimized 64 bit
+multithreaded code using the OpenMP features.  The flags -ansi and -Wall
+tell gcc to produce warnings for any code that vioates the ANSI C standard.
+The -D... flags specify options within the code as described below.
+The -I../include flag specifies the location of CSDP's .h files.
+
+The -D flags that are recommended for CSDP on 64 bit Linux are
+
+-DBIT64              Used on 64 bit systems
+-DUSEOPENMP          Used to build a parallel threaded version of CSDP
+-DSETNUMTHREADS      Use OpenMP to set the number of threads to use.
+-DUSESIGTERM         Terminate CSDP nicely after SIGTERM or other signals
+-DUSEGETTIME         Use ANSI C gettime() to get wall clock running time.
+
+For Windows 64 bit systems using the mingw64 compiler, recommended CFLAGS
+are:
+
+CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBIT64
+       -DUSEOPENMP -DSETNUMTHREADS -DUSEGETTIME -I../include
+
+The only difference here is that -DUSESIGTERM is left out because Windows
+doesn't support Linux/unix signals.
+
+There are some flags that may rarely be useful on other systems:
+
+-DCAPSBLAS           if BLAS routine names are capitalized
+-DCAPSLAPACK         if LAPACK routine names are capitalized
+-DNOUNDERBLAS        if BLAS routine names have no underscore
+-DNOUNDERLAPACK      if LAPACK routine names have no underscore
+-DHIDDENSTRLEN       if Fortran string lengths are hidden arguments
+
+2. LIBS.  The LIBS= line of the Makefile specifies the location of the
+CSDP library and the BLAS and LAPACK libraries.  The distributed version
+of the Makefile has values suitable for a 64 bit Linux system with BLAS
+and LAPACK installed in the system library directories:
+
+LIBS=-static -L../lib -lsdp -llapack -lblas -lm
+
+-static               produce a statically linked executable
+-L../lib -lsdp        libsdp.a is in the lib subdirectory
+-llapack -lblas       LAPACK and BLAS libraries
+-lm                   C standard math library
+
+The LIBS variable will have to be edited if your LAPACK and BLAS libraries
+are not in the standard location or have different names.   For example,
+on my system, the OpenBLAS library is in /opt/OpenBLAS/lib/libopenblas.a.
+This library contains both LAPACK and BLAS routines. Thus I use the flags:
+
+LIBS=-static -L../lib -L/opt/OpenBLAS/lib -lopenblas -lm
+
+Once you've set the LIBS and CFLAGS variables in the top level Makefile,
+issue the command
  
 > make
  
 to build CSDP.  Make will go into the lib, solver, theta, and example
-subdirectories and compile the C code, using values of CFLAGS and LIBS
-supplied in the Makefiles in these directories.
+subdirectories and compile the C code.
 
 If the build fails, it is important to start by identifying where the
 build failed.  Failures in building the CSDP library are extremely
 rare.  Most reported failures have occured in the solver and theta
 directories.  The most common problem in practice is that one or more
-of the required libraries (blas, lapack, or g2c) is missing.  In that
+of the required libraries (blas or lapack) is missing.  In that
 case you must install the required library before continuing with the
 installation of CSDP.  If the build fails for some other reason, feel 
 free to contact the author for help- we're interested in learning about
