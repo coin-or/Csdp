@@ -133,10 +133,17 @@ LIBS=-static -L../lib -lsdp -llapack -lblas -lm
 -llapack -lblas       LAPACK and BLAS libraries
 -lm                   C standard math library
 
-The LIBS variable will have to be edited if your LAPACK and BLAS libraries
-are not in the standard location or have different names.   For example,
-on my system, the OpenBLAS library is in /opt/OpenBLAS/lib/libopenblas.a.
-This library contains both LAPACK and BLAS routines. Thus I use the flags:
+In many cases it will be necessary to add the Fortran run time library:
+
+-lgfortran
+
+The LIBS variable will also have to be edited if your LAPACK and BLAS libraries
+are not in the standard location or have different names.
+
+For example, on my system, the OpenBLAS library is located in
+/opt/OpenBLAS/lib/libopenblas.a.  This OpenBLAS library contains both
+LAPACK and BLAS routines, so I don't need to specify a spearate LAPACK
+library.  Thus I use the flags:
 
 LIBS=-static -L../lib -L/opt/OpenBLAS/lib -lopenblas -lm
 
