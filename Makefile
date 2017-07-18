@@ -1,36 +1,64 @@
 #
-# Target all builds everything.
+# This Makefile can be used to automatically build the entire package.  
 #
-all: theta complement rand_graph graphtoprob
+# If you make changes in the Makefile or code under any subdirectory, you can
+# rebuild the system with "make clean" followed by "make all".
 #
-# This builds the theta number code. 
 #
-theta: theta.o 
-	$(CC) $(CFLAGS) theta.o $(LIBS) -o theta
+# You can change the C compiler by setting CC=...
 #
-# Complement computes the complement of a graph.
+# CC=gcc
 #
-complement: complement.o 
-	$(CC) $(CFLAGS) complement.o $(LIBS) -o complement
+# CFLAGS settings for 64 bit Linux/unix systems.
 #
-# rand_graph generates a random graph.  
+export CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBIT64 -DUSEOPENMP -DSETNUMTHREADS -DUSESIGTERM -DUSEGETTIME -I../include
 #
-rand_graph: rand_graph.o
-	$(CC) $(CFLAGS) rand_graph.o $(LIBS) -o rand_graph
+# LIBS settings for 64 bit Linux/unix systems.
 #
-# graphtoprob converts a file in the graph format to an SDP problem in our
-# SDP format.
+LIBS=-static -L../lib -lsdp -llapack -lblas -lm
 #
-graphtoprob: graphtoprob.o 
-	$(CC) $(CFLAGS) graphtoprob.o $(LIBS) -o graphtoprob
 #
-# To clean up the directory.
+# On most systems, this should handle everything.
 #
+all:
+	cd lib; make libsdp.a
+	cd solver; make csdp
+	cd theta; make all
+	cd example; make all
+
+#
+# Perform a unitTest
+#
+
+unitTest:
+	cd test; make all
+
+#
+# Install the executables in /usr/local/bin.
+#
+
+install:
+	cp -f solver/csdp /usr/local/bin
+	cp -f theta/theta /usr/local/bin
+	cp -f theta/graphtoprob /usr/local/bin
+	cp -f theta/complement /usr/local/bin
+	cp -f theta/rand_graph /usr/local/bin
+
+#
+# Clean out all of the directories.
+# 
+
 clean:
-	rm -f *.o
-	rm -f theta
-	rm -f complement
-	rm -f rand_graph
-	rm -f graphtoprob
+	cd lib; make clean
+	cd solver; make clean
+	cd theta; make clean
+	cd test; make clean
+	cd example; make clean
+
+
+
+
+
+
 
 
