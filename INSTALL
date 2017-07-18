@@ -27,9 +27,9 @@ and LAPACK routines.
 The original authors of BLAS and LAPACK have provided "reference
 implementations" that are freely available but not very well
 optimized.  If your system has BLAS and LAPACK libraries in /usr/lib,
-there's a good chance that these are the reference implementations.  
-Using them is a reasonable way to start, but you may well find that
-you need faster routines to get acceptable performance.  
+there's a good chance that these are the reference implementations.
+Using them is an easy way to start, but you may well find that you
+need faster routines to get acceptable performance.
 
 Most hardware manufacturers have developed optimized BLAS/LAPACK 
 libraries for their systems, such as Apple's veclib for G5 
@@ -49,21 +49,22 @@ a binary version that is not optimized for your system.
 CSDP also includes a set of routines for interfacing CSDP to MATLAB
 and Octave.  This interface is entirely optional- CSDP works fine
 without it.  In order to use this interface, you will need MATLAB (6.5
-or later) or Octave (2.9.5 or later.)  Note that earlier versions of
-Octave, particularly 2.0 and 2.1, will not function with this interface
-because Octave didn't support sparse matrices until version 2.9.  The
-README file in the matlab directory contains instructions for installing
-the matlab interface and testing it on a sample problem.
+or later) or Octave (2.9.5 or later.)  The README file in the matlab
+directory contains instructions for installing the matlab interface
+and testing it on a sample problem.
 
 DOWNLOADING CSDP:
 
-The current version of CSDP can be obtained using subversion from
-the COIN-OR web site.  To do this, first install the subversion 
-tools, then issue the command
+The most current version of CSDP can be obtained using subversion from
+the COIN-OR web site.  To do this, first install the subversion tools,
+then issue the command
 
   svn co https://projects.coin-or.org/svn/Csdp/trunk
  
-Or use a GUI to access the repository.  
+Or use a GUI to access the repository.
+
+Alternatively, you can download a .tar or .zip archive of the source code
+for the most recent stable release of CSDP from the project web site.
 
 INSTALLING CSDP:
 
@@ -171,12 +172,12 @@ this, issue the command
  
 > make clean
  
-If the build appears to be successful, you can test the code with
+Once the build appears to be successful, you can test the code with
  
 > make unitTest
  
 This will run tests of the stand alone solver csdp and Lovasz theta
-program theta.  Compare the .out files produced by the test with the
+program theta.  Compare the .out files produced by the tests with the
 corresponding .correct files.  The actual values will typically vary
 because of small differences in floating point round-off, compiler
 optimizations, and so on.  However, the optimal objective values
