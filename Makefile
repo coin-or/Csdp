@@ -15,7 +15,7 @@ export CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBI
 #
 # LIBS settings for 64 bit Linux/unix systems.
 #
-export LIBS=-static -L../lib -lsdp -L../solver -lopenblas -lblas -lm
+export LIBS=-static -L../lib -lsdp -llapack -lblas -lm
 #
 #
 # On most systems, this should handle everything.
