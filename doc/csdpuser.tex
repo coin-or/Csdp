@@ -286,7 +286,7 @@ function will be perturbed to help deal with problems that have unbounded
 optimal solution sets.  If {\bf perturbobj} is 0, then the objective will not
 be perturbed.  If {\bf perturbobj} is 1,
 then the objective function will be perturbed
-by a default amount.  Larger values of perturbobj (e.g. 100.0) increase the
+by a default amount.  Larger values of {\bf perturbobj} (e.g. 100.0) increase the
 size of the perturbation.  This can be helpful in solving some difficult
 problems. The {\bf fastmode} parameter determines whether or not
 CSDP will skip certain time consuming operations that slightly improve
@@ -347,8 +347,6 @@ Transposing A to match b
 Number of constraints: 21 
 Number of SDP blocks: 2 
 Number of LP vars: 0 
-Percentage of dense constraint blocks is 58.333333
-Structural density of O 441, 1.000000e+00 
 Iter:  0 Ap: 0.00e+00 Pobj:  3.6037961e+02 Ad: 0.00e+00 Dobj:  0.0000000e+00 
 Iter:  1 Ap: 9.56e-01 Pobj:  3.7527534e+02 Ad: 9.60e-01 Dobj:  6.4836002e+04 
 Iter:  2 Ap: 8.55e-01 Pobj:  4.0344779e+02 Ad: 9.67e-01 Dobj:  6.9001508e+04 
@@ -389,6 +387,7 @@ info =
      0
 \end{verbatim}
 
+\newpage
 The {\bf writesdpa} function can be used to write out a problem in SDPA
 sparse format.
 
@@ -770,7 +769,7 @@ errors that did not allow execution.  These are given Table
 \ref{exitcodetable}.
 
 \begin{table}
-\begin{tabular}{|r|r|} \hline
+\begin{tabular}{|r|l|} \hline
   Code & Explanation \\  \hline
   0    & Problem solved to optimality \\ \hline
   1    & Problem is primal infeasible. \\  \hline
@@ -789,7 +788,7 @@ errors that did not allow execution.  These are given Table
 \end{table}
 
 \begin{table}
-\begin{tabular}{|r|r|} \hline
+\begin{tabular}{|r|l|} \hline
   Code   & Explanation \\  \hline
   200    & No problem data file named. \\   \hline
   201    & Couldn't open problem data file. \\  \hline
