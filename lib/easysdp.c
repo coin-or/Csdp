@@ -252,6 +252,16 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
      };
 
    /*
+    * Check to make sure that there is at least one constraint.
+    */
+
+   if (k<= 0)
+     {
+       printf("Problem must have at least one constraint.\n");
+       exit(206);
+     };
+   
+   /*
     *  Work out the leading dimension for the array.  Note that we may not
     *  want to use k itself, for cache issues.
     */

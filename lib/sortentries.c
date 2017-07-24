@@ -81,6 +81,21 @@ void sort_entries(k,C,constraints)
   for (i=1; i<=k; i++)
     {
       ptr=constraints[i].blocks;
+
+      /*
+       * There must be at least one block in each constraint.
+       */
+
+      if (ptr==NULL)
+        {
+          printf("Constraint %d is empty.\n",i);
+          exit(206);
+        };
+
+      /*
+       * Now, loop through the blocks.
+       */
+      
       while (ptr != NULL)
 	{
 	  /*
