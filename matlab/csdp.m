@@ -143,15 +143,15 @@ else
 end
 
 if (isfield(pars,'perturbobj')),
-  fprintf(fid,'printlevel= %d\n',pars.perturbobj);
+  fprintf(fid,'perturbobj= %d\n',pars.perturbobj);
 else
-  fprintf(fid,'printlevel=%d\n',1);
+  fprintf(fid,'perturbobj=%d\n',1);
 end
 
 if (isfield(pars,'fastmode')),
-  fprintf(fid,'printlevel= %d\n',pars.fastmode);
+  fprintf(fid,'fastmode=%d\n',pars.fastmode);
 else
-  fprintf(fid,'printlevel=%d\n',0);
+  fprintf(fid,'fastmode=%d\n',0);
 end
 
 %
