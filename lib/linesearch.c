@@ -140,7 +140,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
       if (method == 1)
 	{
 	  matvec(work3,q,z);
-	  matvec(dX,z,workvec);
+	  matvecsym(dX,z,workvec);
 	  matvec(work2,workvec,z);
 	}
       else
