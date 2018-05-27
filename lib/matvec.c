@@ -126,19 +126,18 @@ void matvecsym(A,x,y)
 	  scale2=0.0;
 
 #ifdef HIDDENSTRLEN
-	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc,1);
+	  dsymv_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc,1);
 #else
 #ifdef NOUNDERBLAS
 #ifdef CAPSBLAS
-	  DGEMV("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
+	  DSYMV("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);	  
 #else
-	  dgemv("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
+  	  dsymv("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);	  
 #endif
 #else
 #ifdef CAPSBLAS
-	  DGEMV_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
+  	  DSYMV_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
 #else
-	  /*	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc); */
   	  dsymv_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
 #endif
 #endif
