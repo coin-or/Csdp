@@ -11,7 +11,6 @@
 
 void skip_to_end_of_line();
 int get_line();
-int max_line_length();
 void countentry();
 int addentry();
 
@@ -60,8 +59,12 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       exit(201);
     };
 
-  buflen=max_line_length(fid)+10;
-  fclose(fid);
+  /*
+   * This constant allows for up to 500000*20=10,000,000 byte long lines.
+   * You might see a line this long in a problem with 500000 constraints.
+   */
+  
+  buflen=8000000;
 
   buf=(char *)malloc(buflen*sizeof(char));
   if (buf == NULL)
@@ -784,66 +787,39 @@ int get_line(fid,buffer,bufsiz)
   int k;
   char c;
 
-  k=0;
-  c=getc(fid);
-  while (c != '\n')
+  if (fgets(buffer,bufsiz-1,fid) != NULL)
     {
-      buffer[k]=c;
-      k++;
-      c=getc(fid);
-      if (c == EOF) return(2);
-      if (k >=bufsiz) 
-	{
-          printf("Line too long in input file!  Adjust BUFFERSIZ in readprob.c\n");
-	  return(1);
-	};
-    };
-  buffer[k]='\n';
-  buffer[k+1]=0;
-
-  for (i=0; i<=k; i++)
-    {
-      if (buffer[i]==',')
-	buffer[i]=' ';
-      if (buffer[i]=='{')
-	buffer[i]=' ';
-      if (buffer[i]=='}')
-	buffer[i]=' ';
-      if (buffer[i]=='(')
-	buffer[i]=' ';
-      if (buffer[i]==')')
-	buffer[i]=' ';
-    };
-
-  return(0);
-}
-
-int max_line_length(fid)
-     FILE *fid;
-{
-  int maxlen;
-  int k;
-  int c;
-
-  maxlen=0;
-  k=0;
-  c=getc(fid);
-  while (c != EOF)
-    {
+      c=buffer[0];
       k=0;
-      while ((c != '\n') && (c != EOF))
-	{
-	  c=getc(fid);
-	  k++;
-	};
-      if (k > maxlen)
-	maxlen=k;
-      c=getc(fid);
-    };
+      while ((c != '\n')  && (c!=0) && (k<bufsiz))
+        {
+          if (c==',')
+            buffer[k]=' ';
+          if (c=='(')
+            buffer[k]=' ';
+          if (c==')')
+            buffer[k]=' ';
+          if (c=='{')
+            buffer[k]=' ';
+          if (c=='}')
+            buffer[k]='  ';
+          k=k+1;
+          c=buffer[k];
+        }
 
-  return(maxlen);
-
+      /*
+       * return an error if the line is longer than the buffer!
+       */
+      
+      if (k<buffsize-5)
+        return(0);
+      else
+        return(1);
+    }
+  else
+    return(2);
 }
+  
 
 void countentry(constraints,matno,blkno,blocksize)
      struct constraintmatrix *constraints;
