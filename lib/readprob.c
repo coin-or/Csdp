@@ -783,6 +783,7 @@ int get_line(fid,buffer,bufsiz)
      char *buffer;
      int bufsiz;
 {
+  int i;
   int k;
   char c;
 
@@ -801,16 +802,16 @@ int get_line(fid,buffer,bufsiz)
           if (c=='{')
             buffer[k]=' ';
           if (c=='}')
-            buffer[k]=' ';
+            buffer[k]='  ';
           k=k+1;
           c=buffer[k];
-        };
+        }
 
       /*
        * return an error if the line is longer than the buffer!
        */
       
-      if (k<bufsiz-5)
+      if (k<buffsize-5)
         return(0);
       else
         return(1);
