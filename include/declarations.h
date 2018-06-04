@@ -133,6 +133,8 @@ void mat_mult_rawatlas(int n, double scale1, double scale2, double *ap,
 
 void matvec(struct blockmatrix A, double *x, double *y);
 
+void matvecsym(struct blockmatrix A, double *x, double *y);
+
 void alloc_mat(struct blockmatrix A, struct blockmatrix *pB);
 
 void free_mat(struct blockmatrix A);
@@ -229,6 +231,7 @@ void DGEMV();
 void DGER();
 void DTRSM();
 void DTRMV();
+void DSYMV();
 #else
 double DNRM2_();
 double DASUM_();
@@ -239,6 +242,7 @@ void DGEMV_();
 void DGER_();
 void DTRSM_();
 void DTRMV_();
+void DSYMV_();
 #endif
 #else
 #ifdef NOUNDERBLAS
@@ -251,6 +255,7 @@ void dgemv();
 void dger();
 void dtrsm();
 void dtrmv();
+void dsymv();
 #else
 double dnrm2_();
 double dasum_();
@@ -261,6 +266,7 @@ void dgemv_();
 void dger_();
 void dtrsm_();
 void dtrmv_();
+void dsymv_();
 #endif
 #endif
 

@@ -13,8 +13,6 @@ double calc_pobj(C,X,constant_offset)
      struct blockmatrix X;
      double constant_offset;
 {
-  int blk;
-  int i,j;
   double pobj;
 
   pobj=constant_offset+trace_prod(C,X);

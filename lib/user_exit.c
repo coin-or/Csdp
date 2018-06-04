@@ -13,6 +13,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <signal.h>
+#include <stdio.h>
 
 int sigterm_signaled=0;
 
@@ -35,7 +36,6 @@ void catch_sigterm(signal)
 void catch_sigxcpu(signal)
      int signal;
 {
-  int ret;
   struct rlimit rlim;
 
   printf("CPU Time Limit Execeded.\n");
@@ -45,10 +45,10 @@ void catch_sigxcpu(signal)
    * Update the time limit.
    */
   
-  ret=getrlimit(RLIMIT_CPU,&rlim);
+  getrlimit(RLIMIT_CPU,&rlim);
   rlim.rlim_cur=rlim.rlim_cur+200+rlim.rlim_cur/10;
 
-  ret=setrlimit(RLIMIT_CPU,&rlim);
+  setrlimit(RLIMIT_CPU,&rlim);
 
 }
 

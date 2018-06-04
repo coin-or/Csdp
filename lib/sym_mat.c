@@ -30,7 +30,7 @@ void sym_mat(A)
 	  n=A.blocks[blk].blocksize;
 	  ap=A.blocks[blk].data.mat;
 	  for (j=1; j<=n; j++)
-	    for (i=1; i<=j; i++)
+	    for (i=1; i<j; i++)
 	      {
 		foo=(ap[ijtok(i,j,n)]+ap[ijtok(j,i,n)])/2.0;
 		ap[ijtok(i,j,n)]=foo;

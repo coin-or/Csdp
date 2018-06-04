@@ -925,7 +925,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	    * Do iterative refinement.
 	    */
 
-
 	   if ((iter>1) && (relerr2 > parameters.axtol) && 
 	       (parameters.fastmode==0))
 	     {
@@ -996,7 +995,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       
 	     };
 
-
+	   
 	   /*
 	    * Extract dy.
 	    */
@@ -1055,7 +1054,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   /*
 	     Compute dX=-X+Zi*Fd*X-temp*X;
 
-             First, put I-Zi*Fd+work1 in workn2.  Then multiply -work2*X, and
+             First, put I-Zi*Fd+work1 in work2.  Then multiply -work2*X, and
              put the result in dX.
 
 	   */
@@ -1103,12 +1102,15 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 				workvec5,workvec6,mystepfrac,1.0,
 				printlevel);
 
+
+	   
 	   /* Here, work1 holds X+alphap1*dX, work2=Z+alphad1*dZ */
 
 	   addscaledmat(X,alphap1,dX,work1);
 	   addscaledmat(Z,alphad1,dZ,work2);
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad1*dy[i];
+
 
 
 	   /*
@@ -1281,6 +1283,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		 };
 	     };
 
+
+	   
 	   /*
 	    * Compute muplus and prepare for the corrector step.
 	    */
@@ -1360,17 +1364,28 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	    * Take a moment to figure out how well we're doing on feasibility.
 	    */
 
-	   addscaledmat(X,1.0,dX,work1);
-	   op_a(k,constraints,work1,workvec1);
-	   for (i=1; i<=k; i++)
-	     workvec1[i]=workvec1[i]-a[i];
-	   relerr1=norm2(k,workvec1+1)/(1.0+norma);	   
 	   if (printlevel >= 3)
 	     {
+	       addscaledmat(X,1.0,dX,work1);
+	       op_a(k,constraints,work1,workvec1);
+	       for (i=1; i<=k; i++)
+		 workvec1[i]=workvec1[i]-a[i];
+	       relerr1=norm2(k,workvec1+1)/(1.0+norma);	   
+
+	       /*
+		* Note: the compiler may complain that relerr1 could be used
+		* uninitialized.  In fact, this is safe since all uses are
+		* protected by if (printlevel >= 3) conditions.
+		*/
+	       
 	       printf("refinement: Relative error in A(X+dX)=a (Fphat) is %e \n",
 		      relerr1);
 	     };
 
+	   
+
+	   
+	   
 	   /*
 	     Now, compute the corrector step.
 	   */
@@ -1395,11 +1410,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
 	    */
 
-	   make_i(work1);
-	   scale1=0.0;
-	   scale2=mu;
-	   mat_mult(scale1,scale2,work2,work2,work1);
-
+	   make_scaled_i(work1,mu);
+	   
 	   scale1=-1.0;
 	   scale2=1.0;
 	   mat_multspa(scale1,scale2,dZ,dX,work1,fill); 
@@ -1555,13 +1567,13 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   scale2=0.0;
 	   mat_mult(scale1,scale2,Zi,work1,work2);
 	   sym_mat(work2);
-
+	   
 	   addscaledmat(X,1.0,dX,work1);
 	   op_a(k,constraints,work1,workvec1);
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=workvec1[i]-a[i];
 	   relerr2=norm2(k,workvec1+1)/(1.0+norma);
-	   
+
 	   if (printlevel >= 3)
 	     {
 	       printf("refinement: Before dX+dX1 Relative error in A(X+dX)=a is %e \n",relerr2);
@@ -1589,6 +1601,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   /*
 	    * Check A(X+dX)=a.
 	    */
+
 	   addscaledmat(X,1.0,dX,work1);
 	   op_a(k,constraints,work1,workvec1);
 	   for (i=1; i<=k; i++)
@@ -1630,6 +1643,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     };
 
 
+
+	   
+
 	   /* 
 	      Now, we've got the individual steps.
 	      Find maximum possible step sizes.
@@ -1651,6 +1667,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad*dy[i];
 
+
+	   
 	   /*
 	    * Check on the feasibility of the new solutions.  If they're
 	    * worse, and the old solution was feasible, then don't take the
@@ -1694,6 +1712,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   if ((probdfeas==0) && (dinfeasmeas>1.0e4))
 	     limrelpinfeas=1.0e30;
 
+
+	   
 	   /*
 	    * Now, make sure that the step keeps us feasible enough.
 	    */
