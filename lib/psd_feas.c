@@ -50,12 +50,10 @@ double dinfeas(k,C,constraints,y,Z,work1)
    * Next, check that A'(y)-C=Z
    */
 
-  zero_mat(work1);
-
   op_at(k,y,constraints,work1);
 
-  addscaledmat(work1,-1.0,C,work1);
-  addscaledmat(work1,-1.0,Z,work1);
+  addscaledmatut(work1,-1.0,C,work1);
+  addscaledmatut(work1,-1.0,Z,work1);
 
   /*
     Now, we've got the error in workn1.  We'll compute the F norm of this
@@ -84,7 +82,7 @@ double dimacserr3(k,C,constraints,y,Z,work1)
    * Next, check that A'(y)-C=Z
    */
 
-  zero_mat(work1);
+  /*xyzzy  zero_mat(work1); */
 
   op_at(k,y,constraints,work1);
 

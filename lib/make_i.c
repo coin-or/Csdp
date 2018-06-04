@@ -43,3 +43,41 @@ void make_i(A)
 
 
 
+void make_scaled_i(A,mu)
+     struct blockmatrix A;
+     double mu;
+{
+  int blk,i,j;
+  double *p;
+
+  for (blk=1; blk<=A.nblocks; blk++)
+    {
+      switch (A.blocks[blk].blockcategory) 
+	{
+	case DIAG:
+	  p=A.blocks[blk].data.vec;
+	  for (i=1; i<=A.blocks[blk].blocksize; i++)
+	    p[i]=mu;
+	  break;
+	case MATRIX:
+	  p=A.blocks[blk].data.mat;
+#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,p,A)
+	  for (j=1; j<=A.blocks[blk].blocksize; j++)
+	    for (i=1; i<=A.blocks[blk].blocksize; i++)
+	      p[ijtok(i,j,A.blocks[blk].blocksize)]=0.0;
+
+	  for (i=1; i<=A.blocks[blk].blocksize; i++)
+	    p[ijtok(i,i,A.blocks[blk].blocksize)]=mu;
+	  break;
+	default:
+	  printf("make_i illegal block type\n");
+	  exit(206);
+	};
+    }
+}
+
+
+
+
+
+
