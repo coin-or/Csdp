@@ -35,12 +35,15 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
       switch(C.blocks[blk].blockcategory)
 	{
 	case DIAG:
+#pragma omp simd
 	  for (i=1; i<=C.blocks[blk].blocksize; i++)
 	    work1.blocks[blk].data.vec[i]=1.0;
 	  break;
 	case MATRIX:
-	  for (i=1; i<=C.blocks[blk].blocksize; i++)
-	    for (j=1; j<=C.blocks[blk].blocksize; j++)
+#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(C,work1,blk)	  
+	  for (j=1; j<=C.blocks[blk].blocksize; j++)
+#pragma omp simd
+	    for (i=1; i<=C.blocks[blk].blocksize; i++)
 	      {
 		if ((C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)] != 0.0) || (i == j))
 		  work1.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=1.0;
@@ -233,14 +236,17 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
    * Print out information about fill.
    */
 
-  ptr=pfill->blocks;
-  while (ptr != NULL)
+  if (printlevel >= 3)
     {
-      blk=ptr->blocknum;
-      if (printlevel >= 3)
-	printf("Block %d, Size %d, Fill %d, %.2f \n",blk,C.blocks[blk].blocksize,ptr->numentries,100.0*ptr->numentries/(C.blocks[blk].blocksize*C.blocks[blk].blocksize*1.0));
-      ptr=ptr->next;
+      ptr=pfill->blocks;
+      while (ptr != NULL)
+	{
+	  blk=ptr->blocknum;
+	  printf("Block %d, Size %d, Fill %d, %.2f \n",blk,C.blocks[blk].blocksize,ptr->numentries,100.0*ptr->numentries/(C.blocks[blk].blocksize*C.blocks[blk].blocksize*1.0));
+	  ptr=ptr->next;
+	};      
     };
+
 }
 
 
