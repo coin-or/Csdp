@@ -86,17 +86,18 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 
   if (method==1)
     {
+      /*
+       * Method 1. We'll use matrix-vector mults.
+       */
       scale1=-1.0;
       zero_mat(work1);
       store_unpacked(cholinv,work3);
       triu(work3);
-      addscaledmat(work1,scale1,work3,work2);
-      trans(work2);
     }
   else
     {
       /*
-       * method=2.
+       * method=2.  We'll pre-multiply the matrices.
        */
       /*
        * First, multiply dX*cholinv.  Store it in work3.
@@ -139,13 +140,19 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 
       if (method == 1)
 	{
-	  matvec(work3,q,z);
+	  matvecR(work3,q,z);
 	  matvecsym(dX,z,workvec);
-	  matvec(work2,workvec,z);
+	  matvecRT(work3,workvec,z);
+          /*
+           * Because we didn't put the minus sign in by transposing 
+           * work3, we need to do it here.  
+           */
+          for (i=1; i<=n; i++)
+            z[i]=-z[i];        
 	}
       else
 	{
-	  matvec(work1,q,z);
+	  matvecsym(work1,q,z);
 	};
 
       lalpha[j]=0.0;

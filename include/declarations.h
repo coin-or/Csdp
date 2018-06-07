@@ -135,6 +135,10 @@ void matvec(struct blockmatrix A, double *x, double *y);
 
 void matvecsym(struct blockmatrix A, double *x, double *y);
 
+void matvecsymR(struct blockmatrix A, double *x, double *y);
+
+void matvecsymRT(struct blockmatrix A, double *x, double *y);
+
 void alloc_mat(struct blockmatrix A, struct blockmatrix *pB);
 
 void free_mat(struct blockmatrix A);
