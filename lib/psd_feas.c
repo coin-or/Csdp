@@ -35,16 +35,16 @@ double pinfeas(k,constraints,X,a,workvec)
 }
 
 
-double dinfeas(k,C,constraints,y,Z,work1)
+double dinfeas(k,C,constraints,y,Z,work1,nrmC)
      int k;
      struct blockmatrix C;
      struct constraintmatrix *constraints;
      double *y;
      struct blockmatrix Z;
      struct blockmatrix work1;
+     double nrmC;
 {
   double nrme;
-  double nrmC;
 
   /*
    * Next, check that A'(y)-C=Z
@@ -61,8 +61,6 @@ double dinfeas(k,C,constraints,y,Z,work1)
     */
 
   nrme=Fnorm(work1);
-
-  nrmC=Fnorm(C);
 
   return(nrme/(1+nrmC));
 

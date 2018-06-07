@@ -203,7 +203,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
    *
    */
   double newalphap;
-
+  
   /*
    * Stuff for keeping track of best solutions.
    */
@@ -366,7 +366,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 
   relpinfeas=pinfeas(k,constraints,X,a,workvec1);
   bestrelpinfeas=relpinfeas;
-  reldinfeas=dinfeas(k,C,constraints,y,Z,work2);
+  reldinfeas=dinfeas(k,C,constraints,y,Z,work2,normC);
   bestreldinfeas=reldinfeas;
 
   if (relpinfeas < parameters.axtol )
@@ -490,7 +490,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       relpinfeas=pinfeas(k,constraints,X,a,workvec1);
 	       if (relpinfeas < bestrelpinfeas)
 		 bestrelpinfeas=relpinfeas;
-	       reldinfeas=dinfeas(k,C,constraints,y,Z,work2);
+	       reldinfeas=dinfeas(k,C,constraints,y,Z,work2,normC);
 	       if (reldinfeas < bestreldinfeas)
 		 bestreldinfeas=reldinfeas;
 
@@ -541,7 +541,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       relpinfeas=pinfeas(k,constraints,X,a,workvec1);
 	       if (relpinfeas < bestrelpinfeas)
 		 bestrelpinfeas=relpinfeas;
-	       reldinfeas=dinfeas(k,C,constraints,y,Z,work2);
+	       reldinfeas=dinfeas(k,C,constraints,y,Z,work2,normC);
 	       if (reldinfeas < bestreldinfeas)
 		 bestreldinfeas=reldinfeas;
 
@@ -1201,7 +1201,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		   affrelgap=affgap/(1.0+fabs(affpobj)+fabs(affdobj));
 		 };
 
-	       affreldinfeas=dinfeas(k,C,constraints,workvec1,work2,work3);
+	       affreldinfeas=dinfeas(k,C,constraints,workvec1,work2,work3,normC);
 	       affrelpinfeas=pinfeas(k,constraints,work1,a,workvec4);
 	       
 	       if (printlevel >= 3)
@@ -1778,7 +1778,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad*dy[i];
 
-	   newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,work2);
+	   newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,work2,normC);
 
 	   limreldinfeas=bestreldinfeas*100;
 
@@ -1818,7 +1818,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		 workvec1[j]=y[j]+alphad*dy[j];
 	       
 	       newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,
-				     work2);
+				     work2,normC);
 	       i=i+1;
 	       if (i>15)
 		 {
@@ -1909,7 +1909,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   for (i=1; i<=k; i++)
 	     workvec1[i]=y[i]+alphad*dy[i];
 	   
-	   newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,work2);
+	   newreldinfeas=dinfeas(k,C,constraints,workvec1,work1,work2,normC);
 
 	   /*
 	    * Update cholzinv.
@@ -2031,7 +2031,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     };
 
 	   relpinfeas=pinfeas(k,constraints,X,a,workvec1);
-	   reldinfeas=dinfeas(k,C,constraints,y,Z,work2);
+	   reldinfeas=dinfeas(k,C,constraints,y,Z,work2,normC);
 	   
 	   if (relpinfeas < parameters.axtol )
 	     probpfeas=1;
@@ -2219,7 +2219,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
    */
 
   relpinfeas=pinfeas(k,constraints,X,a,workvec1);
-  reldinfeas=dinfeas(k,C,constraints,y,Z,work1);
+  reldinfeas=dinfeas(k,C,constraints,y,Z,work1,normC);
 
   if (relpinfeas < parameters.axtol )
     probpfeas=1;

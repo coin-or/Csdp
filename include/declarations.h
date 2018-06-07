@@ -70,7 +70,7 @@ double pinfeas(int k, struct constraintmatrix *constraints,
 
 double dinfeas(int k, struct blockmatrix C, 
 	       struct constraintmatrix *constraints, double *y, 
-	       struct blockmatrix Z, struct blockmatrix work1);
+	       struct blockmatrix Z, struct blockmatrix work1, double nrmC);
 
 double dimacserr3(int k, struct blockmatrix C, 
 	       struct constraintmatrix *constraints, double *y, 

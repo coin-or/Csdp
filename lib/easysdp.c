@@ -516,7 +516,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
 	       printf("Relative primal infeasibility: %.2e \n",
 		      pinfeas(k,constraints,*pX,a,workvec1));
 	       printf("Relative dual infeasibility: %.2e \n",
-		      dinfeas(k,C,constraints,*py,*pZ,work1));
+		      dinfeas(k,C,constraints,*py,*pZ,work1,Fnorm(C)));
 	       printf("Real Relative Gap: %.2e \n",gap/(1+fabs(*pdobj)+fabs(*ppobj)));
 	       printf("XZ Relative Gap: %.2e \n",trace_prod(*pZ,*pX)/(1+fabs(*pdobj)+fabs(*ppobj)));
 
