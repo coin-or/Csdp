@@ -59,6 +59,8 @@ double calc_dobj(int k, double *a, double *y, double constant_offset);
 
 double trace_prod(struct blockmatrix A, struct blockmatrix B);
 
+double trace(struct blockmatrix A);
+
 double linesearch(int n, struct blockmatrix dX,
 		  struct blockmatrix work1, struct blockmatrix work2, 
 		  struct blockmatrix work3, struct blockmatrix cholinv, 
@@ -137,6 +139,10 @@ void mat_mult_rawatlas(int n, double scale1, double scale2, double *ap,
 		  double *bp, double *cp);
 
 void matvec(struct blockmatrix A, double *x, double *y);
+
+void matvecR(struct blockmatrix A, double *x, double *y);
+
+void matvecRT(struct blockmatrix A, double *x, double *y);
 
 void matvecsym(struct blockmatrix A, double *x, double *y);
 
