@@ -479,14 +479,14 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       
 	       for (i=1; i<=k; i++)
 		 y[i]=0.0;
- 
+
 	       alphad=parameters.atytol/(sqrt(n*1.0)*200);
 	       make_i(work1);
 	       if (alphad*trace_prod(X,work1) > parameters.objtol)
 		 alphad=0.005*parameters.objtol/trace_prod(X,work1);
 	       zero_mat(work2);
 	       addscaledmat(work2,alphad,work1,Z);
-
+	       
 	       relpinfeas=pinfeas(k,constraints,X,a,workvec1);
 	       if (relpinfeas < bestrelpinfeas)
 		 bestrelpinfeas=relpinfeas;
@@ -534,10 +534,11 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       zero_mat(work2);
 	       op_a(k,constraints,work1,workvec1);
 	       alphap=parameters.atytol/(200.0*norm2(k,workvec1+1));
-	       if (alphap*trace_prod(work1,Z) > parameters.objtol)
-		 alphap=0.005*parameters.objtol/trace_prod(work1,Z);
-	       addscaledmat(work2,alphap,work1,X);
-
+	       if (alphap*trace(Z) > parameters.objtol)
+		 alphap=0.005*parameters.objtol/trace(Z);
+	       
+	       scalemat(alphap,work1,X);
+	       
 	       relpinfeas=pinfeas(k,constraints,X,a,workvec1);
 	       if (relpinfeas < bestrelpinfeas)
 		 bestrelpinfeas=relpinfeas;
@@ -855,16 +856,14 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     {
 	       if (printlevel >= 3)
 		 printf("Perturbing C.\n");
-	       make_i(work3);
-	       addscaledmat(work2,-perturbfac,work3,work2);
+	       addscaledI(work2,-perturbfac);
 	     };
 
 	   if ((bestmeas < 1.0e3) && (parameters.perturbobj>0))
 	     {
 	       if (printlevel >= 3)
 		 printf("Perturbing C.\n");
-	       make_i(work3);
-	       addscaledmat(work2,-perturbfac*pow(bestmeas/1000.0,1.5),work3,work2);
+	       addscaledI(work2,-perturbfac*pow(bestmeas/1000.0,1.5));
 	     };
 
 
@@ -1055,15 +1054,13 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Compute dX=-X+Zi*Fd*X-temp*X;
 
              First, put I-Zi*Fd+work1 in work2.  Then multiply -work2*X, and
-             put the result in dX.
+             put the result in dX.  Zi*Fd is in work3.
 
 	   */
-	   make_i(work2);
-
-	   addscaledmat(work2,-1.0,work3,work2);
-
-	   addscaledmat(work2,1.0,work1,work2);
-
+	   
+	   addscaledmat(work1,-1.0,work3,work2);
+	   addscaledI(work2,1.0);
+	   
 	   scale1=-1.0;
 	   scale2=0.0;
 	   mat_mult(scale1,scale2,work2,X,dX);
@@ -1322,7 +1319,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       if (muplus < 0.9*muk)
 		 mu=muplus;
 	       else
-		 mu=muk*0.9;
+		 mu=0.9*muk;
 	     };
 	   
 	   /*
@@ -1553,13 +1550,19 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Compute dX1=-Zi*dZ1*X-Zi*dZ*dX+mu*zi;
 	     dX1=Zi*(-dZ1*X-dZ*dX+mu*I)
 
-	     for storage sake, dX1 is stored in work2.  
-	   */
+	     for storage sake, dX1 is stored in work2.
+  
+	      Multiply -1*dZ*dX and put the result in work1.  Then add mu*I.
+	    */
 
-	   make_i(work1);
 	   scale1=-1.0;
-	   scale2=mu;
-	   mat_multspa(scale1,scale2,dZ,dX,work1,fill); 
+	   scale2=0.0;
+	   mat_multspa(scale1,scale2,dZ,dX,work1,fill);
+	   addscaledI(work1,mu);
+
+	   /*
+	    *
+	    */
 	   scale1=-1.0;
 	   scale2=1.0;
 	   mat_multspa(scale1,scale2,work3,X,work1,fill); 
@@ -2096,9 +2099,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	       store_packed(X,bestx);
 	       for (i=1; i<=k; i++)
 		 besty[i]=0.0;
-	       make_i(work2);
-	       zero_mat(work3);
-	       addscaledmat(work3,0.005*parameters.objtol/trace_prod(X,work2),work2,work3);
+
+	       make_scaled_i(work3,0.005*parameters.objtol/trace_prod(X,work2));
 	       store_packed(work3,bestz);
 	       if (printlevel >= 3)
 		 printf("New best solution, %e \n",bestmeas);
@@ -2109,9 +2111,8 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     {
 	       bestmeas=reldinfeas/parameters.atytol;
 
-	       zero_mat(work3);
-	       make_i(work1);
-	       addscaledmat(work3,1.0e-40,work1,work3);
+	       make_scaled_i(work3,1.0e-40);
+	       
 	       store_packed(work3,bestx);
 	       store_packed(Z,bestz);
 	       for (i=1; i<=k; i++)

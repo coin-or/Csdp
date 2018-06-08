@@ -95,6 +95,11 @@ void op_o(int k, struct constraintmatrix *constraints,
 void addscaledmat(struct blockmatrix A, double scale, struct blockmatrix B,
 		  struct blockmatrix C);
 
+void addscaledI(struct blockmatrix A, double scale);
+
+void scalemat(double scale, struct blockmatrix B,
+		  struct blockmatrix C);
+
 void addscaledmatut(struct blockmatrix A, double scale, struct blockmatrix B,
 		  struct blockmatrix C);
 
