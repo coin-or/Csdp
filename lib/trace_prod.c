@@ -55,3 +55,33 @@ double trace_prod(A,B)
   return(sum);
 }
 
+double trace(A)
+     struct blockmatrix A;
+{
+  int blk;
+  double sum;
+  int i;
+
+
+  sum=0.0;
+  for (blk=1; blk<=A.nblocks; blk++)
+    {
+      switch (A.blocks[blk].blockcategory) 
+	{
+	case DIAG:
+	  for (i=1; i<=A.blocks[blk].blocksize; i++)
+	    sum += A.blocks[blk].data.vec[i];
+	  break;
+	case MATRIX:
+	  for (i=1; i<=A.blocks[blk].blocksize; i++)
+	    sum += A.blocks[blk].data.mat[ijtok(i,i,A.blocks[blk].blocksize)];
+	  break;
+	case PACKEDMATRIX:
+	default:
+	  printf("trace_prod illegal block type \n");
+	  exit(206);
+	};
+    };
+  return(sum);
+}
+

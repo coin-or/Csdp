@@ -80,8 +80,6 @@ double dimacserr3(k,C,constraints,y,Z,work1)
    * Next, check that A'(y)-C=Z
    */
 
-  /*xyzzy  zero_mat(work1); */
-
   op_at(k,y,constraints,work1);
 
   addscaledmat(work1,-1.0,C,work1);

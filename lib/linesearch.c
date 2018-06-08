@@ -89,8 +89,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
       /*
        * Method 1. We'll use matrix-vector mults.
        */
-      scale1=-1.0;
-      zero_mat(work1);
+
       store_unpacked(cholinv,work3);
       triu(work3);
     }
@@ -117,6 +116,10 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
       scale1=-1.0;
       scale2=0.0;
       mat_mult(scale1,scale2,work2,work3,work1);
+
+      /*
+       * The required product is in work1.
+       */
     };
 
   /*

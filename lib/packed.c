@@ -29,7 +29,7 @@ void store_packed(A,B)
 	  p=A.blocks[blk].data.mat;
 	  q=B.blocks[blk].data.mat;
 	  n=A.blocks[blk].blocksize;
-#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n)
+#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n) 
 	  for (j=1; j<=n; j++)
 	    for (i=1; i<=j; i++)
 	      q[ijtokp(i,j,n)]=p[ijtok(i,j,n)];
@@ -68,6 +68,7 @@ void store_unpacked(A,B)
 	  for (j=1; j<=n; j++)
 	    for (i=1; i<=j; i++)
 	      q[ijtok(i,j,n)]=p[ijtokp(i,j,n)];
+#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n)
 	  for (j=1; j<n; j++)
 	    for (i=j+1; i<=n; i++)
 	      q[ijtok(i,j,n)]=q[ijtok(j,i,n)];
@@ -196,7 +197,7 @@ void triu(A)
 	  break;
 	case MATRIX:
 	  n=A.blocks[blk].blocksize;
-#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(A,n)
+#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(A,n) 
 	  for (j=1; j<n; j++)
 	    for (i=j+1; i<=n; i++)
 	      A.blocks[blk].data.mat[ijtok(i,j,n)]=0.0;

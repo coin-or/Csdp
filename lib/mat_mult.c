@@ -27,13 +27,18 @@ void mat_mult(scale1,scale2,A,B,C)
 
   /*
    * In theory, the BLAS ensures that if scale2=0, then C will not be 
-   * accessed before being written to.  In practice, this is not always 
-   * true, so we initilize C to zeros for safety.
+   * accessed before being written to.  Some poor implementations of the
+   * BLAS would generate NaN results if C contained NaNs, and scale2=0.0.
+   * This doesn't appear to be conforming to the reference implementation, 
+   * and I'm not aware of any current BLAS implementations with this problem, 
+   * so I'm commenting out this bit of code.  It's here only in case this
+   * problem arises again.
+
+
+         if (scale2 == 0.0)
+            zero_mat(C);
+
    */
-
-  if (scale2 == 0.0)
-    zero_mat(C);
-
 
   /*
    * Work through the blocks one at a time.

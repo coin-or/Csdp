@@ -26,8 +26,9 @@ void copy_mat(A,B)
 	case MATRIX:
 	  p=A.blocks[blk].data.mat;
 	  q=B.blocks[blk].data.mat;
-#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q)
+#pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q) 
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
+#pragma omp simd
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      q[ijtok(i,j,A.blocks[blk].blocksize)]=
 		p[ijtok(i,j,A.blocks[blk].blocksize)];

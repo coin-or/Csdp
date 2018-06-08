@@ -544,12 +544,10 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
     {
 
       /*
-       * To protect against bad implementations of the BLAS that don't handle
-       * scale2=0 in dgemv well.
+       * Zero out C before we start.
        */
 
       zero_mat(C);
-
 
       /*
        * Now, multiply A*B and add it in.
