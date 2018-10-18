@@ -1,3 +1,5 @@
+[![a COIN-OR project](https://www.coin-or.org/GitHub/coin-or-badge.png)](https://www.coin-or.org)
+
 Copyright 1997-2018, Brian Borchers.  This copy of CSDP is made
 available under the Eclipse Public License.  See LICENCE for the
 details of the EPL.
