@@ -8,7 +8,7 @@
  */
 
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 #include <stddef.h>      /* definition of NULL */
 #include <sys/time.h>   /* definition of timeval struct and protyping of gettime
 			   ofday */
@@ -43,7 +43,7 @@ int main(argc,argv)
   double *y;
   double pobj,dobj;
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
   gettimeofday(&tp, NULL);
   starttime=(double)tp.tv_sec+(1.e-6)*tp.tv_usec;
 #endif
@@ -106,7 +106,7 @@ int main(argc,argv)
 
   free_prob(n,k,C,a,constraints,X,y,Z);
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
   gettimeofday(&tp, NULL);
   endtime=(double)tp.tv_sec+(1.e-6)*tp.tv_usec;
   totaltime=endtime-starttime;

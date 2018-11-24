@@ -40,7 +40,7 @@
 #include <math.h>
 #include "declarations.h"
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 /*
  * Stuff for keeping track of time.
  */
@@ -637,14 +637,14 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Now, compute the system matrix.  
 	   */
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 	   gettimeofday(&tp,NULL);
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
 	   op_o(k,constraints,byblocks,Zi,X,O,work1,work2);
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 	   gettimeofday(&tp,NULL);
 	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   opotime=opotime+t2-t1;
@@ -766,26 +766,14 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	     Next, compute the cholesky factorization of the system matrix.
 	   */
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 	   gettimeofday(&tp,NULL);
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
-#ifdef NOUNDERLAPACK
-  #ifdef CAPSLAPACK
-	   DPOTRF("U",&m,O,&ldam,&info);
-  #else
-	   dpotrf("U",&m,O,&ldam,&info);
-  #endif
-#else
-  #ifdef CAPSLAPACK
-	   DPOTRF_("U",&m,O,&ldam,&info);
-  #else
-	   dpotrf_("U",&m,O,&ldam,&info);
-  #endif
-#endif
+	   COIN_LAPACK_FUNC(dpotrf,DPOTRF)("U",&m,O,&ldam,&info);
 
-#ifdef USEGETTIME
+#ifdef HAVE_GETTIMEOFDAY
 	   gettimeofday(&tp,NULL);
 	   t2=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 	   factortime=factortime+t2-t1;

@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "declarations.h"
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #include <omp.h>
 #endif
 
@@ -105,7 +105,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -226,7 +226,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 		  __builtin_prefetch(ptr->next,0,3);
 #endif
 #endif
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -342,7 +342,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -466,7 +466,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();

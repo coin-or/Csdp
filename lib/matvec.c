@@ -52,19 +52,7 @@ void matvec(A,x,y)
 #ifdef HIDDENSTRLEN
 	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc,1);
 #else
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-	  DGEMV("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#else
-	  dgemv("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#endif
-#else
-#ifdef CAPSBLAS
-	  DGEMV_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#else
-	  dgemv_("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#endif
-#endif
+	  COIN_LAPACK_FUNC(dgemv,DGEMV)("N",&n,&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
 #endif
 	  
 	  p=p+n;
@@ -128,19 +116,7 @@ void matvecsym(A,x,y)
 #ifdef HIDDENSTRLEN
 	  dsymv_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc,1);
 #else
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-	  DSYMV("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);	  
-#else
-  	  dsymv("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);	  
-#endif
-#else
-#ifdef CAPSBLAS
-  	  DSYMV_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#else
-  	  dsymv_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
-#endif
-#endif
+	  COIN_LAPACK_FUNC(dsymv,DSYMV)("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);	  
 #endif
 	  
 	  p=p+n;
@@ -210,19 +186,7 @@ void matvecR(A,x,y)
 #ifdef HIDDENSTRLEN
           dtrmv_("U","N","N",&n,ap,&n,y+p,&inc,1,1,1);
 #else
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-          DTRMV("U","N","N",&n,ap,&n,y+p,&inc);
-#else
-          dtrmv("U","N","N",&n,ap,&n,y+p,&inc);
-#endif
-#else
-#ifdef CAPSBLAS
-          DTRMV_("U","N","N",&n,ap,&n,y+p,&inc);
-#else
-  	  dtrmv_("U","N","N",&n,ap,&n,y+p,&inc);
-#endif
-#endif
+          COIN_LAPACK_FUNC(dtrmv,DTRMV)("U","N","N",&n,ap,&n,y+p,&inc);
 #endif
 	  
 	  p=p+n;
@@ -291,19 +255,7 @@ void matvecRT(A,x,y)
 #ifdef HIDDENSTRLEN
           dtrmv_("U","T","N",&n,ap,&n,y+p,&inc,1,1,1);
 #else
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-          DTRMV("U","T","N",&n,ap,&n,y+p,&inc);
-#else
-          dtrmv("U","T","N",&n,ap,&n,y+p,&inc);
-#endif
-#else
-#ifdef CAPSBLAS
-          DTRMV_("U","T","N",&n,ap,&n,y+p,&inc);
-#else
-  	  dtrmv_("U","T","N",&n,ap,&n,y+p,&inc);
-#endif
-#endif
+          COIN_LAPACK_FUNC(dtrmv,DTRMV)("U","T","N",&n,ap,&n,y+p,&inc);
 #endif
 	  
 	  p=p+n;

@@ -23,23 +23,7 @@ int chol_blk(n,lda,A)
 #ifdef HIDDENSTRLEN
   dpotrf_("U",&n,A,&lda,&info,1);
 #else
-#ifdef HIDDENSTRLEN
-  dpotrf_("U",&n,A,&lda,&info,1);
-#else
-#ifdef NOUNDERLAPACK
-  #ifdef CAPSLAPACK
-    DPOTRF("U",&n,A,&lda,&info);
-  #else
-    dpotrf("U",&n,A,&lda,&info);
-  #endif
-#else
-  #ifdef CAPSLAPACK
-    DPOTRF_("U",&n,A,&lda,&info);
-  #else
-    dpotrf_("U",&n,A,&lda,&info);
-  #endif
-#endif
-#endif
+  COIN_LAPACK_FUNC(dpotrf,DPOTRF)("U",&n,A,&lda,&info);
 #endif
     
   if (info != 0)
@@ -185,19 +169,7 @@ void chol_inv(A,work)
 #ifdef HIDDENSTRLEN
    	  dtrtri_("U","N",&n,ap,&n,&info,1,1);
 #else
-#ifdef NOUNDERLAPACK
-#ifdef CAPSLAPACK
-	  DTRTRI("U","N",&n,ap,&n,&info);
-#else
-	  dtrtri("U","N",&n,ap,&n,&info);
-#endif
-#else
-#ifdef CAPSLAPACK
-	  DTRTRI_("U","N",&n,ap,&n,&info);
-#else
-	  dtrtri_("U","N",&n,ap,&n,&info);
-#endif
-#endif
+	  COIN_LAPACK_FUNC(dtrtri,DTRTRI)("U","N",&n,ap,&n,&info);
 #endif
           
 	  if (info != 0)

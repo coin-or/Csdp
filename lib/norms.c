@@ -12,19 +12,7 @@ double norm2(n,x)
   double nrm;
   int incx=1;
 
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-  nrm=DNRM2(&n,x,&incx);
-#else
-  nrm=dnrm2(&n,x,&incx);
-#endif
-#else
-#ifdef CAPSBLAS
-  nrm=DNRM2_(&n,x,&incx);
-#else
-  nrm=dnrm2_(&n,x,&incx);
-#endif
-#endif
+  nrm=COIN_LAPACK_FUNC(dnrm2,DNRM2)(&n,x,&incx);
   
   return(nrm);
 }
@@ -36,19 +24,7 @@ double norm1(n,x)
   double nrm;
   int incx=1;
 
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-  nrm=DASUM(&n,x,&incx);
-#else
-  nrm=dasum(&n,x,&incx);
-#endif
-#else
-#ifdef CAPSBLAS
-  nrm=DASUM_(&n,x,&incx);
-#else
-  nrm=dasum_(&n,x,&incx);
-#endif
-#endif
+  nrm=COIN_LAPACK_FUNC(dasum,DASUM)(&n,x,&incx);
   
   return(nrm);
 }
@@ -61,23 +37,8 @@ double norminf(n,x)
   double nrm;
   int incx=1;
 
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-  i=IDAMAX(&n,x,&incx);
+  i=COIN_LAPACK_FUNC(idamax,IDAMAX)(&n,x,&incx);
   nrm=fabs(x[i-1]);
-#else
-  i=idamax(&n,x,&incx);
-  nrm=fabs(x[i-1]);
-#endif
-#else
-#ifdef CAPSBLAS
-  i=IDAMAX_(&n,x,&incx);
-  nrm=fabs(x[i-1]);
-#else
-  i=idamax_(&n,x,&incx);
-  nrm=fabs(x[i-1]);
-#endif
-#endif
   
   return(nrm);
 }
