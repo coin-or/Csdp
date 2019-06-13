@@ -3,10 +3,10 @@
 %
 %  Usage:
 %
-%  ret=writesdpa(fname,A,b,c,K,pars)
+%  ret=writesdpa(fname,At,b,c,K,pars)
 %
 %      fname           Name of SDPA file, in quotes
-%      A,b,c,K         Problem in SeDuMi form
+%      At,b,c,K        Problem in SeDuMi form
 %      pars            Optional parameters.
 %                      pars.printlevel=0           No printed output  
 %                      pars.printlevel=1 (default) Some printed output.
@@ -40,7 +40,7 @@
 %  First Version: 7/14/03.  Modified from old writesdp.m which wrote problems
 %                 in SDPPack format.
 %
-function ret=writesdpa(fname,A,b,c,K,pars)
+function ret=writesdpa(fname,At,b,c,K,pars)
 %
 % First, check to see whether or not we should be quiet.
 %
@@ -59,11 +59,11 @@ else
   quiet=0;
 end
 %
-%  First, check for complex numbers in A, b, or c.
+%  First, check for complex numbers in At, b, or c.
 %
-if (isreal(A) ~= 1)
+if (isreal(At) ~= 1)
   if (quiet == 0)
-    fprintf('A is not real!\n');
+    fprintf('At is not real!\n');
   end
   ret=1;
   return
@@ -123,17 +123,17 @@ end
 %
 m=length(b);
 %
-%  Deal with the following special case.  If A is transposed, transpose
-%  it again so that it is of the right size.
+%  Deal with the following special case.  If At is transposed (i.e., if it
+%  is just A), transpose it to obtain the actual At so that it is of 
+%  the right size.
 %
-[Am,An]=size(A);
+[An,Am]=size(At);
 if (Am ~= m)
   if (An == m)
     if (quiet==0)  
       fprintf('Transposing A to match b \n');
     end
-    AT=A;
-    A=A';
+    At=At';
 %
 % Also swap Am and An so that they're correct.
 %
@@ -150,11 +150,6 @@ if (Am ~= m)
     ret=1;
     return
   end
-else
-%
-% No need to transpose A, but we'll need AT.
-%
-  AT=A';
 end
 %
 %  Deal with the following special case:  if c==0, then c should really
@@ -334,7 +329,7 @@ for cn=1:m
 %  Print out the SDP part of constraint cn.
 %
   base=sizelin+1;
-  rowcn=AT(:,cn);
+  rowcn=At(:,cn);
   for i=1:nsdpblocks
     I=find(rowcn);
     II=find(I>=base);
