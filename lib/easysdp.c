@@ -25,9 +25,32 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
      double *ppobj;
      double *pdobj;
 {
+   struct paramstruc params;
+   int printlevel;
+   /*
+    *  Initialize the parameters.
+    */
+   initparams(&params,&printlevel);
+   return parametrized_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj,printlevel,params);
+}
+
+int parametrized_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj,printlevel,params)
+     int n;
+     int k;
+     struct blockmatrix C;
+     double *a;
+     struct constraintmatrix *constraints;
+     double constant_offset;
+     struct blockmatrix *pX;
+     double **py;
+     struct blockmatrix *pZ;
+     double *ppobj;
+     double *pdobj;
+     int printlevel;
+     struct paramstruc params;
+{
   int ret;
   struct constraintmatrix fill;
-  struct paramstruc params;
   struct blockmatrix work1;
   struct blockmatrix work2;
   struct blockmatrix work3;
@@ -53,7 +76,6 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
   double *dy1;
   double *rhs;
   double *besty;
-  int printlevel;
   int ldam;
   struct sparseblock **byblocks;
   struct sparseblock *ptr;
@@ -67,13 +89,6 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
   int nnz;
   int denseblocks;
   int numblocks;
-
-   /*
-    *  Initialize the parameters.
-    */
-
-   initparams(&params,&printlevel);
-
 
   /*
    *  Allocate working storage
