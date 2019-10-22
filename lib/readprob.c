@@ -13,6 +13,7 @@ void* safe_malloc();
 
 #include "julia.c"
 
+int load_prob_from_file();
 int read_prob_size();
 int load_prob();
 
@@ -34,6 +35,45 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
   int ret;
   int blk;
   struct LoadingProblem *loading_prob;
+
+  ret = load_prob_from_file(fname,pC,&loading_prob,printlevel);
+  if (ret != 0)
+    return ret;
+
+  *pn = loading_prob->total_dimension;
+  *pk = loading_prob->num_constraints;
+  *pa = loading_prob->a;
+  *pconstraints = loading_prob->constraints;
+
+  free_loading_prob(loading_prob);
+
+  /*
+   * If the printlevel is high, print out info on constraints and block
+   * matrix structure.
+   */
+  if (printlevel >= 3)
+    {
+      printf("Block matrix structure.\n");
+      for (blk=1; blk<=pC->nblocks; blk++)
+	    {
+	      if (pC->blocks[blk].blockcategory == DIAG)
+	        printf("Block %d, DIAG, %d \n",blk,pC->blocks[blk].blocksize);
+	      if (pC->blocks[blk].blockcategory == MATRIX)
+	        printf("Block %d, MATRIX, %d \n",blk,pC->blocks[blk].blocksize);
+	    };
+    };
+
+  return(0);
+}
+
+int load_prob_from_file(fname,pC,problem,printlevel)
+     char *fname;
+     struct blockmatrix *pC;
+     struct LoadingProblem **problem;
+     int printlevel;
+
+{
+  int ret;
   int buflen;
   char *buf;
 
@@ -51,43 +91,24 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
    * and allocate space for everything.
    */
 
-  ret = read_prob_size(fname,pC,buf,buflen,&loading_prob,printlevel);
+  ret = read_prob_size(fname,pC,buf,buflen,problem,printlevel);
   if (ret != 0)
     {
       free(buf);
       return ret;
     }
 
-  *pn = loading_prob->total_dimension;
-  *pk = loading_prob->num_constraints;
-  *pa = loading_prob->a;
-  *pconstraints = loading_prob->constraints;
-
   /*
    *  In the final pass through the file, fill in the actual data.
    */
 
-  ret = load_prob(fname,buf,buflen,loading_prob,printlevel);
+  ret = load_prob(fname,buf,buflen,*problem,printlevel);
   free(buf);
-  free_loading_prob(loading_prob);
   if (ret != 0)
-    return ret;
-
-  /*
-   * If the printlevel is high, print out info on constraints and block
-   * matrix structure.
-   */
-  if (printlevel >= 3)
     {
-      printf("Block matrix structure.\n");
-      for (blk=1; blk<=pC->nblocks; blk++)
-	    {
-	      if (pC->blocks[blk].blockcategory == DIAG)
-	        printf("Block %d, DIAG, %d \n",blk,pC->blocks[blk].blocksize);
-	      if (pC->blocks[blk].blockcategory == MATRIX)
-	        printf("Block %d, MATRIX, %d \n",blk,pC->blocks[blk].blocksize);
-	    };
-    };
+      return ret;
+      free_loading_prob(*problem);
+    }
 
   return(0);
 }
