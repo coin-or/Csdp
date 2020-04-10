@@ -131,13 +131,19 @@ int load_prob(fname,buf,buflen,loading_prob,printlevel)
   double ent;
 
   fid = sdpa_fopen(fname, printlevel);
-  // Skip the number of constraints (primal variables in SDPA terminology).
+  /*
+   * Skip the number of constraints (primal variables in SDPA terminology).
+   */
   ret = safe_get_line(fid,buf,buflen,"mDIM",printlevel);
   if (ret != 0) return(1);
-  // Skip the number of blocks.
+  /*
+   * Skip the number of blocks.
+   */
   ret = safe_get_line(fid,buf,buflen,"nBLOCKS",printlevel);
   if (ret != 0) return(1);
-  // Skip the block structure.
+  /*
+   * Skip the block structure.
+   */
   ret = safe_get_line(fid,buf,buflen,"block sizes",printlevel);
   if (ret != 0) return(1);
 

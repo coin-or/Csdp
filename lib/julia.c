@@ -1,4 +1,6 @@
-// API used by the Julia wrapper at https://github.com/JuliaOpt/CSDP.jl
+/*
+  API used by the Julia wrapper at https://github.com/JuliaOpt/CSDP.jl
+*/
 
 double getindex(block,i,j)
      struct blockrec block;
@@ -45,8 +47,10 @@ struct blockrec getblockrec(blockmat, blk)
   return blockmat.blocks[blk];
 }
 
-// Structure used to look problem with a O(1) lookup from block number
-// too the pointer of the corresponding block.
+/*
+ * Structure used to look problem with a O(1) lookup from block number
+ * too the pointer of the corresponding block.
+ */
 struct LoadingProblem
 {
     int total_dimension;
@@ -70,10 +74,10 @@ struct LoadingProblem* allocate_loading_prob(pC, block_dims, num_constraints, nu
     int length;
     struct sparseblock *sparse_block;
 
-    if (pC->blocks < 0)
+    if (pC->nblocks < 0)
       {
         if (printlevel >= 1)
-          printf("Invalid number of blocks in matrix C: %d\n", pC->blocks);
+          printf("Invalid number of blocks in matrix C: %d\n", pC->nblocks);
         exit(1);
       }
     pC->blocks = (struct blockrec *) safe_malloc((pC->nblocks + 1) * sizeof(struct blockrec));
@@ -167,7 +171,6 @@ void free_loaded_prob(prob,X,y,Z)
 void free_loading_prob(loading_prob)
     struct LoadingProblem* loading_prob;
 {
-    int mat;
     free(loading_prob->constraint_block_lookup);
     free(loading_prob);
 }
