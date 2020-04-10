@@ -206,6 +206,11 @@ int sdp(int n, int k, struct blockmatrix C, double *a, double constant_offset,
 	double *dy, double *dy1, double *Fp, int printlevel, 
 	struct paramstruc parameters);
 
+int parametrized_sdp(int n, int k, struct blockmatrix C, double *a, 
+	     struct constraintmatrix *constraints, double constant_offset,
+	     struct blockmatrix *pX, double **py, struct blockmatrix *pZ,
+	     double *ppobj, double *pdobj, int printlevel, struct paramstruc params);
+
 int easy_sdp(int n, int k, struct blockmatrix C, double *a, 
 	     struct constraintmatrix *constraints, double constant_offset,
 	     struct blockmatrix *pX, double **py, struct blockmatrix *pZ,
