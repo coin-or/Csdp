@@ -50,7 +50,7 @@ void free_prob(n,k,C,a,constraints,X,y,Z)
 	  while (ptr != NULL)
 	    {
 	      free(ptr->entries);
-	      free(ptr->iindices);
+	      if (ptr->iindices != ptr->jindices) free(ptr->iindices);
 	      free(ptr->jindices);
 	      oldptr=ptr;
 	      ptr=ptr->next;
