@@ -1,4 +1,10 @@
-#
+# Copyright 1997-2018, Brian Borchers.
+# This file is distributed under the Eclipse Public License 2.0.
+
+AUTOMAKE_OPTIONS = foreign
+
+include $(top_srcdir)/BuildTools/Makemain.inc
+
 # Currently, we have only two tests to complete.  The first is the solution
 # of the SDPA format problem theta1.dat-s.  The makefile will run CSDP on 
 # this problem and store the output in theta1.out.  The second test is the
@@ -10,21 +16,24 @@
 # 1.0e-6.  
 #
 
-all: theta1.out g50.out 
- 
+.PHONY: test theta1.out g50.out
+
+test: theta1.out g50.out 
+
 #
 # Test the solver on theta1.dat-s
 #
 
+
 theta1.out: 
-	../solver/csdp theta1.dat-s >theta1.out
+	../solver/csdp $(srcdir)/theta1.dat-s | tee theta1.out
 
 #
 # Test theta on the g50 graph.
 #
 
 g50.out: 
-	../theta/theta g50 >g50.out
+	../theta/theta $(srcdir)/g50 | tee g50.out
 
-clean:
+clean-local:
 	rm -f *.out

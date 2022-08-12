@@ -15,19 +15,7 @@ double calc_dobj(k,a,y,constant_offset)
 
   s=0.0;
 
-#ifdef NOUNDERBLAS
-#ifdef CAPSBLAS
-    s=s+DDOT(&k,a+1,&incx,y+1,&incx);
-#else
-    s=s+ddot(&k,a+1,&incx,y+1,&incx);
-#endif
-#else
-#ifdef CAPSBLAS
-    s=s+DDOT_(&k,a+1,&incx,y+1,&incx);
-#else
-    s=s+ddot_(&k,a+1,&incx,y+1,&incx);
-#endif
-#endif
+  s=s+CSDP_LAPACK_FUNC(ddot,DDOT)(&k,a+1,&incx,y+1,&incx);
 
   return(s+constant_offset);
   

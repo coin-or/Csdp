@@ -22,19 +22,7 @@ int solvesys(m,ldam,A,rhs)
 #ifdef HIDDENSTRLEN
   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info,1);
 #else
-#ifdef NOUNDERLAPACK
-  #ifdef CAPSLAPACK
-	   DPOTRS("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
-  #else
-	   dpotrs("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
-  #endif
-#else
-  #ifdef CAPSLAPACK	
-	   DPOTRS_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
-  #else
-	   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
-  #endif
-#endif
+  CSDP_LAPACK_FUNC(dpotrs,DPOTRS)("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
 #endif
 
 	   if (info != 0)

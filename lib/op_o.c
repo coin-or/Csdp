@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #include <omp.h>
 #endif
 #include "declarations.h"
@@ -55,7 +55,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
    * Get the maximum number of threads.
    */
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
   max_threads=omp_get_max_threads();
 #else
   max_threads=1;
@@ -129,7 +129,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
       O[ijtok(i, j, (long int) ldam)] = 0.0;
 
   /* Loop over i, then the blocks, then j */
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #ifdef SETNUMTHREADS
   omp_set_num_threads(omp_get_max_threads());
 #endif
@@ -139,7 +139,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
   for (i = 1; i <= k; i++) 
     {
 
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #ifdef SETNUMTHREADS
       /* Only use one thread in the inner loop. */
       omp_set_num_threads(1);
@@ -324,7 +324,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 	       * put this block into a work matrix. 
 	       */
 	      
-#ifdef USEOPENMP
+#ifdef _OPENMP
 	      thread_num = omp_get_thread_num();
 #else
 	      thread_num=0;
@@ -421,7 +421,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
     }
 
   /* Make sure the number of threads is at maximum. */
-#ifdef USEOPENMP
+#ifdef _OPENMP
 #ifdef SETNUMTHREADS
   omp_set_num_threads(omp_get_max_threads());
 #endif

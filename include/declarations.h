@@ -235,85 +235,24 @@ int bisect_(int *n, double *eps1, double *d, double *e, double *e2,
   First, BLAS routines.
  */
 
-#ifdef CAPSBLAS
-#ifdef NOUNDERBLAS
-double DNRM2();
-double DASUM();
-double DDOT();
-int IDAMAX();
-void DGEMM();
-void DGEMV();
-void DGER();
-void DTRSM();
-void DTRMV();
-void DSYMV();
-#else
-double DNRM2_();
-double DASUM_();
-double DDOT_();
-int IDAMAX_();
-void DGEMM_();
-void DGEMV_();
-void DGER_();
-void DTRSM_();
-void DTRMV_();
-void DSYMV_();
-#endif
-#else
-#ifdef NOUNDERBLAS
-double dnrm2();
-double dasum();
-double ddot();
-int idamax();
-void dgemm();
-void dgemv();
-void dger();
-void dtrsm();
-void dtrmv();
-void dsymv();
-#else
-double dnrm2_();
-double dasum_();
-double ddot_();
-int idamax_();
-void dgemm_();
-void dgemv_();
-void dger_();
-void dtrsm_();
-void dtrmv_();
-void dsymv_();
-#endif
-#endif
+double CSDP_LAPACK_FUNC(dnrm2,DNRM2)();
+double CSDP_LAPACK_FUNC(dasum,DASUM)();
+double CSDP_LAPACK_FUNC(ddot,DDOT)();
+int CSDP_LAPACK_FUNC(idamax,IDAMAX)();
+void CSDP_LAPACK_FUNC(dgemm,DGEMM)();
+void CSDP_LAPACK_FUNC(dgemv,DGEMV)();
+void CSDP_LAPACK_FUNC(dger,DGER)();
+void CSDP_LAPACK_FUNC(dtrsm,DTRSM)();
+void CSDP_LAPACK_FUNC(dtrmv,DTRMV)();
+void CSDP_LAPACK_FUNC(dsymv,DSYMV)();
 
 /*
   LAPACK next.
  */
 
-#ifdef CAPSLAPACK
-#ifdef NOUNDERLAPACK
-void DPOTRF();
-void DPOTRS();
-void DPOTRI();
-void DTRTRI();
-#else
-void DPOTRF_();
-void DPOTRS_();
-void DPOTRI_();
-void DTRTRI_();
-#endif
-#else
-#ifdef NOUNDERLAPACK
-void dpotrf();
-void dpotrs();
-void dpotri();
-void dtrtri();
-#else
-void dpotrf_();
-void dpotrs_();
-void dpotri_();
-void dtrtri_();
-#endif
-#endif
-
+void CSDP_LAPACK_FUNC(dpotrf,DPOTRF)();
+void CSDP_LAPACK_FUNC(dpotrs,DPOTRS)();
+void CSDP_LAPACK_FUNC(dpotri,DPOTRI)();
+void CSDP_LAPACK_FUNC(dtrtri,DTRTRI)();
 
 #endif

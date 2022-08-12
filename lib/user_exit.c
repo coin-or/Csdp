@@ -6,7 +6,7 @@
 #include "declarations.h"
 
 
-#ifdef USESIGTERM
+#ifdef HAVE_SIGNAL
 
 #include <unistd.h>
 #include <sys/types.h>
