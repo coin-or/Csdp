@@ -12,7 +12,7 @@ double norm2(n,x)
   double nrm;
   int incx=1;
 
-  nrm=COIN_LAPACK_FUNC(dnrm2,DNRM2)(&n,x,&incx);
+  nrm=CSDP_LAPACK_FUNC(dnrm2,DNRM2)(&n,x,&incx);
   
   return(nrm);
 }
@@ -24,7 +24,7 @@ double norm1(n,x)
   double nrm;
   int incx=1;
 
-  nrm=COIN_LAPACK_FUNC(dasum,DASUM)(&n,x,&incx);
+  nrm=CSDP_LAPACK_FUNC(dasum,DASUM)(&n,x,&incx);
   
   return(nrm);
 }
@@ -37,7 +37,7 @@ double norminf(n,x)
   double nrm;
   int incx=1;
 
-  i=COIN_LAPACK_FUNC(idamax,IDAMAX)(&n,x,&incx);
+  i=CSDP_LAPACK_FUNC(idamax,IDAMAX)(&n,x,&incx);
   nrm=fabs(x[i-1]);
   
   return(nrm);

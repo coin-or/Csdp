@@ -22,7 +22,7 @@ int solvesys(m,ldam,A,rhs)
 #ifdef HIDDENSTRLEN
   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info,1);
 #else
-  COIN_LAPACK_FUNC(dpotrs,DPOTRS)("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
+  CSDP_LAPACK_FUNC(dpotrs,DPOTRS)("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
 #endif
 
 	   if (info != 0)

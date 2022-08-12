@@ -235,24 +235,24 @@ int bisect_(int *n, double *eps1, double *d, double *e, double *e2,
   First, BLAS routines.
  */
 
-double COIN_LAPACK_FUNC(dnrm2,DNRM2)();
-double COIN_LAPACK_FUNC(dasum,DASUM)();
-double COIN_LAPACK_FUNC(ddot,DDOT)();
-int COIN_LAPACK_FUNC(idamax,IDAMAX)();
-void COIN_LAPACK_FUNC(dgemm,DGEMM)();
-void COIN_LAPACK_FUNC(dgemv,DGEMV)();
-void COIN_LAPACK_FUNC(dger,DGER)();
-void COIN_LAPACK_FUNC(dtrsm,DTRSM)();
-void COIN_LAPACK_FUNC(dtrmv,DTRMV)();
-void COIN_LAPACK_FUNC(dsymv,DSYMV)();
+double CSDP_LAPACK_FUNC(dnrm2,DNRM2)();
+double CSDP_LAPACK_FUNC(dasum,DASUM)();
+double CSDP_LAPACK_FUNC(ddot,DDOT)();
+int CSDP_LAPACK_FUNC(idamax,IDAMAX)();
+void CSDP_LAPACK_FUNC(dgemm,DGEMM)();
+void CSDP_LAPACK_FUNC(dgemv,DGEMV)();
+void CSDP_LAPACK_FUNC(dger,DGER)();
+void CSDP_LAPACK_FUNC(dtrsm,DTRSM)();
+void CSDP_LAPACK_FUNC(dtrmv,DTRMV)();
+void CSDP_LAPACK_FUNC(dsymv,DSYMV)();
 
 /*
   LAPACK next.
  */
 
-void COIN_LAPACK_FUNC(dpotrf,DPOTRF)();
-void COIN_LAPACK_FUNC(dpotrs,DPOTRS)();
-void COIN_LAPACK_FUNC(dpotri,DPOTRI)();
-void COIN_LAPACK_FUNC(dtrtri,DTRTRI)();
+void CSDP_LAPACK_FUNC(dpotrf,DPOTRF)();
+void CSDP_LAPACK_FUNC(dpotrs,DPOTRS)();
+void CSDP_LAPACK_FUNC(dpotri,DPOTRI)();
+void CSDP_LAPACK_FUNC(dtrtri,DTRTRI)();
 
 #endif

@@ -177,7 +177,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 #ifdef HIDDENSTRLEN
       dgemv_("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc,1,1);
 #else
-      COIN_LAPACK_FUNC(dgemv,DGEMV)("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc);
+      CSDP_LAPACK_FUNC(dgemv,DGEMV)("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc);
 #endif
       scale1=-1.0;
       scale2=1.0;
@@ -186,7 +186,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 #ifdef HIDDENSTRLEN
       dgemv_("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc,1);
 #else
-      COIN_LAPACK_FUNC(dgemv,DGEMV)("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc);
+      CSDP_LAPACK_FUNC(dgemv,DGEMV)("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc);
 #endif
 	  
       scale1=1.0;
@@ -196,7 +196,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 #ifdef HIDDENSTRLEN
       dgemv_("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc,1);
 #else
-      COIN_LAPACK_FUNC(dgemv,DGEMV)("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc);
+      CSDP_LAPACK_FUNC(dgemv,DGEMV)("T",&n,&j,&scale1,lanczosvectors,&n,z+1,&inc,&scale2,reorth+1,&inc);
 #endif
 
       scale1=-1.0;
@@ -206,7 +206,7 @@ double linesearch(n,dX,work1,work2,work3,cholinv,q,z,workvec,
 #ifdef HIDDENSTRLEN
       dgemv_("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc,1);     
 #else
-      COIN_LAPACK_FUNC(dgemv,DGEMV)("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc);
+      CSDP_LAPACK_FUNC(dgemv,DGEMV)("N",&n,&j,&scale1,lanczosvectors,&n,reorth+1,&inc,&scale2,z+1,&inc);
 #endif	  
 
       /*

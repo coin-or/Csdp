@@ -771,7 +771,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
-	   COIN_LAPACK_FUNC(dpotrf,DPOTRF)("U",&m,O,&ldam,&info);
+	   CSDP_LAPACK_FUNC(dpotrf,DPOTRF)("U",&m,O,&ldam,&info);
 
 #ifdef HAVE_GETTIMEOFDAY
 	   gettimeofday(&tp,NULL);

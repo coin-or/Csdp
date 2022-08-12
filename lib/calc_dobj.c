@@ -15,7 +15,7 @@ double calc_dobj(k,a,y,constant_offset)
 
   s=0.0;
 
-  s=s+COIN_LAPACK_FUNC(ddot,DDOT)(&k,a+1,&incx,y+1,&incx);
+  s=s+CSDP_LAPACK_FUNC(ddot,DDOT)(&k,a+1,&incx,y+1,&incx);
 
   return(s+constant_offset);
   
