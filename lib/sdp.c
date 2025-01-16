@@ -771,6 +771,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
+#ifdef HIDDENSTRLEN
+	   dpotrf_("U",&m,O,&ldam,&info,1);
+#else
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
 	   DPOTRF("U",&m,O,&ldam,&info);
@@ -783,6 +786,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   #else
 	   dpotrf_("U",&m,O,&ldam,&info);
   #endif
+#endif
 #endif
 
 #ifdef USEGETTIME
