@@ -237,53 +237,60 @@ int bisect_(int *n, double *eps1, double *d, double *e, double *e2,
 
 #ifdef CAPSBLAS
 #ifdef NOUNDERBLAS
-double DNRM2();
-double DASUM();
-double DDOT();
-int IDAMAX();
-void DGEMM();
-void DGEMV();
-void DGER();
-void DTRSM();
-void DTRMV();
-void DSYMV();
+#  define BLAS_FUNC(name, NAME) NAME
 #else
-double DNRM2_();
-double DASUM_();
-double DDOT_();
-int IDAMAX_();
-void DGEMM_();
-void DGEMV_();
-void DGER_();
-void DTRSM_();
-void DTRMV_();
-void DSYMV_();
+#  define BLAS_FUNC(name, NAME) NAME##_
 #endif
 #else
 #ifdef NOUNDERBLAS
-double dnrm2();
-double dasum();
-double ddot();
-int idamax();
-void dgemm();
-void dgemv();
-void dger();
-void dtrsm();
-void dtrmv();
-void dsymv();
+#  define BLAS_FUNC(name, NAME) name
 #else
-double dnrm2_();
-double dasum_();
-double ddot_();
-int idamax_();
-void dgemm_();
-void dgemv_();
-void dger_();
-void dtrsm_();
-void dtrmv_();
-void dsymv_();
+#  define BLAS_FUNC(name, NAME) name##_
 #endif
 #endif
+
+#ifdef HIDDENSTRLEN
+#include <stddef.h>
+#  define CSDP_STRLEN_DECL_1 , size_t
+#  define CSDP_STRLEN_DECL_2 , size_t, size_t
+#  define CSDP_STRLEN_DECL_3 , size_t, size_t, size_t
+#  define CSDP_STRLEN_1 , 1
+#  define CSDP_STRLEN_2 , 1, 1
+#  define CSDP_STRLEN_3 , 1, 1, 1
+#else
+#  define CSDP_STRLEN_DECL_1
+#  define CSDP_STRLEN_DECL_2
+#  define CSDP_STRLEN_DECL_3
+#  define CSDP_STRLEN_1
+#  define CSDP_STRLEN_2
+#  define CSDP_STRLEN_3
+#endif
+
+double BLAS_FUNC(dnrm2, DNRM2)(const int *n, const double *x, const int *incx);
+double BLAS_FUNC(dasum, DASUM)(const int *n, const double *x, const int *incx);
+double BLAS_FUNC(ddot, DDOT)(const int *n, const double *x, const int *incx,
+			     const double *y, const int *incy);
+int BLAS_FUNC(idamax, IDAMAX)(const int *n, const double *x, const int *incx);
+void BLAS_FUNC(dgemm, DGEMM)(const char *transa, const char *transb,
+			     const int *m, const int *n, const int *k,
+			     const double *alpha, const double *a,
+			     const int *lda, const double *b, const int *ldb,
+			     const double *beta, double *c, const int *ldc
+			     CSDP_STRLEN_DECL_2);
+void BLAS_FUNC(dgemv, DGEMV)(const char *trans, const int *m, const int *n,
+			     const double *alpha, const double *a,
+			     const int *lda, const double *x, const int *incx,
+			     const double *beta, double *y, const int *incy
+			     CSDP_STRLEN_DECL_1);
+void BLAS_FUNC(dsymv, DSYMV)(const char *uplo, const int *n,
+			     const double *alpha, const double *a,
+			     const int *lda, const double *x, const int *incx,
+			     const double *beta, double *y, const int *incy
+			     CSDP_STRLEN_DECL_1);
+void BLAS_FUNC(dtrmv, DTRMV)(const char *uplo, const char *trans,
+			     const char *diag, const int *n, const double *a,
+			     const int *lda, double *x, const int *incx
+			     CSDP_STRLEN_DECL_3);
 
 /*
   LAPACK next.
@@ -291,29 +298,39 @@ void dsymv_();
 
 #ifdef CAPSLAPACK
 #ifdef NOUNDERLAPACK
-void DPOTRF();
-void DPOTRS();
-void DPOTRI();
-void DTRTRI();
+#  define LAPACK_FUNC(name, NAME) NAME
 #else
-void DPOTRF_();
-void DPOTRS_();
-void DPOTRI_();
-void DTRTRI_();
+#  define LAPACK_FUNC(name, NAME) NAME##_
 #endif
 #else
 #ifdef NOUNDERLAPACK
-void dpotrf();
-void dpotrs();
-void dpotri();
-void dtrtri();
+#  define LAPACK_FUNC(name, NAME) name
 #else
-void dpotrf_();
-void dpotrs_();
-void dpotri_();
-void dtrtri_();
+#  define LAPACK_FUNC(name, NAME) name##_
 #endif
 #endif
 
+void LAPACK_FUNC(dpotrf, DPOTRF)(const char *uplo, const int *n,
+				 double *a, const int *lda, int *info
+				 CSDP_STRLEN_DECL_1);
+void LAPACK_FUNC(dpotrs, DPOTRS)(const char *uplo, const int *n,
+				 const int *nrhs, const double *a,
+				 const int *lda, double *b, const int *ldb,
+				 int *info CSDP_STRLEN_DECL_1);
+void LAPACK_FUNC(dtrtri, DTRTRI)(const char *uplo, const char *diag,
+				 const int *n, double *a, const int *lda,
+				 int *info CSDP_STRLEN_DECL_2);
+
+#define csdp_dnrm2(...) BLAS_FUNC(dnrm2, DNRM2)(__VA_ARGS__)
+#define csdp_dasum(...) BLAS_FUNC(dasum, DASUM)(__VA_ARGS__)
+#define csdp_ddot(...) BLAS_FUNC(ddot, DDOT)(__VA_ARGS__)
+#define csdp_idamax(...) BLAS_FUNC(idamax, IDAMAX)(__VA_ARGS__)
+#define csdp_dgemm(...) BLAS_FUNC(dgemm, DGEMM)(__VA_ARGS__ CSDP_STRLEN_2)
+#define csdp_dgemv(...) BLAS_FUNC(dgemv, DGEMV)(__VA_ARGS__ CSDP_STRLEN_1)
+#define csdp_dsymv(...) BLAS_FUNC(dsymv, DSYMV)(__VA_ARGS__ CSDP_STRLEN_1)
+#define csdp_dtrmv(...) BLAS_FUNC(dtrmv, DTRMV)(__VA_ARGS__ CSDP_STRLEN_3)
+#define csdp_dpotrf(...) LAPACK_FUNC(dpotrf, DPOTRF)(__VA_ARGS__ CSDP_STRLEN_1)
+#define csdp_dpotrs(...) LAPACK_FUNC(dpotrs, DPOTRS)(__VA_ARGS__ CSDP_STRLEN_1)
+#define csdp_dtrtri(...) LAPACK_FUNC(dtrtri, DTRTRI)(__VA_ARGS__ CSDP_STRLEN_2)
 
 #endif
