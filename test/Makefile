@@ -10,8 +10,20 @@
 # 1.0e-6.  
 #
 
+.PHONY: all clean
+
 all: theta1.out g50.out 
  
+#
+# The programs are run out of the build tree, so with SHARED=yes they have to
+# find libsdp there rather than in $(libdir).  Exported rather than set on each
+# recipe, so that adding a platform, or a test, does not mean editing every
+# other line.
+#
+export LD_LIBRARY_PATH := ../lib
+export DYLD_LIBRARY_PATH := ../lib
+export PATH := ../lib:$(PATH)
+
 #
 # Test the solver on theta1.dat-s
 #

@@ -6,6 +6,10 @@
 #ifndef CSDPDECLARATIONS
 #define CSDPDECLARATIONS 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
   Other important includes that we need.
  */
@@ -315,5 +319,9 @@ void dtrtri_();
 #endif
 #endif
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

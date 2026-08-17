@@ -69,9 +69,9 @@ for the most recent stable release of CSDP from the project web site.
 INSTALLING CSDP:
 
 The following instructions assume that you're using a Linux system
-with gcc, gfortran, LAPACK, and BLAS installed.  The make files will
-have to be altered for other systems, but the basic process of
-building the software will be similar.
+with gcc, gfortran, LAPACK, and BLAS installed.  Other systems are
+configured with the variables described below rather than by editing
+the make files.  GNU make is required.
 
 After you've downloaded the source code, unpack the tar archive if you
 downloaded a .tar archive of CSDP, and then go into the csdp
@@ -81,38 +81,87 @@ solver, an example program that computes the Lovasz theta number of
 a graph, and a small example program showing how to call CSDP.  There
 are Makefiles within these subdirectories.
 
-There are two lines in the top level Makefile that will likely need to
-be edited:
+The default settings should work as they stand on a Linux system with the
+reference BLAS and LAPACK installed.  If you need to change something, you
+do not have to edit any of the Makefiles: every setting lives in
+Makefile.inc and may be overridden either in the environment or on the make
+command line.  For example,
 
-1. CFLAGS.  The CFLAGS variable specifies command line arguments to the
-C compiler.  The default value of CFLAGS is appropriate for 64 bit Linux
-systems using the gcc compiler.  It is:
+> make CC=clang CFLAGS="-O3 -g" BLAS_LIBS="-lopenblas"
 
-CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBIT64
-       -DUSEOPENMP -DSETNUMTHREADS -DUSESIGTERM -DUSEGETTIME -I../include
+The variables you are most likely to want are:
 
-The flags -m64 through -fopenmp tell gcc to produce optimized 64 bit
-multithreaded code using the OpenMP features.  The flags -ansi and -Wall
-tell gcc to produce warnings for any code that vioates the ANSI C standard.
-The -D... flags specify options within the code as described below.
-The -I../include flag specifies the location of CSDP's .h files.
+CC              The C compiler.  Default: cc
+CFLAGS          Optimization and warning flags.  Default: -O2 -Wall.  Note
+                that CSDP is a numerical code, so -Ofast is not recommended.
+CPPFLAGS        Additional preprocessor flags.
+LDFLAGS         Additional linker flags.
+BLAS_LIBS       The BLAS and LAPACK libraries, plus any Fortran run time
+                library they need.  Default: -llapack -lblas
+LIBS            Anything else to link against.  Additive; no default.
+OPENMP_CFLAGS   The flag that enables OpenMP.  Default: -fopenmp
+OPENMP_LIBS     The corresponding link flag.  Default: empty
+SHARED          Set to yes to build a shared library alongside libsdp.a.
+                The programs then link against it.  Default: no
+prefix          Installation prefix.  Default: /usr/local
+exec_prefix     Default: $(prefix)
+bindir          Where the programs are installed.  Default: $(exec_prefix)/bin
+libdir          Where the library is installed.  Default: $(exec_prefix)/lib
+includedir      Where the headers are installed, in a csdp subdirectory.
+                Default: $(prefix)/include
+pkgconfigdir    Where csdp.pc is installed.  Default: $(libdir)/pkgconfig
+DESTDIR         Staging directory prepended to the install paths.
+INSTALL         The install(1) program.  Default: install
+INSTALL_PROGRAM The command used to install the programs.
+                Default: $(INSTALL) -m 755
+INSTALL_DATA    The command used to install everything else.
+                Default: $(INSTALL) -m 644
+TOOL_PREFIX     A prefix for the installed names of theta, complement,
+                graphtoprob and rand_graph, whose names are rather generic.
+                TOOL_PREFIX=csdp- installs them as csdp-theta and so on.
+                The solver itself is always installed as csdp.
 
-The -D flags that are recommended for CSDP on 64 bit Linux are
+With OpenBLAS, which supplies both BLAS and LAPACK:
 
--DBIT64              Used on 64 bit systems
--DUSEOPENMP          Used to build a parallel threaded version of CSDP
--DSETNUMTHREADS      Use OpenMP to set the number of threads to use.
+> make BLAS_LIBS="-L/opt/OpenBLAS/lib -lopenblas"
+
+On macOS, with Accelerate and Homebrew's libomp:
+
+> make BLAS_LIBS="-framework Accelerate" \
+    OPENMP_CFLAGS="-Xpreprocessor -fopenmp -I$(brew --prefix libomp)/include" \
+    OPENMP_LIBS="-L$(brew --prefix libomp)/lib -lomp"
+
+Without OpenMP at all:
+
+> make OPENMP_CFLAGS=
+
+CSDP's own required flags are kept in CSDP_CPPFLAGS, CSDP_CFLAGS and
+CSDP_LIBS, which are separate from CPPFLAGS, CFLAGS and LIBS precisely so
+that setting the latter cannot accidentally drop them.  CSDP_LIBS is just
+CSDP's own library, so BLAS_LIBS and LIBS only ever need the external ones.
+CSDP_CPPFLAGS holds the feature macros:
+
+-DBIT64              Use long int for array indexing, which raises the limit
+                     on the number of constraints from 23169.
 -DUSESIGTERM         Terminate CSDP nicely after SIGTERM or other signals
--DUSEGETTIME         Use ANSI C gettime() to get wall clock running time.
+-DUSEGETTIME         Use gettimeofday() to get wall clock running time
+-DUSEOPENMP          Build a parallel threaded version of CSDP
+-DSETNUMTHREADS      Use OpenMP to set the number of threads to use
 
-For Windows 64 bit systems using the mingw64 compiler, recommended CFLAGS
-are:
+All of these are set automatically, since getting them wrong is worse than
+not having them:
 
-CFLAGS=-m64 -march=native -mtune=native -Ofast, -fopenmp -ansi -Wall -DBIT64
-       -DUSEOPENMP -DSETNUMTHREADS -DUSEGETTIME -I../include
+  BIT64 also turns off the check in read_prob() that rejects problems too
+  large for 32 bit indexing, so it is set only where long is 64 bits wide.
+  That excludes 32 bit targets, and Windows, where long is 32 bits even on
+  64 bit builds.
 
-The only difference here is that -DUSESIGTERM is left out because Windows
-doesn't support Linux/unix signals.
+  USESIGTERM needs setrlimit() and USEGETTIME needs gettimeofday(), so they
+  are set only where <sys/resource.h> and <sys/time.h> exist.  Windows has
+  neither in a plain MSVC build, though mingw does supply <sys/time.h>.
+
+  USEOPENMP and SETNUMTHREADS include <omp.h> and call the OpenMP runtime,
+  so they are set only when OPENMP_CFLAGS is non-empty.
 
 There are some flags that may rarely be useful on other systems:
 
@@ -122,34 +171,7 @@ There are some flags that may rarely be useful on other systems:
 -DNOUNDERLAPACK      if LAPACK routine names have no underscore
 -DHIDDENSTRLEN       if Fortran string lengths are hidden arguments
 
-2. LIBS.  The LIBS= line of the Makefile specifies the location of the
-CSDP library and the BLAS and LAPACK libraries.  The distributed version
-of the Makefile has values suitable for a 64 bit Linux system with BLAS
-and LAPACK installed in the system library directories:
-
-LIBS=-static -L../lib -lsdp -llapack -lblas -lm
-
--static               produce a statically linked executable
--L../lib -lsdp        libsdp.a is in the lib subdirectory
--llapack -lblas       LAPACK and BLAS libraries
--lm                   C standard math library
-
-In many cases it will be necessary to add the Fortran run time library:
-
--lgfortran
-
-The LIBS variable will also have to be edited if your LAPACK and BLAS libraries
-are not in the standard location or have different names.
-
-For example, on my system, the OpenBLAS library is located in
-/opt/OpenBLAS/lib/libopenblas.a.  This OpenBLAS library contains both
-LAPACK and BLAS routines, so I don't need to specify a spearate LAPACK
-library.  Thus I use the flags:
-
-LIBS=-static -L../lib -L/opt/OpenBLAS/lib -lopenblas -lm
-
-Once you've set the LIBS and CFLAGS variables in the top level Makefile,
-issue the command
+Then issue the command
  
 > make
  
@@ -192,10 +214,23 @@ command
 
 > make install
 
-This will copy csdp, rand_graph, complement, theta, and graphtoprob
-into the /usr/local/bin directory.  If you use the C shell, remember
+This will copy csdp, rand_graph, complement, theta, and graphtoprob into
+the /usr/local/bin directory, libsdp.a into /usr/local/lib, the headers
+into /usr/local/include/csdp, and a pkg-config file into
+/usr/local/lib/pkgconfig.  With SHARED=yes the shared library is installed
+as well.  Code using CSDP can then be built with either
+
+> cc `pkg-config --cflags csdp` prog.c `pkg-config --libs csdp`
+
+and either #include <csdp/declarations.h> or #include "declarations.h".  If you use the C shell, remember
 to "rehash" so that the shell will know that these programs have been
 added to the /usr/local/bin directory.
+
+To install somewhere else, set prefix, and to install into a staging
+directory rather than onto the live system, set DESTDIR:
+
+> make install prefix=/opt/csdp
+> make install DESTDIR=/tmp/stage prefix=/usr
 
 The matlab directory contains .m files that provide a matlab interface
 to CSDP solver. To install these .m files they must be added to your

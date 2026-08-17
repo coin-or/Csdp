@@ -5,60 +5,77 @@
 # rebuild the system with "make clean" followed by "make all".
 #
 #
-# You can change the C compiler by setting CC=...
+# Build settings are in Makefile.inc.  Every variable there can be set in the
+# environment or on the make command line; see INSTALL.
 #
-# CC=gcc
-#
-# CFLAGS settings for 64 bit Linux/unix systems.
-#
-export CFLAGS=-m64 -march=native -mtune=native -Ofast -fopenmp -ansi -Wall -DBIT64 -DUSEOPENMP -DSETNUMTHREADS -DUSESIGTERM -DUSEGETTIME -I../include
-#
-# LIBS settings for 64 bit Linux/unix systems.
-#
-export LIBS=-static -L../lib -lsdp -llapack -lblas -lm
-#
+include Makefile.inc
+
+.PHONY: all clean install unitTest
+
 #
 # On most systems, this should handle everything.
 #
 all:
-	cd lib; make libsdp.a
-	cd solver; make csdp
-	cd theta; make all
-	cd example; make all
+	$(MAKE) -C lib all
+	$(MAKE) -C solver all
+	$(MAKE) -C theta all
+	$(MAKE) -C example all
 
 #
 # Perform a unitTest
 #
 
-unitTest:
-	cd test; make all
+unitTest: all
+	$(MAKE) -C test all
+
+csdp.pc: csdp.pc.in
+	sed -e 's|@prefix@|$(prefix)|' -e 's|@exec_prefix@|$(exec_prefix)|' \
+	    -e 's|@libdir@|$(libdir)|' -e 's|@includedir@|$(includedir)|' \
+	    -e 's|@VERSION@|$(CSDP_VERSION)|' -e 's|@BLAS_LIBS@|$(BLAS_LIBS)|' \
+	    -e 's|@LIBS@|$(LIBS)|' -e 's|@OPENMP_LIBS@|$(OPENMP_LIBS)|' \
+	    -e 's|@PC_CPPFLAGS@|$(CSDP_PC_CPPFLAGS)|' \
+	    csdp.pc.in > $@
 
 #
-# Install the executables in /usr/local/bin.
+# Install the executables in $(bindir), and the library, headers and
+# pkg-config file under $(libdir) and $(includedir).  install is among the
+# .PHONY targets above so that the INSTALL file does not satisfy it on case
+# insensitive filesystems.
 #
-
-install:
-	cp -f solver/csdp /usr/local/bin
-	cp -f theta/theta /usr/local/bin
-	cp -f theta/graphtoprob /usr/local/bin
-	cp -f theta/complement /usr/local/bin
-	cp -f theta/rand_graph /usr/local/bin
+install: all csdp.pc
+	$(INSTALL) -d "$(DESTDIR)$(bindir)"
+	$(INSTALL_PROGRAM) solver/csdp "$(DESTDIR)$(bindir)/csdp"
+	$(INSTALL_PROGRAM) theta/theta "$(DESTDIR)$(bindir)/$(TOOL_PREFIX)theta"
+	$(INSTALL_PROGRAM) theta/graphtoprob "$(DESTDIR)$(bindir)/$(TOOL_PREFIX)graphtoprob"
+	$(INSTALL_PROGRAM) theta/complement "$(DESTDIR)$(bindir)/$(TOOL_PREFIX)complement"
+	$(INSTALL_PROGRAM) theta/rand_graph "$(DESTDIR)$(bindir)/$(TOOL_PREFIX)rand_graph"
+	$(INSTALL) -d "$(DESTDIR)$(libdir)"
+	$(INSTALL_DATA) lib/libsdp.a "$(DESTDIR)$(libdir)/libsdp.a"
+ifeq ($(SHARED),yes)
+ifeq ($(CSDP_IMPLIB),)
+	$(INSTALL_PROGRAM) lib/$(CSDP_SHLIB) "$(DESTDIR)$(libdir)/$(CSDP_SHLIB)"
+	ln -sf $(CSDP_SHLIB) "$(DESTDIR)$(libdir)/$(CSDP_SONAME)"
+	ln -sf $(CSDP_SHLIB) "$(DESTDIR)$(libdir)/$(CSDP_SHLIB_DEV)"
+else
+	$(INSTALL_PROGRAM) lib/$(CSDP_SHLIB) "$(DESTDIR)$(bindir)/$(CSDP_SHLIB)"
+	$(INSTALL_DATA) lib/$(CSDP_IMPLIB) "$(DESTDIR)$(libdir)/$(CSDP_IMPLIB)"
+endif
+endif
+	$(INSTALL) -d "$(DESTDIR)$(includedir)/csdp"
+	for h in include/*.h; do \
+	  $(INSTALL_DATA) $$h "$(DESTDIR)$(includedir)/csdp" || exit 1; \
+	done
+	$(INSTALL) -d "$(DESTDIR)$(pkgconfigdir)"
+	$(INSTALL_DATA) csdp.pc "$(DESTDIR)$(pkgconfigdir)/csdp.pc"
 
 #
 # Clean out all of the directories.
 # 
 
 clean:
-	cd lib; make clean
-	cd solver; make clean
-	cd theta; make clean
-	cd test; make clean
-	cd example; make clean
-
-
-
-
-
-
-
-
+	rm -f csdp.pc
+	$(MAKE) -C lib clean
+	$(MAKE) -C solver clean
+	$(MAKE) -C theta clean
+	$(MAKE) -C test clean
+	$(MAKE) -C example clean
